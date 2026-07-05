@@ -1,0 +1,72 @@
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1.05em 2.1em;
+    border-radius: 999px;
+    position: relative;
+    transition:
+      color var(--dur-quick),
+      border-color var(--dur-quick),
+      transform var(--dur-quick) var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(0.985);
+  }
+
+  .btn--primary {
+    background: var(--grad-gold);
+    color: var(--c-white);
+    background-size: 150% 150%;
+    background-position: 0% 0%;
+    transition: background-position 0.5s var(--ease-out), transform var(--dur-quick) var(--ease-out);
+  }
+
+  .btn--primary:hover {
+    background-position: 90% 90%;
+  }
+
+  .btn--ghost {
+    border: 1px solid var(--rule);
+    color: var(--ink);
+  }
+
+  .btn--ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Text-level arrow link used in teases */
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: color var(--dur-quick);
+  }
+
+  .arrow-link svg {
+    width: 1.05em;
+    height: 1.05em;
+    transition: transform var(--dur-quick) var(--ease-out);
+  }
+
+  .arrow-link:hover {
+    color: var(--accent);
+  }
+
+  .arrow-link:hover svg {
+    transform: translateX(0.3em);
+  }
+}

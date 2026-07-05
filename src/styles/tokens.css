@@ -1,0 +1,117 @@
+@layer tokens {
+  /* ---- Fonts ------------------------------------------------------ */
+  @font-face {
+    font-family: 'Source Serif 4';
+    src: url('/assets/fonts/source-serif-4.woff2') format('woff2');
+    font-weight: 200 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Source Serif 4';
+    src: url('/assets/fonts/source-serif-4-italic.woff2') format('woff2');
+    font-weight: 200 700;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url('/assets/fonts/inter.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  /* Metric-tuned fallbacks: near-zero reflow on swap */
+  @font-face {
+    font-family: 'Source Serif Fallback';
+    src: local('Georgia');
+    ascent-override: 91.8%;
+    descent-override: 24.2%;
+    line-gap-override: 0%;
+    size-adjust: 103.4%;
+  }
+  @font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.12%;
+  }
+
+  :root {
+    /* ---- Gathering Light palette (brand book) ---------------------- */
+    --c-dark-anchor: #071938;
+    --c-dark-deep: #05152d;
+    --c-dark-lift: #0d2354;
+    --c-gold: #f59700;
+    --c-gold-80: #f9ac46;
+    --c-gold-t1: #fff4e8;
+    --c-gold-t2: #fefaf3;
+    --c-gold-t3: #fefcf8;
+    --c-coral: #e2513c;
+    --c-coral-t1: #fcedeb;
+    --c-coral-t2: #fdf7f6;
+    --c-coral-t3: #fefaf9;
+    --c-white: #fffcf6;
+    /* Seal golds (certificate register — used sparingly) */
+    --c-seal-deep: #bd8100;
+    --c-seal-mid: #dec874;
+    --c-seal-light: #f1dc83;
+    --c-seal-bright: #fff5a8;
+
+    /* ---- Locked gradients (135°) ----------------------------------- */
+    --grad-light: linear-gradient(135deg, #ffffff, #fffdf9, #fff8f5);
+    --grad-dark: linear-gradient(135deg, #0d2354, #071938, #05152d);
+    --grad-gold: linear-gradient(135deg, #f9ac46, #f59700, #e2513c);
+
+    /* ---- Semantic (theme-switchable) -------------------------------- */
+    --ink: var(--c-dark-anchor);
+    --ink-soft: rgb(7 25 56 / 0.64);
+    --ink-faint: rgb(7 25 56 / 0.4);
+    --surface: var(--c-white);
+    --accent: var(--c-gold);
+    --accent-deep: var(--c-coral);
+    --rule: rgb(7 25 56 / 0.14);
+    --rule-soft: rgb(7 25 56 / 0.08);
+
+    /* ---- Type ------------------------------------------------------- */
+    --font-display: 'Source Serif 4', 'Source Serif Fallback', Georgia, serif;
+    --font-body: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+
+    /* Fluid scale */
+    --step--1: clamp(0.8rem, 0.78rem + 0.12vw, 0.89rem);
+    --step-0: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+    --step-1: clamp(1.19rem, 1.12rem + 0.36vw, 1.44rem);
+    --step-2: clamp(1.42rem, 1.3rem + 0.61vw, 1.83rem);
+    --step-3: clamp(1.7rem, 1.5rem + 0.98vw, 2.33rem);
+    --step-4: clamp(2.03rem, 1.72rem + 1.53vw, 2.96rem);
+    --step-5: clamp(2.42rem, 1.96rem + 2.32vw, 3.77rem);
+    --step-6: clamp(2.9rem, 2.2rem + 3.46vw, 4.9rem);
+    --step-7: clamp(3.45rem, 2.5rem + 5vw, 6.3rem);
+
+    /* ---- Rhythm ------------------------------------------------------ */
+    --space-section: clamp(6rem, 4rem + 8vw, 11rem);
+    --space-block: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+    --container: min(100% - clamp(2.5rem, 8vw, 6rem), 82rem);
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+    --header-h: 5.25rem;
+
+    /* ---- Motion ------------------------------------------------------ */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-quick: 0.35s;
+    --dur-slow: 0.9s;
+  }
+
+  /* Dusk theme: flipped once by skyJourney at the dusk threshold */
+  [data-theme='dusk'] {
+    --ink: var(--c-white);
+    --ink-soft: rgb(255 252 246 / 0.68);
+    --ink-faint: rgb(255 252 246 / 0.42);
+    --surface: transparent;
+    --accent: var(--c-gold-80);
+    --rule: rgb(255 252 246 / 0.18);
+    --rule-soft: rgb(255 252 246 / 0.1);
+  }
+}

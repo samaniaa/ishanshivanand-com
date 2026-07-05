@@ -1,0 +1,42 @@
+@layer components {
+  .testimonial {
+    padding-block: var(--space-block);
+  }
+
+  .testimonial__inner {
+    max-width: 52rem;
+    margin-inline: auto;
+    text-align: center;
+    position: relative;
+    padding-block: var(--space-block);
+  }
+
+  .testimonial__seal {
+    width: 3.2rem;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+  }
+
+  .testimonial__quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 420;
+    font-size: var(--step-3);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .testimonial__attrib {
+    margin-top: 2rem;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+
+  .testimonial__attrib strong {
+    display: block;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+}

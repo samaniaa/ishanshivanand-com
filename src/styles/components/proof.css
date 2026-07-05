@@ -1,0 +1,43 @@
+@layer components {
+  .proof {
+    padding-block: var(--space-block);
+  }
+
+  .proof__grid {
+    display: grid;
+    gap: 2.5rem 2rem;
+    border-block: 1px solid var(--rule-soft);
+    padding-block: clamp(2.2rem, 4vw, 3.6rem);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 760px) {
+    .proof__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .stat__value {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    font-weight: 420;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+  }
+
+  .stat__value .stat__suffix {
+    color: var(--c-gold);
+    font-size: 0.66em;
+    margin-left: 0.08em;
+  }
+
+  .stat__label {
+    margin-top: 0.7rem;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    max-width: 18ch;
+  }
+}

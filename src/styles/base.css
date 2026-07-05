@@ -1,0 +1,68 @@
+@layer base {
+  html {
+    font-family: var(--font-body);
+    font-size: 100%;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  body {
+    font-size: var(--step-0);
+    background-color: var(--c-white);
+    transition: color 0.6s var(--ease-in-out);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      transition: none;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 480;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+
+  h4 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  em,
+  .u-italic {
+    font-style: italic;
+  }
+
+  ::selection {
+    background: var(--c-gold-80);
+    color: var(--c-dark-anchor);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p a,
+  .u-link {
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--dur-quick);
+  }
+
+  p a:hover,
+  .u-link:hover {
+    text-decoration-color: var(--accent);
+  }
+}

@@ -1,0 +1,135 @@
+@layer components {
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    visibility: hidden;
+  }
+
+  .menu[data-open='true'] {
+    visibility: visible;
+  }
+
+  /* Panels rest in place; the open/close offset is owned entirely by
+     GSAP (a CSS translateY here would be parsed as a separate pixel
+     component and fight yPercent tweens). */
+  .menu__panel {
+    position: absolute;
+    inset: 0;
+  }
+
+  .menu__panel--under {
+    background: linear-gradient(135deg, var(--c-gold-80), var(--c-gold));
+  }
+
+  .menu__panel--main {
+    background:
+      radial-gradient(110% 80% at 85% 110%, rgb(245 151 0 / 0.14), transparent 55%),
+      linear-gradient(135deg, #0d2354, #071938, #05152d);
+    display: grid;
+    overflow-y: auto;
+    padding-block: calc(var(--header-h) + 1rem) 3rem;
+  }
+
+  /* margin-block auto = safe centering: content stays reachable when it
+     overflows a short viewport (align-content center would clip the top) */
+  .menu__inner {
+    width: var(--container);
+    margin-inline: auto;
+    margin-block: auto;
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .menu__inner {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+      gap: 4rem;
+      align-items: end;
+    }
+  }
+
+  .menu__nav ol {
+    display: grid;
+    gap: clamp(0.15rem, 0.8vh, 0.7rem);
+    list-style: none;
+    padding: 0;
+  }
+
+  .menu__link {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 1.2rem + 3.6vh, 3.4rem);
+    line-height: 1.18;
+    color: var(--c-white);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 1.1rem;
+    transition: color var(--dur-quick);
+  }
+
+  .menu__link:hover,
+  .menu__link[aria-current='page'] {
+    color: var(--c-gold-80);
+  }
+
+  .menu__num {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: rgb(255 252 246 / 0.45);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .menu__sub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+    padding-left: 2.6rem;
+    margin-top: 0.15rem;
+  }
+
+  .menu__sub a {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    color: rgb(255 252 246 / 0.55);
+    transition: color var(--dur-quick);
+  }
+
+  .menu__sub a:hover {
+    color: var(--c-gold-80);
+  }
+
+  .menu__aside {
+    display: grid;
+    gap: 1.6rem;
+    position: relative;
+  }
+
+  .menu__aside-laurel {
+    width: clamp(6rem, 10vw, 9rem);
+    opacity: 0.35;
+  }
+
+  .menu__aside-motto {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: rgb(255 252 246 / 0.8);
+  }
+
+  .menu__aside a {
+    font-size: var(--step--1);
+    color: rgb(255 252 246 / 0.55);
+    transition: color var(--dur-quick);
+  }
+
+  .menu__aside a:hover {
+    color: var(--c-gold-80);
+  }
+
+  /* line-mask wrappers added by SplitText get overflow clip */
+  .menu .line-mask {
+    overflow: clip;
+  }
+}

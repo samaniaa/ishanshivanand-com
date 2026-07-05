@@ -1,0 +1,37 @@
+@layer components {
+  .stub {
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+    padding-block: calc(var(--header-h) + 3rem) var(--space-section);
+  }
+
+  .stub__eyebrow {
+    font-size: var(--step--1);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-gold);
+    margin-bottom: 1.6rem;
+  }
+
+  .stub__title {
+    font-size: var(--step-6);
+    max-width: 16ch;
+    margin-bottom: 1.8rem;
+  }
+
+  .stub__body {
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin-bottom: 2.6rem;
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+  .stub__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 2rem;
+    align-items: center;
+  }
+}

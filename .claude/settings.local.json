@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /Users/aarti/Downloads | grep -iE 'ishan|IS-|portrait|photo|\\\\.jpe?g|\\\\.png' | head -30)",
+      "Bash(grep -iE '\\\\.\\(jpe?g|png|webp|heic\\)$')",
+      "Bash(git init *)",
+      "Bash(npm install *)",
+      "Bash(mkdir -p public/assets/brand public/assets/img public/assets/gallery public/assets/fonts partials plugins src/styles/components src/js/core src/js/modules src/js/gallery src/js/utils)",
+      "Bash(cp \"/Users/aarti/Downloads/Ishan Shivanand_Icon_Full Colour_Final.svg\" public/assets/brand/is-icon.svg)",
+      "Bash(cp \"/Users/aarti/Downloads/Ishan Shivanand_Full Colour Logo_Final.svg\" public/assets/brand/is-wordmark.svg)",
+      "Bash(cp \"/Users/aarti/Downloads/IS-Seal-Smooth-0626.svg\" public/assets/brand/is-seal.svg)",
+      "Bash(cp \"/Users/aarti/Downloads/IS-Seal-Scalloped-0626.svg\" public/assets/brand/is-seal-scalloped.svg)",
+      "Bash(python3)",
+      "Bash(rm fonts.css.tmp)",
+      "Bash(sips -Z 1500 -s format jpeg -s formatOptions 78 portrait-original.jpg --out portrait-hero.jpg)",
+      "Bash(sips -g pixelWidth -g pixelHeight portrait-hero.jpg)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'Scaffold Gathering Light site: design system, homepage, motion backbone, menu, sphere gallery *)"
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+@layer components {
+  .footer {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--space-block) 2.5rem;
+    color: var(--c-white);
+  }
+
+  .footer__motto {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-3);
+    letter-spacing: -0.01em;
+    color: var(--c-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer__values {
+    font-size: var(--step--1);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(255 252 246 / 0.55);
+    display: flex;
+    gap: 0.6em;
+    flex-wrap: wrap;
+  }
+
+  .footer__values span:not(:last-child)::after {
+    content: '·';
+    margin-left: 0.6em;
+    color: var(--c-gold-80);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 3.5rem 3rem;
+    border-top: 1px solid rgb(255 252 246 / 0.12);
+    margin-top: 3rem;
+  }
+
+  @media (min-width: 760px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+  }
+
+  .footer__col h4 {
+    font-size: var(--step--1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 252 246 / 0.45);
+    margin-bottom: 1.1rem;
+    font-weight: 500;
+  }
+
+  .footer__col ul {
+    display: grid;
+    gap: 0.55rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer__col a {
+    font-size: var(--step--1);
+    color: rgb(255 252 246 / 0.75);
+    transition: color var(--dur-quick);
+  }
+
+  .footer__col a:hover {
+    color: var(--c-gold-80);
+  }
+
+  .footer__brand svg {
+    width: 3rem;
+    height: auto;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer__brand p {
+    font-size: var(--step--1);
+    color: rgb(255 252 246 / 0.6);
+    max-width: 30ch;
+  }
+
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(255 252 246 / 0.12);
+    font-size: 0.78rem;
+    color: rgb(255 252 246 / 0.4);
+  }
+
+  .footer__laurel {
+    position: absolute;
+    right: max(2vw, 1rem);
+    bottom: 6rem;
+    width: clamp(10rem, 18vw, 16rem);
+    opacity: 0.14;
+    pointer-events: none;
+  }
+}
