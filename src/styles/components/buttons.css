@@ -6,31 +6,23 @@
     font-family: var(--font-body);
     font-size: var(--step--1);
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 1.05em 2.1em;
-    border-radius: 999px;
+    padding: 1em 2em;
     position: relative;
     transition:
       color var(--dur-quick),
       border-color var(--dur-quick),
-      transform var(--dur-quick) var(--ease-out);
-  }
-
-  .btn:active {
-    transform: scale(0.985);
+      background-color var(--dur-quick);
   }
 
   .btn--primary {
-    background: var(--grad-gold);
+    background: var(--c-dark-anchor);
     color: var(--c-white);
-    background-size: 150% 150%;
-    background-position: 0% 0%;
-    transition: background-position 0.5s var(--ease-out), transform var(--dur-quick) var(--ease-out);
   }
 
   .btn--primary:hover {
-    background-position: 90% 90%;
+    background: var(--c-coral);
   }
 
   .btn--ghost {
@@ -43,30 +35,37 @@
     color: var(--accent);
   }
 
-  /* Text-level arrow link used in teases */
+  /* Dash-link: hairline dash grows toward the label on hover */
   .arrow-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.9rem;
     font-size: var(--step--1);
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink);
     transition: color var(--dur-quick);
   }
 
+  .arrow-link::before {
+    content: '';
+    width: 2.4rem;
+    height: 1px;
+    background: var(--c-gold);
+    transition: width 0.45s var(--ease-out);
+  }
+
   .arrow-link svg {
-    width: 1.05em;
-    height: 1.05em;
-    transition: transform var(--dur-quick) var(--ease-out);
+    display: none;
   }
 
   .arrow-link:hover {
-    color: var(--accent);
+    color: var(--c-coral);
   }
 
-  .arrow-link:hover svg {
-    transform: translateX(0.3em);
+  .arrow-link:hover::before {
+    width: 3.6rem;
+    background: var(--c-coral);
   }
 }

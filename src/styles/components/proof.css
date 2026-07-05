@@ -1,27 +1,40 @@
 @layer components {
   .proof {
-    padding-block: var(--space-block);
+    padding-block: var(--space-block) var(--space-section);
   }
 
   .proof__grid {
     display: grid;
-    gap: 2.5rem 2rem;
-    border-block: 1px solid var(--rule-soft);
-    padding-block: clamp(2.2rem, 4vw, 3.6rem);
     grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2.5rem;
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 900px) {
     .proof__grid {
       grid-template-columns: repeat(4, 1fr);
     }
+
+    /* Staggered baselines: break the template rhythm */
+    .proof__grid .stat:nth-child(2) {
+      translate: 0 2.2rem;
+    }
+
+    .proof__grid .stat:nth-child(4) {
+      translate: 0 2.2rem;
+    }
+  }
+
+  .stat {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.3rem;
   }
 
   .stat__value {
     font-family: var(--font-display);
-    font-size: var(--step-5);
-    font-weight: 420;
+    font-size: var(--step-6);
+    font-weight: 380;
     line-height: 1;
+    letter-spacing: -0.03em;
     font-variant-numeric: tabular-nums;
     color: var(--ink);
     display: flex;
@@ -30,14 +43,15 @@
 
   .stat__value .stat__suffix {
     color: var(--c-gold);
-    font-size: 0.66em;
-    margin-left: 0.08em;
+    font-size: 0.6em;
+    margin-left: 0.06em;
   }
 
   .stat__label {
-    margin-top: 0.7rem;
+    margin-top: 0.9rem;
     font-size: var(--step--1);
     color: var(--ink-soft);
-    max-width: 18ch;
+    max-width: 17ch;
+    line-height: 1.5;
   }
 }

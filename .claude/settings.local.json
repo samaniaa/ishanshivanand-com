@@ -23,7 +23,10 @@
       "mcp__14b119d2-544f-4803-ae0b-c24c81e065c6__list_workspaces",
       "Bash(LC_ALL=en_US.UTF-8 sed -i '' 's/event organisers/event organizers/' about/index.html)",
       "Bash(python3 -)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__computer",
+      "Bash(git commit -q -m 'Editorial pass: monumental type, edge-bleed portrait, outlined numerals, grain *)"
     ]
   }
 }

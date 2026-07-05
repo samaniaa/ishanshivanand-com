@@ -58,18 +58,26 @@
 
   .menu__link {
     font-family: var(--font-display);
-    font-size: clamp(1.9rem, 1.2rem + 3.6vh, 3.4rem);
-    line-height: 1.18;
+    font-size: clamp(2.2rem, 1.2rem + 4.6vh, 4.4rem);
+    font-weight: 410;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
     color: var(--c-white);
     display: inline-flex;
     align-items: baseline;
     gap: 1.1rem;
-    transition: color var(--dur-quick);
+    transition: color var(--dur-quick), transform 0.45s var(--ease-out);
   }
 
-  .menu__link:hover,
+  .menu__link:hover {
+    color: var(--c-gold-80);
+    transform: translateX(0.35em);
+    font-style: italic;
+  }
+
   .menu__link[aria-current='page'] {
     color: var(--c-gold-80);
+    font-style: italic;
   }
 
   .menu__num {

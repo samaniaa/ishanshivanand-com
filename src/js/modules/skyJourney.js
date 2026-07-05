@@ -28,7 +28,7 @@ export function init(el) {
     // proof/showreel middle, and dusk gathers across the final zone.
     tl.to(dawn, { opacity: 0, ease: 'none', duration: 0.3 }, 0.12)
       .to(day, { opacity: 1, ease: 'none', duration: 0.3 }, 0.12)
-      .to(dusk, { opacity: 1, ease: 'none', duration: 0.22 }, 0.7)
+      .to(dusk, { opacity: 1, ease: 'none', duration: 0.18 }, 0.64)
   })
 
   // Theme flip is NOT scrubbed: one eased swap, both directions.

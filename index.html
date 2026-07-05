@@ -17,34 +17,35 @@
     <main id="main">
       <!-- 1 · Hero · dawn -->
       <section class="hero" data-module="hero" aria-label="Vision">
-        <div class="hero__grid">
-          <div class="hero__copy">
-            <div class="hero__mark" data-hero-mark>
-              <!-- @include icon.html {"ns":"hero","cls":"hero__mark-svg"} -->
-            </div>
-            <h1 class="hero__vision" data-hero-vision>
-              I envision a world free from mental and physical suffering, where
-              every person has access to the tools that sustain their
-              well-being. <em>This is the destination my work moves toward.</em>
-            </h1>
-            <p class="hero__attrib" data-hero-attrib>Dr. Ishan Shivanand</p>
+        <figure class="hero__portrait" data-hero-portrait>
+          <img
+            src="/assets/img/portrait-hero.jpg"
+            alt="Dr. Ishan Shivanand"
+            width="1200"
+            height="1500"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+        <div class="hero__inner">
+          <div class="hero__mark" data-hero-mark>
+            <!-- @include icon.html {"ns":"hero","cls":"hero__mark-svg"} -->
           </div>
-          <figure class="hero__portrait u-warm" data-hero-portrait>
-            <img
-              src="/assets/img/portrait-hero.jpg"
-              alt="Dr. Ishan Shivanand"
-              width="1200"
-              height="1500"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </figure>
+          <h1 class="hero__vision" data-hero-vision>
+            I envision a world free from mental and physical suffering, where
+            every person has access to the tools that sustain their
+            well-being. <em>This is the destination my work moves toward.</em>
+          </h1>
+          <div class="hero__meta" data-hero-attrib>
+            <p class="hero__attrib">Dr. Ishan Shivanand</p>
+            <p class="hero__roles">Academic. Philanthropist. Founder.</p>
+          </div>
         </div>
         <p class="hero__scrollcue" data-hero-cue>Scroll</p>
       </section>
 
       <!-- Credibility band -->
-      <section class="cred container" data-module="tease" aria-label="Introduction">
+      <section id="introduction" class="cred container" data-module="tease" aria-label="Introduction">
         <div class="cred__inner">
           <h2 class="cred__label" data-reveal-title>
             <span>Academic.</span>
@@ -64,7 +65,7 @@
       </section>
 
       <!-- 2 · Proof strip · early light -->
-      <section class="proof container" data-module="proof" aria-label="Reach">
+      <section id="reach" class="proof container" data-module="proof" aria-label="Reach">
         <div class="proof__grid">
           <div class="stat">
             <p class="stat__value">
@@ -94,7 +95,7 @@
       </section>
 
       <!-- 3 · Showreel · daylight -->
-      <section class="showreel" data-module="showreel" aria-label="Showreel">
+      <section id="showreel" class="showreel" data-module="showreel" aria-label="Showreel">
         <div class="container showreel__head">
           <p class="overline"><span class="overline__num">01</span> The Breadth</p>
           <h2 class="showreel__title" data-reveal-title>
@@ -123,7 +124,7 @@
       </section>
 
       <!-- 4 · Logo wall -->
-      <section class="logo-wall container" data-module="logo-wall" aria-label="Institutions">
+      <section id="institutions" class="logo-wall container" data-module="logo-wall" aria-label="Institutions">
         <p class="logo-wall__intro">The work is carried in rooms that ask for proof</p>
         <ul class="logo-wall__grid">
           <li class="logo-wall__cell"><span class="logo-wall__name">Mayo Clinic</span></li>
@@ -142,7 +143,8 @@
       </section>
 
       <!-- 5 · Research tease -->
-      <section class="tease container" data-module="tease" aria-label="Research">
+      <section id="research-tease" class="tease container" data-module="tease" aria-label="Research">
+        <span class="tease__index" aria-hidden="true">02</span>
         <div class="tease__grid">
           <div class="tease__copy">
             <p class="overline"><span class="overline__num">02</span> Research</p>
@@ -198,7 +200,8 @@
       </section>
 
       <!-- 6 · Philanthropy tease -->
-      <section class="tease tease--flip container" data-module="tease" aria-label="Philanthropy">
+      <section id="philanthropy-tease" class="tease tease--flip container" data-module="tease" aria-label="Philanthropy">
+        <span class="tease__index" aria-hidden="true">03</span>
         <div class="tease__grid">
           <div class="tease__copy">
             <p class="overline"><span class="overline__num">03</span> Philanthropy</p>
@@ -228,7 +231,8 @@
       </section>
 
       <!-- 7 · Book tease -->
-      <section class="tease tease--book container" data-module="tease" aria-label="The book">
+      <section id="book-tease" class="tease tease--book container" data-module="tease" aria-label="The book">
+        <span class="tease__index" aria-hidden="true">04</span>
         <div class="tease__grid">
           <div class="tease__copy">
             <p class="overline"><span class="overline__num">04</span> The Book</p>
@@ -254,7 +258,8 @@
       </section>
 
       <!-- 8 · About tease -->
-      <section class="tease tease--flip container" data-module="tease" aria-label="About">
+      <section id="about-tease" class="tease tease--flip container" data-module="tease" aria-label="About">
+        <span class="tease__index" aria-hidden="true">05</span>
         <div class="tease__grid">
           <div class="tease__copy">
             <p class="overline"><span class="overline__num">05</span> The Story</p>
@@ -282,49 +287,49 @@
       </section>
 
       <!-- 9 · Work with Ishan · dusk -->
-      <section class="work container" data-module="tease" data-dusk-threshold aria-label="Work with Ishan">
+      <section id="work" class="work container" data-module="tease" data-dusk-threshold aria-label="Work with Ishan">
         <p class="overline"><span class="overline__num">06</span> Work with Ishan</p>
         <h2 class="tease__title" data-reveal-title>
           Bring peer-reviewed mental health protocols
           <em>to your organization.</em>
         </h2>
         <div class="work__routes" data-reveal-body>
-          <article class="work__route">
-            <p class="work__route-num">Route 01</p>
+          <a class="work__route" href="/work-with-ishan/#research">
+            <span class="work__route-num">01</span>
             <h3>Research and academic partnerships</h3>
             <p>
               Collaborate, co-author, and study the protocols at scale, with
               access to an engaged global community most labs cannot reach.
             </p>
-            <a class="arrow-link" href="/work-with-ishan/#research">
+            <span class="work__route-cta">
               Propose a study
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </article>
-          <article class="work__route">
-            <p class="work__route-num">Route 02</p>
+            </span>
+          </a>
+          <a class="work__route" href="/work-with-ishan/#advisory">
+            <span class="work__route-num">02</span>
             <h3>Advisory and corporate programs</h3>
             <p>
               Workplace mental health for boards, executives, and teams,
               delivered as measured programs with named outcomes.
             </p>
-            <a class="arrow-link" href="/work-with-ishan/#advisory">
+            <span class="work__route-cta">
               Request a conversation
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </article>
-          <article class="work__route">
-            <p class="work__route-num">Route 03</p>
+            </span>
+          </a>
+          <a class="work__route" href="/work-with-ishan/#speaking">
+            <span class="work__route-num">03</span>
             <h3>Speaking and appearances</h3>
             <p>
               Keynotes, convenings, and media appearances across healthcare,
               business, and government.
             </p>
-            <a class="arrow-link" href="/work-with-ishan/#speaking">
+            <span class="work__route-cta">
               Invite Ishan
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </article>
+            </span>
+          </a>
         </div>
       </section>
     </main>

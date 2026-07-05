@@ -89,6 +89,10 @@
     --step-5: clamp(2.42rem, 1.96rem + 2.32vw, 3.77rem);
     --step-6: clamp(2.9rem, 2.2rem + 3.46vw, 4.9rem);
     --step-7: clamp(3.45rem, 2.5rem + 5vw, 6.3rem);
+    /* Monumental display sizes: the editorial voice of the site */
+    --display-hero: clamp(2.2rem, 1rem + 4.2vw, 4.4rem);
+    --display-huge: clamp(3.2rem, 1.6rem + 7.5vw, 8.2rem);
+    --display-numeral: clamp(7rem, 18vw, 17rem);
 
     /* ---- Rhythm ------------------------------------------------------ */
     --space-section: clamp(6rem, 4rem + 8vw, 11rem);

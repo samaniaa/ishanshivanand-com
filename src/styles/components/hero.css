@@ -1,30 +1,54 @@
 @layer components {
   .hero {
     min-height: 100svh;
-    display: grid;
-    align-items: center;
-    padding-block: calc(var(--header-h) + 2rem) var(--space-block);
     position: relative;
+    display: grid;
+    align-content: end;
+    padding-block: calc(var(--header-h) + 1.5rem) clamp(3rem, 7vh, 5.5rem);
+    overflow: clip;
   }
 
-  .hero__grid {
+  /* Portrait bleeds off the right viewport edge, fading into the dawn
+     field. No card, no radius: a presence, not a photo frame. */
+  .hero__portrait {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: min(44vw, 40rem);
+    margin: 0;
+    -webkit-mask-image: linear-gradient(to left, black 62%, transparent 100%);
+    mask-image: linear-gradient(to left, black 62%, transparent 100%);
+  }
+
+  .hero__portrait img {
+    width: 100%;
+    height: 116%;
+    object-fit: cover;
+    object-position: 62% 12%;
+    filter: saturate(0.82) contrast(1.04);
+  }
+
+  .hero__portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgb(255 244 232 / 0.55), transparent 34%),
+      linear-gradient(135deg, rgb(249 172 70 / 0.2), rgb(7 25 56 / 0.16));
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  .hero__inner {
     width: var(--container);
     margin-inline: auto;
-    display: grid;
-    gap: 3rem;
-  }
-
-  @media (min-width: 900px) {
-    .hero__grid {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      gap: clamp(3rem, 6vw, 6rem);
-      align-items: center;
-    }
+    position: relative;
+    z-index: 1;
   }
 
   .hero__mark {
-    width: clamp(3.2rem, 5vw, 4.6rem);
-    margin-bottom: clamp(1.8rem, 4vh, 3rem);
+    width: clamp(2.4rem, 3vw, 3rem);
+    margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem);
   }
 
   .hero__mark svg {
@@ -34,135 +58,148 @@
   }
 
   .hero__vision {
-    font-family: var(--font-display);
-    font-weight: 440;
-    font-size: var(--step-5);
-    line-height: 1.18;
-    letter-spacing: -0.018em;
+    font-size: var(--display-hero);
+    font-weight: 410;
+    line-height: 1.08;
+    letter-spacing: -0.026em;
     max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  @media (min-width: 900px) {
+    .hero__vision {
+      max-width: min(60vw, 23ch);
+    }
   }
 
   .hero__vision em {
     color: var(--c-coral);
-    font-style: italic;
+  }
+
+  /* Marginalia row: attribution left, roles right of it, hairline above */
+  .hero__meta {
+    margin-top: clamp(2.2rem, 5vh, 3.6rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 3.5rem;
+    align-items: baseline;
+    max-width: min(58vw, 44rem);
+  }
+
+  @media (max-width: 899px) {
+    .hero__meta {
+      max-width: none;
+    }
   }
 
   .hero__attrib {
-    margin-top: clamp(1.6rem, 3.5vh, 2.6rem);
-    display: flex;
-    align-items: center;
-    gap: 1.1rem;
     font-size: var(--step--1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .hero__roles {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-0);
     color: var(--ink-soft);
-  }
-
-  .hero__attrib::before {
-    content: '';
-    width: 3rem;
-    height: 1px;
-    background: var(--c-gold);
-  }
-
-  .hero__portrait {
-    position: relative;
-    border-radius: 0.4rem;
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-    max-height: 74svh;
-    justify-self: center;
-    width: 100%;
-    max-width: 30rem;
-  }
-
-  .hero__portrait img {
-    width: 100%;
-    height: 112%;
-    object-fit: cover;
-    object-position: center 20%;
-  }
-
-  .hero__portrait::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(160deg, rgb(249 172 70 / 0.12), transparent 45%, rgb(7 25 56 / 0.14));
-    pointer-events: none;
   }
 
   .hero__scrollcue {
     position: absolute;
-    left: 50%;
-    bottom: 1.8rem;
-    translate: -50% 0;
+    left: max(calc((100vw - var(--container)) / 2), 1.25rem);
+    bottom: 2rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.65rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
+    gap: 0.8rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     color: var(--ink-faint);
-  }
-
-  .hero__scrollcue::after {
-    content: '';
-    width: 1px;
-    height: 3rem;
-    background: linear-gradient(to bottom, var(--c-gold), transparent);
+    writing-mode: vertical-rl;
+    display: none;
   }
 
   @media (max-width: 899px) {
-    .hero__scrollcue {
-      display: none;
+    .hero {
+      align-content: start;
+    }
+
+    .hero__portrait {
+      position: relative;
+      inset: auto;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      height: 56svh;
+      order: 2;
+      -webkit-mask-image: linear-gradient(to top, black 55%, transparent 100%);
+      mask-image: linear-gradient(to top, black 55%, transparent 100%);
+      margin-top: 2.5rem;
+    }
+
+    .hero__portrait img {
+      height: 100%;
+      object-position: 50% 15%;
     }
   }
 
-  /* Credibility band directly under the hero */
+  /* Credibility band: the three roles as monuments, body hanging right */
   .cred {
-    padding-block: var(--space-block);
-    border-top: 1px solid var(--rule-soft);
+    padding-block: var(--space-section);
   }
 
   .cred__inner {
     display: grid;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   @media (min-width: 900px) {
     .cred__inner {
-      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-      gap: 4rem;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .cred__label {
+      grid-column: 1 / 8;
+    }
+
+    .cred__body {
+      grid-column: 8 / 13;
+      align-self: end;
     }
   }
 
   .cred__label {
     font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.25;
+    font-size: var(--display-huge);
+    font-weight: 410;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
   }
 
   .cred__label span {
     display: block;
   }
 
-  .cred__label span:nth-child(1) {
-    color: var(--ink);
-  }
-
   .cred__label span:nth-child(2) {
     color: var(--c-coral);
+    font-style: italic;
+    padding-left: 0.6em;
   }
 
   .cred__label span:nth-child(3) {
-    color: var(--c-gold);
+    color: var(--ink-faint);
   }
 
   .cred__body {
     color: var(--ink-soft);
-    max-width: 58ch;
-    font-size: var(--step-1);
-    line-height: 1.55;
-    font-weight: 380;
+    font-size: var(--step-0);
+    line-height: 1.7;
+    max-width: 38ch;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 1.4rem;
   }
 }
