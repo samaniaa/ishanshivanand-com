@@ -1,6 +1,18 @@
 @layer components {
+  /* Stub pages carry their own morning field (no day engine) */
+  body:has(.stub) {
+    background: linear-gradient(180deg, #fdf4e3 0%, #fffdf6 40%, #ffffff 100%);
+  }
+
+  /* Header is always visible on stub pages */
+  body:has(.stub) .header {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
   .stub {
-    min-height: 100svh;
+    min-height: 82svh;
     display: grid;
     align-content: center;
     padding-block: calc(var(--header-h) + 3rem) var(--space-section);
@@ -8,24 +20,45 @@
 
   .stub__eyebrow {
     font-size: var(--step--1);
-    letter-spacing: 0.18em;
+    font-weight: 550;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--c-gold);
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.4rem;
   }
 
   .stub__title {
-    font-size: var(--step-6);
-    max-width: 16ch;
-    margin-bottom: 1.8rem;
+    font-size: var(--step-5);
+    max-width: 20ch;
+    margin-bottom: 1.6rem;
   }
 
   .stub__body {
     color: var(--ink-soft);
-    max-width: 52ch;
-    margin-bottom: 2.6rem;
+    max-width: 54ch;
+    margin-bottom: 2rem;
     font-size: var(--step-1);
-    line-height: 1.55;
+    line-height: 1.65;
+  }
+
+  .stub__index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.8rem;
+    margin-bottom: 2.6rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--rule-soft);
+  }
+
+  .stub__index a {
+    font-size: var(--step--1);
+    font-weight: 520;
+    color: var(--ink-soft);
+    transition: color var(--dur-quick);
+  }
+
+  .stub__index a:hover {
+    color: var(--c-coral);
   }
 
   .stub__links {

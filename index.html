@@ -1,372 +1,341 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- @include head.html {"title":"Dr. Ishan Shivanand · Academic. Philanthropist. Founder.","description":"One of the leading voices shaping the global response to the mental health crisis. Peer-reviewed mental health protocols, adopted at Mayo Clinic, Google, Amazon, and MD Anderson."} -->
-    <link rel="preload" as="image" href="/assets/img/portrait-cutout.webp" type="image/webp" fetchpriority="high" />
+    <!-- @include head.html {"title":"Dr. Ishan Shivanand · Academic. Philanthropist. Founder.","description":"Dr. Ishan Shivanand is an academic, philanthropist, founder of Compassion Unites, and one of the leading voices shaping the global response to the mental health crisis."} -->
     <script type="module" src="/src/js/home.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://ishanshivanand.com/#person",
+            "name": "Dr. Ishan Shivanand",
+            "jobTitle": ["Academic", "Philanthropist", "Founder"],
+            "description": "Dr. Ishan Shivanand is an academic, philanthropist, founder of Compassion Unites, and one of the leading voices shaping the global response to the mental health crisis.",
+            "url": "https://ishanshivanand.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/ishanshivanand",
+              "https://www.instagram.com/ishan.shivanand",
+              "https://www.facebook.com/IshanShivanand"
+            ],
+            "founder": {
+              "@type": "Organization",
+              "name": "Compassion Unites",
+              "url": "https://compassionunites.com"
+            }
+          },
+          {
+            "@type": "Book",
+            "name": "The Practice of Immortality",
+            "author": { "@id": "https://ishanshivanand.com/#person" },
+            "publisher": [
+              { "@type": "Organization", "name": "Penguin Random House" },
+              { "@type": "Organization", "name": "Hachette" }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
-  <body>
-    <div class="sky" aria-hidden="true" data-module="sky">
-      <div class="sky__layer" data-sky="dawn"></div>
-      <div class="sky__layer" data-sky="day"></div>
-      <div class="sky__layer" data-sky="dusk">
-        <div class="sky__stars"></div>
-      </div>
+  <body data-phase="dark">
+    <!-- The day: fixed sky, stars, and the traveling light -->
+    <div class="day-sky" aria-hidden="true">
+      <div class="day-sky__layer" data-sky="predawn"></div>
+      <div class="day-sky__layer" data-sky="sunrise"></div>
+      <div class="day-sky__layer" data-sky="morning"></div>
+      <div class="day-sky__layer" data-sky="midday"></div>
+      <div class="day-sky__layer" data-sky="golden"></div>
+      <div class="day-sky__layer" data-sky="dusk"></div>
+      <div class="day-sky__layer" data-sky="night"></div>
+      <div class="day-sky__stars"></div>
+    </div>
+    <div class="celestial" aria-hidden="true">
+      <div class="celestial__moon"></div>
+      <div class="celestial__sun"></div>
     </div>
 
     <!-- @include header.html -->
 
     <main id="main">
-      <!-- 1 · Hero · dawn: the name and the roles -->
-      <section class="hero" data-module="hero" aria-label="Dr. Ishan Shivanand">
-        <div class="hero__backdrop" aria-hidden="true">
-          <img src="/assets/brand/is-laurel.svg" alt="" width="138" height="119" />
-        </div>
-        <div class="hero__inner">
-          <h1 class="hero__name">
-            <span class="hero__name-line"><span class="line-inner">Dr. Ishan</span></span>
-            <span class="hero__name-line"><span class="line-inner">Shivanand</span></span>
-          </h1>
-          <p class="hero__role" aria-label="Academic, philanthropist, founder, author, speaker">
-            <span class="hero__role-mask" aria-hidden="true">
-              <span class="hero__role-word" data-role-word>Academic.</span>
-            </span>
-          </p>
-        </div>
-        <figure class="hero__cutout" data-hero-portrait>
-          <picture>
-            <source srcset="/assets/img/portrait-cutout.webp" type="image/webp" />
-            <img
-              src="/assets/img/portrait-cutout.png"
-              alt="Dr. Ishan Shivanand"
-              width="842"
-              height="1200"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </picture>
-        </figure>
-        <div class="hero__foot">
-          <div class="hero__vision-block" data-hero-attrib>
-            <p class="hero__vision">
-              &ldquo;I envision a world free from mental and physical
-              suffering, where every person has access to the tools that
-              sustain their well-being. This is the destination my work moves
-              toward.&rdquo;
-            </p>
-            <p class="hero__tagline">
-              One of the leading voices shaping the global response to the
-              mental health crisis
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2 · Introduction band -->
-      <section id="introduction" class="cred container" data-module="tease" aria-label="Introduction">
-        <div class="cred__inner">
-          <h2 class="cred__label" data-reveal-title>
-            The work begins where <em>suffering does.</em>
-          </h2>
-          <div class="cred__body" data-reveal-body>
-            <p>
-              Dr. Ishan Shivanand is the founder of Compassion Unites, the
-              cross-sector mental health alliance. Peer-reviewed research
-              validates his mental health protocols, adopted at Mayo Clinic,
-              Google, Amazon, and MD Anderson. He has been recognized by the
-              US Congress, received by UK Parliament, and invited to the White
-              House Office of National Drug Control Policy roundtable on the
-              opioid crisis.
-            </p>
-            <a class="arrow-link" href="/about/">
-              Read the story
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3 · Flagship grid: the work in four streams -->
-      <section id="streams" class="flagship container" data-module="tease" aria-label="The work">
-        <p class="overline"><span class="overline__num">01</span> The Work</p>
-        <h2 class="flagship__title" data-reveal-title>
-          The work, in <em>four streams.</em>
-        </h2>
-        <div class="flagship__grid" data-reveal-body>
-          <a class="flagship__card" href="/research/">
-            <figure class="flagship__media flagship__media--ph">
-              <figcaption>Placeholder: research, clinical setting</figcaption>
-            </figure>
-            <h3>The Research</h3>
-            <p>Yoga of Immortals. Six peer-reviewed studies with named US universities.</p>
-            <span class="flagship__cta">Explore</span>
-          </a>
-          <a class="flagship__card" href="/philanthropy/">
-            <figure class="flagship__media flagship__media--ph">
-              <figcaption>Placeholder: field program, natural light</figcaption>
-            </figure>
-            <h3>Compassion Unites</h3>
-            <p>The cross-sector mental health alliance he founded.</p>
-            <span class="flagship__cta">See the alliance</span>
-          </a>
-          <a class="flagship__card" href="/practice-of-immortality/">
-            <figure class="flagship__media flagship__media--ph">
-              <figcaption>Placeholder: book cover</figcaption>
-            </figure>
-            <h3>The Book</h3>
-            <p>The Practice of Immortality. A USA Today national bestseller.</p>
-            <span class="flagship__cta">About the book</span>
-          </a>
-          <a class="flagship__card" href="/work-with-ishan/">
-            <figure class="flagship__media flagship__media--ph">
-              <figcaption>Placeholder: keynote stage</figcaption>
-            </figure>
-            <h3>The Stage</h3>
-            <p>Keynotes and advisory across healthcare, business, and government.</p>
-            <span class="flagship__cta">Work with Ishan</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 4 · FACETS: one person, four facets -->
-      <section class="facets-head container" data-module="tease" aria-label="Facets">
-        <p class="overline"><span class="overline__num">02</span> The Facets</p>
-        <h2 class="facets-head__title" data-reveal-title>
-          One person. <em>Four facets.</em>
-        </h2>
-      </section>
-
-      <!-- Facet 01 · The Academic · daylight -->
-      <section id="facet-academic" class="facet container" data-module="tease" aria-label="The Academic">
-        <span class="tease__index" aria-hidden="true">I</span>
-        <div class="tease__grid">
-          <div class="tease__copy">
-            <p class="facet__kicker">Facet one</p>
-            <h3 class="tease__title" data-reveal-title>The <em>Academic.</em></h3>
-            <p class="tease__body" data-reveal-body>
-              Six peer-reviewed studies with the University of Cincinnati, the
-              University of Kentucky College of Medicine, and Rutgers
-              University document the outcomes of the Yoga of Immortals
-              protocols.
-            </p>
-            <div class="facet__rows" data-reveal-body>
-              <div class="facet__row">
-                <span class="facet__row-num">82%</span>
-                <span class="facet__row-label">of participants with severe insomnia achieved complete resolution of clinical symptoms within 8 weeks</span>
-              </div>
-              <div class="facet__row">
-                <span class="facet__row-num">79%</span>
-                <span class="facet__row-label">with moderate to severe anxiety achieved significant improvement</span>
-              </div>
-              <div class="facet__row">
-                <span class="facet__row-num">73%</span>
-                <span class="facet__row-label">with moderately severe depression improved significantly</span>
-              </div>
-            </div>
-            <a class="arrow-link" href="/research/">
-              Explore the research
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-          <div class="tease__media">
-            <figure class="tease__frame tease__frame--ph u-warm" data-reveal-media>
-              <figcaption>Placeholder: university research environment</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- Facet 02 · The Philanthropist · golden hour -->
-      <section id="facet-philanthropist" class="facet tease--flip container" data-module="tease" aria-label="The Philanthropist">
-        <span class="tease__index" aria-hidden="true">II</span>
-        <div class="tease__grid">
-          <div class="tease__copy">
-            <p class="facet__kicker">Facet two</p>
-            <h3 class="tease__title" data-reveal-title>The <em>Philanthropist.</em></h3>
-            <p class="tease__body" data-reveal-body>
-              Rural healthcare through ARK in Rajasthan. Scholarships and the
-              Centre for Yogic Sciences at IIT Ropar. Champions of Compassion
-              in Mauritius. Validated protocols delivered without charge to
-              veterans, farmers, and frontline healthcare workers from Kenya
-              to Tanzania.
-            </p>
-            <a class="arrow-link" href="/philanthropy/">
-              See the philanthropy
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-          <div class="tease__media">
-            <figure class="tease__frame tease__frame--wide tease__frame--ph u-warm" data-reveal-media>
-              <figcaption>Placeholder: community program in the field</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- Facet 03 · The Author · sunset -->
-      <section id="facet-author" class="facet tease--book container" data-module="tease" aria-label="The Author">
-        <span class="tease__index" aria-hidden="true">III</span>
-        <div class="tease__grid">
-          <div class="tease__copy">
-            <p class="facet__kicker">Facet three</p>
-            <h3 class="tease__title" data-reveal-title>The <em>Author.</em></h3>
-            <p class="tease__body" data-reveal-body>
-              The Practice of Immortality, a USA Today national bestseller
-              published by Penguin Random House and Hachette.
-              <span class="u-italic">A Monk&rsquo;s Guide to Discovering Your
-              Unlimited Potential.</span>
-            </p>
-            <a class="arrow-link" href="/practice-of-immortality/">
-              About the book
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-          <div class="tease__media">
-            <figure class="tease__frame tease__frame--ph" data-reveal-media>
-              <figcaption>Placeholder: book cover artwork</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- Facet 04 · The Source · dusk, stars -->
-      <section id="facet-source" class="facet facet--source container" data-module="tease" data-dusk-threshold aria-label="The Source">
-        <span class="tease__index" aria-hidden="true">IV</span>
-        <div class="tease__grid">
-          <div class="tease__copy">
-            <p class="facet__kicker">Facet four</p>
-            <h3 class="tease__title" data-reveal-title>The <em>Source.</em></h3>
-            <p class="tease__body" data-reveal-body>
-              Before the research and the institutions there was a boy in
-              training. More than fifteen years within one of India&rsquo;s
-              oldest contemplative lineages, in Himalayan monasteries and
-              desert ashrams, shaped the tools he now studies, teaches, and
-              gives away.
-            </p>
-            <blockquote class="facet__quote" data-reveal-body>
-              &ldquo;I wanted them all to have access to the tools that had
-              made me stronger.&rdquo;
-            </blockquote>
-            <a class="arrow-link" href="/tradition/">
-              Enter the tradition
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </a>
-          </div>
-          <div class="tease__media">
-            <figure class="tease__frame tease__frame--ph" data-reveal-media>
-              <figcaption>Placeholder: Himalayan landscape, quiet practice</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · Showreel · the reach, on the dusk field -->
-      <section id="showreel" class="showreel" data-module="showreel" aria-label="Showreel">
-        <div class="container showreel__head">
-          <p class="overline"><span class="overline__num">03</span> The Reach</p>
-          <h2 class="showreel__title" data-reveal-title>
-            One body of work, <em class="u-italic">seen from every side.</em>
-          </h2>
-        </div>
+      <!-- Pre-dawn · the vision -->
+      <section class="chapter predawn" data-sky-phase="predawn" data-ink="dark" aria-label="Vision">
         <div class="container">
-          <div class="showreel__stage" data-showreel-stage>
-            <p class="showreel__hint">Drag to explore</p>
+          <p class="predawn__vision" data-vision>
+            I envision a world free from mental and physical suffering, where
+            every person has access to the tools that sustain their
+            well-being. This is the destination my work moves toward.
+          </p>
+          <p class="predawn__motto" data-rise>Rise and Lift Others</p>
+        </div>
+        <div class="ridge ridge--back" aria-hidden="true">
+          <svg viewBox="0 0 1440 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,88 L96,44 190,72 300,26 396,66 520,34 640,70 760,22 880,58 1000,36 1120,68 1240,40 1340,64 1440,48 L1440,110 0,110 Z" fill="#0b1026" opacity="0.7"/></svg>
+        </div>
+        <div class="ridge ridge--front" aria-hidden="true">
+          <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,90 L60,62 170,80 260,48 380,78 470,56 600,84 700,44 830,76 940,58 1060,82 1170,52 1300,78 1380,66 1440,74 L1440,90 Z" fill="#070b1d"/></svg>
+        </div>
+      </section>
+
+      <!-- Sunrise · the man -->
+      <section class="chapter sunrise container" data-sky-phase="sunrise" data-ink="dark" aria-label="Dr. Ishan Shivanand">
+        <h1 class="sunrise__name" data-rise>Dr. Ishan Shivanand</h1>
+        <p class="sunrise__tagline" data-rise>
+          One of the leading voices shaping the global response to the mental
+          health crisis
+        </p>
+        <p class="sunrise__entity" data-word-reveal>
+          Dr. Ishan Shivanand is an academic, philanthropist, founder of
+          Compassion Unites, and one of the leading voices shaping the global
+          response to the mental health crisis. Peer-reviewed research
+          validates his mental health protocols, now adopted at Google and
+          Fortune 500 companies. Shivanand advises global governments and
+          CEOs. An award-winning author, his first book, The Practice of
+          Immortality, is a USA Today national bestseller.
+        </p>
+        <p class="chapter__cta" data-rise>
+          <a class="btn" href="/about/">Read the story</a>
+        </p>
+      </section>
+
+      <div class="sky-breath" aria-hidden="true"></div>
+
+      <!-- Morning · the research -->
+      <section id="research" class="chapter container" data-sky-phase="morning" data-ink="light" aria-label="Research">
+        <h2>Peer-reviewed mental health research</h2>
+        <p class="research__meta" data-word-reveal>
+          Six studies, conducted in collaboration with leading academic
+          institutions including the University of Cincinnati, the University
+          of Kentucky College of Medicine, and Rutgers University. The
+          protocols are adopted at Mayo Clinic, Google, Amazon, and MD
+          Anderson.
+        </p>
+        <div class="research__stats">
+          <div class="research__stat" data-rise>
+            <span class="research__num">82%</span>
+            <span class="research__label">
+              with severe <strong>insomnia</strong> achieved a complete
+              resolution of their clinical symptoms within 8 weeks.
+            </span>
           </div>
-          <ul class="showreel__grid" data-showreel-grid>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Keynote, institutional stage</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Hospital program delivery</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Rural clinic, Rajasthan</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>University research visit</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Champions program, Mauritius</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Live forum, large audience</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Field medical, East Africa</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>IIT Ropar, Centre opening</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Quiet practice, teaching</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Government reception</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Book, reader moment</figcaption></figure></li>
-            <li><figure class="showreel__tile showreel__tile--ph"><span class="ph-laurel"><img src="/assets/brand/is-laurel.svg" alt="" loading="lazy" width="138" height="119" /></span><figcaption>Corporate program, workshop</figcaption></figure></li>
+          <div class="research__stat" data-rise>
+            <span class="research__num">79%</span>
+            <span class="research__label">
+              with moderate to severe <strong>anxiety</strong> achieved
+              significant improvement.
+            </span>
+          </div>
+          <div class="research__stat" data-rise>
+            <span class="research__num">73%</span>
+            <span class="research__label">
+              with moderately severe <strong>depression</strong> improved
+              significantly.
+            </span>
+          </div>
+        </div>
+        <figure class="pullquote">
+          <blockquote data-word-reveal>
+            &ldquo;We found these techniques immensely useful to healthcare
+            to eliminate negative effects of stress and burnout in our lives
+            and help us improve overall well-being.&rdquo;
+          </blockquote>
+          <figcaption>MD Program Director</figcaption>
+        </figure>
+        <p class="chapter__cta" data-rise>
+          <a class="btn" href="/research/">Read the research</a>
+        </p>
+      </section>
+
+      <!-- Midday · philanthropy -->
+      <section id="philanthropy" class="chapter container" data-sky-phase="midday" data-ink="light" aria-label="Philanthropy">
+        <h2>Mental health outcomes, advanced through community programs globally</h2>
+        <p class="chapter__lead" data-word-reveal>
+          Mental health outcomes are shaped by the conditions people live in.
+          The community programs focus on practical, sustainable impact,
+          strengthening health, opportunity, and stability so progress holds
+          without dependency. Initiatives span rural healthcare, education
+          scholarships, high-altitude medical services, and broader community
+          support.
+        </p>
+        <div class="phil__drift" data-drift>
+          <article class="phil__moment" data-rise>
+            <figure class="phil__photo"><figcaption>Photo: ARK</figcaption></figure>
+            <h3>Rural Healthcare</h3>
+            <p>Essential care delivered where access is limited.</p>
+          </article>
+          <article class="phil__moment" data-rise>
+            <figure class="phil__photo"><figcaption>Photo: IIT</figcaption></figure>
+            <h3>Education Scholarships</h3>
+            <p>Opportunity that lasts, built through education infrastructure.</p>
+          </article>
+          <article class="phil__moment" data-rise>
+            <figure class="phil__photo"><figcaption>Photo: Six Sigma</figcaption></figure>
+            <h3>Field Medical Services</h3>
+            <p>Delivery under pressure, including high-altitude environments.</p>
+          </article>
+        </div>
+        <p class="chapter__cta" data-rise>
+          <a class="btn" href="/philanthropy/">See the philanthropy</a>
+        </p>
+      </section>
+
+      <!-- Afternoon · the book -->
+      <section id="book" class="chapter container" data-sky-phase="golden" data-ink="light" aria-label="The book">
+        <h2>The Practice of Immortality</h2>
+        <p class="chapter__lead" data-word-reveal>
+          A guide to discovering your unlimited potential. Published by
+          Penguin Random House and Hachette. Translated into Italian, German,
+          and Portuguese.
+        </p>
+        <div class="book__grid">
+          <img
+            class="book__cover"
+            src="/assets/img/framer/book-cover.jpg"
+            alt="The Practice of Immortality, by Ishan Shivanand"
+            width="1024"
+            height="1536"
+            loading="lazy"
+            data-rise
+          />
+          <div class="book__body">
+            <h3>Award-winning book</h3>
+            <div class="book__awards" data-rise data-rise-children>
+              <img src="/assets/img/framer/award-usatoday.png" alt="USA Today Featured Bestseller" width="200" height="200" loading="lazy" />
+              <img src="/assets/img/framer/award-nautilus.png" alt="Nautilus Book Awards Winner" width="200" height="200" loading="lazy" />
+              <img src="/assets/img/framer/award-literarytitan.png" alt="Literary Titan Book Award" width="200" height="200" loading="lazy" />
+              <img src="/assets/img/framer/award-bookfest.png" alt="The BookFest Award Winner" width="200" height="200" loading="lazy" />
+              <img src="/assets/img/framer/award-amazon.png" alt="Amazon number one bestseller" width="200" height="200" loading="lazy" />
+            </div>
+            <p class="book__memoir" data-word-reveal>
+              A personal memoir of the formative years in a monastery,
+              written as a guide to lived experience. Each chapter takes the
+              reader from story to insight to a practice they can apply.
+            </p>
+            <a class="btn" href="/practice-of-immortality/">About the book</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Golden hour · the voice -->
+      <section id="voice" class="chapter container" data-sky-phase="golden" data-ink="light" aria-label="The voice">
+        <h2>In his own words</h2>
+        <div class="voice__video" data-video="aLnMHnr4JD8" data-rise>
+          <img
+            src="https://i.ytimg.com/vi/aLnMHnr4JD8/maxresdefault.jpg"
+            alt="Video: The Ancient Practice High Performers Are Missing"
+            loading="lazy"
+            width="1280"
+            height="720"
+          />
+          <button class="voice__play" type="button" aria-label="Play video">
+            <span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+          </button>
+        </div>
+        <div class="voice__trusted">
+          <p class="voice__statement" data-word-reveal>
+            Trusted by Fortune 500 companies, Governments, and World Leading
+            Academia
+          </p>
+          <ul class="voice__institutions" data-rise data-rise-children>
+            <li>Mayo Clinic</li>
+            <li>Google</li>
+            <li>Amazon</li>
+            <li>MD Anderson</li>
+            <li>US Congress</li>
+            <li>UK Parliament</li>
+            <li>The White House ONDCP</li>
+            <li>University of Cincinnati</li>
+            <li>University of Kentucky</li>
+            <li>Rutgers University</li>
+            <li>IIT Ropar</li>
+            <li>Penguin Random House</li>
           </ul>
         </div>
       </section>
 
-      <!-- 6 · Institutions index -->
-      <section id="institutions" class="logo-wall container" data-module="logo-wall" aria-label="Institutions">
-        <p class="logo-wall__intro">The work is carried in rooms that ask for proof</p>
-        <ul class="logo-wall__grid">
-          <li class="logo-wall__cell"><span class="logo-wall__name">Mayo Clinic</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">Google</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">Amazon</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">MD Anderson</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">US Congress</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">UK Parliament</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">The White House ONDCP</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">University of Cincinnati</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">University of Kentucky</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">Rutgers University</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">IIT Ropar</span></li>
-          <li class="logo-wall__cell"><span class="logo-wall__name">Penguin Random House</span></li>
-        </ul>
-      </section>
+      <div class="sky-breath" aria-hidden="true"></div>
 
-      <!-- 7 · Testimonial -->
-      <section class="testimonial container" data-module="testimonial" aria-label="Testimonial">
-        <figure class="testimonial__inner">
-          <img class="testimonial__seal" src="/assets/brand/is-seal.svg" alt="" width="64" height="64" loading="lazy" />
-          <blockquote class="testimonial__quote" data-reveal-title>
-            These techniques have been immensely useful in reducing stress and
-            burnout among our physicians.
-          </blockquote>
-          <figcaption class="testimonial__attrib" data-reveal-body>
-            <strong>Program Director</strong>
-            Placeholder attribution, medical institution
-          </figcaption>
-        </figure>
-      </section>
-
-      <!-- 8 · Work with Ishan -->
-      <section id="work" class="work container" data-module="tease" aria-label="Work with Ishan">
-        <p class="overline"><span class="overline__num">04</span> Work with Ishan</p>
-        <h2 class="tease__title" data-reveal-title>
-          Bring peer-reviewed mental health protocols
-          <em>to your organization.</em>
-        </h2>
-        <div class="work__routes" data-reveal-body>
-          <a class="work__route" href="/work-with-ishan/#research">
-            <span class="work__route-num">01</span>
+      <!-- Dusk · work with Ishan -->
+      <section id="work" class="chapter container" data-sky-phase="dusk" data-ink="dark" aria-label="Work with Ishan">
+        <h2>Work with Ishan</h2>
+        <p class="chapter__lead" data-word-reveal>
+          For research collaborations, partnerships, speaking engagements, or
+          media inquiries, send a note to Ishan&rsquo;s team.
+        </p>
+        <div class="work__routes">
+          <div class="work__route" data-rise>
             <h3>Research and academic partnerships</h3>
             <p>
               Collaborate, co-author, and study the protocols at scale, with
               access to an engaged global community most labs cannot reach.
             </p>
-            <span class="work__route-cta">
-              Propose a study
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </a>
-          <a class="work__route" href="/work-with-ishan/#advisory">
-            <span class="work__route-num">02</span>
+            <a class="btn" href="/work-with-ishan/">Propose a study</a>
+          </div>
+          <div class="work__route" data-rise>
             <h3>Advisory and corporate programs</h3>
             <p>
               Workplace mental health for boards, executives, and teams,
               delivered as measured programs with named outcomes.
             </p>
-            <span class="work__route-cta">
-              Request a conversation
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </a>
-          <a class="work__route" href="/work-with-ishan/#speaking">
-            <span class="work__route-num">03</span>
+            <a class="btn" href="/work-with-ishan/">Start a conversation</a>
+          </div>
+          <div class="work__route" data-rise>
             <h3>Speaking and appearances</h3>
             <p>
               Keynotes, convenings, and media appearances across healthcare,
               business, and government.
             </p>
-            <span class="work__route-cta">
-              Invite Ishan
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </a>
+            <a class="btn" href="/work-with-ishan/">Invite Ishan</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Night · the story, then the motto -->
+      <section id="about" class="chapter night container" data-sky-phase="night" data-ink="dark" aria-label="About">
+        <h2>From the monastery to modern medicine</h2>
+        <div class="night__grid">
+          <figure class="night__photo" data-rise>
+            <img
+              src="/assets/img/portrait-hero.jpg"
+              alt="Dr. Ishan Shivanand"
+              width="1000"
+              height="1500"
+              loading="lazy"
+            />
+          </figure>
+          <div class="night__body">
+            <p data-word-reveal>
+              Ishan Shivanand&rsquo;s work on mental health started long
+              before the research or the public recognition. It was shaped in
+              the monastery, through disciplined training within one of
+              India&rsquo;s oldest contemplative lineages, where practice was
+              a way of life.
+            </p>
+            <p data-word-reveal>
+              That formation set the standard he holds himself to: rigorous,
+              grounded, and operating in service of humanity. Compassion
+              Unites is the structural expression of that commitment, built
+              to strengthen the global response to the mental health crisis.
+            </p>
+            <p data-word-reveal>
+              He codified that training into protocols that modern clinical
+              science can evaluate. They have been validated through
+              peer-reviewed research conducted with leading US universities,
+              and carried into the world through teaching and impact
+              initiatives that change the realities people live with.
+            </p>
+            <p data-word-reveal>
+              All of it, toward one destination: a world free from mental and
+              physical suffering.
+            </p>
+            <a class="btn" href="/about/">About Ishan</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="night__close" data-sky-phase="night" data-ink="dark" aria-label="Rise and Lift Others">
+        <p class="night__motto" data-word-reveal>Rise and Lift Others</p>
+        <div class="ridge ridge--front" aria-hidden="true">
+          <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,90 L60,62 170,80 260,48 380,78 470,56 600,84 700,44 830,76 940,58 1060,82 1170,52 1300,78 1380,66 1440,74 L1440,90 Z" fill="#04081a"/></svg>
         </div>
       </section>
     </main>

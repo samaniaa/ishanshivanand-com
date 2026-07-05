@@ -25,15 +25,12 @@ if (import.meta.env.DEV) {
   qa.style.cssText =
     'position:fixed;bottom:4px;left:4px;z-index:999;display:flex;gap:6px;font-size:9px;opacity:.5'
   qa.innerHTML = [
-    'introduction',
-    'reach',
-    'showreel',
-    'institutions',
-    'research-tease',
-    'philanthropy-tease',
-    'book-tease',
-    'about-tease',
+    'research',
+    'philanthropy',
+    'book',
+    'voice',
     'work',
+    'about',
   ]
     .map((id) => `<a href="#${id}" data-qa="${id}">${id.slice(0, 4)}</a>`)
     .join('')

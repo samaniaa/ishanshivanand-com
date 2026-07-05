@@ -1,0 +1,226 @@
+@layer components {
+  /* =====================================================================
+     THE DAY: one continuous sky behind the whole page.
+     Fixed layer stack; opacity cross-fades are compositor-only and are
+     driven by a single scrubbed timeline in modules/day.js, which also
+     flips body[data-phase] so ink and sky can never disagree.
+     ===================================================================== */
+  .day-sky {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .day-sky__layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  /* Pre-dawn: deep indigo through lilac, dark enough for the moon */
+  .day-sky__layer[data-sky='predawn'] {
+    opacity: 1;
+    background: linear-gradient(
+      180deg,
+      #0a1230 0%,
+      #131b44 34%,
+      #2c2f63 62%,
+      #59486e 82%,
+      #8a5f63 94%,
+      #b06a4e 100%
+    );
+  }
+
+  /* Sunrise: ember and rose climbing from the horizon */
+  .day-sky__layer[data-sky='sunrise'] {
+    background: linear-gradient(
+      180deg,
+      #3a2c55 0%,
+      #7c4053 30%,
+      #bf4f37 58%,
+      #e0813a 78%,
+      #f2b968 92%,
+      #fbe9c0 100%
+    );
+  }
+
+  /* Morning: pale warmth */
+  .day-sky__layer[data-sky='morning'] {
+    background: linear-gradient(180deg, #fdf4e3 0%, #fdf8ec 55%, #fffdf6 100%);
+  }
+
+  /* Midday: her light gradient, near-white */
+  .day-sky__layer[data-sky='midday'] {
+    background: linear-gradient(180deg, #ffffff 0%, #fffdf9 55%, #fff8f5 100%);
+  }
+
+  /* Golden hour: amber gathering */
+  .day-sky__layer[data-sky='golden'] {
+    background: linear-gradient(180deg, #fdf3dc 0%, #f8d9a0 45%, #f2b968 78%, #e89050 100%);
+  }
+
+  /* Dusk: back through the blues and lilacs */
+  .day-sky__layer[data-sky='dusk'] {
+    background: linear-gradient(
+      180deg,
+      #1b2148 0%,
+      #333567 38%,
+      #59486e 62%,
+      #8a5f80 80%,
+      #b06a5e 94%,
+      #d98a4e 100%
+    );
+  }
+
+  /* Night: deep navy, faint lilac breath at the horizon */
+  .day-sky__layer[data-sky='night'] {
+    background: linear-gradient(
+      180deg,
+      #050b20 0%,
+      #0a1230 45%,
+      #1c1f4a 75%,
+      #3a3260 92%,
+      #4c3a5e 100%
+    );
+  }
+
+  /* ---- Stars: bright core + soft halo pairs, only in dark phases ----- */
+  .day-sky__stars {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-image:
+      radial-gradient(2px 2px at 12% 14%, rgb(255 250 235 / 0.95), transparent 100%),
+      radial-gradient(7px 7px at 12% 14%, rgb(255 250 235 / 0.22), transparent 100%),
+      radial-gradient(1.6px 1.6px at 31% 27%, rgb(230 235 255 / 0.85), transparent 100%),
+      radial-gradient(6px 6px at 31% 27%, rgb(230 235 255 / 0.18), transparent 100%),
+      radial-gradient(2.4px 2.4px at 47% 9%, rgb(255 250 235 / 1), transparent 100%),
+      radial-gradient(9px 9px at 47% 9%, rgb(255 250 235 / 0.25), transparent 100%),
+      radial-gradient(1.5px 1.5px at 62% 21%, rgb(230 235 255 / 0.8), transparent 100%),
+      radial-gradient(5px 5px at 62% 21%, rgb(230 235 255 / 0.16), transparent 100%),
+      radial-gradient(2px 2px at 76% 12%, rgb(255 250 235 / 0.9), transparent 100%),
+      radial-gradient(8px 8px at 76% 12%, rgb(255 250 235 / 0.2), transparent 100%),
+      radial-gradient(1.6px 1.6px at 89% 25%, rgb(230 235 255 / 0.85), transparent 100%),
+      radial-gradient(6px 6px at 89% 25%, rgb(230 235 255 / 0.18), transparent 100%),
+      radial-gradient(1.4px 1.4px at 22% 38%, rgb(255 250 235 / 0.6), transparent 100%),
+      radial-gradient(1.8px 1.8px at 55% 33%, rgb(230 235 255 / 0.65), transparent 100%),
+      radial-gradient(1.4px 1.4px at 83% 40%, rgb(255 250 235 / 0.55), transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .day-sky__stars {
+      animation: star-breathe 7s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes star-breathe {
+    0% {
+      filter: brightness(0.85);
+    }
+
+    100% {
+      filter: brightness(1.15);
+    }
+  }
+
+  /* ---- The traveling light: one element, moon and sun states --------- */
+  .celestial {
+    position: fixed;
+    z-index: 1;
+    width: clamp(56px, 7vw, 96px);
+    aspect-ratio: 1;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  .celestial__moon,
+  .celestial__sun {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    will-change: opacity;
+  }
+
+  /* Crescent: a light disc with a shadow disc biting into it */
+  .celestial__moon {
+    background: radial-gradient(circle, #f6f2e4 0%, #e8e2cd 70%, transparent 71%);
+    -webkit-mask-image: radial-gradient(circle at 68% 38%, transparent 52%, black 54%);
+    mask-image: radial-gradient(circle at 68% 38%, transparent 52%, black 54%);
+    filter: drop-shadow(0 0 22px rgb(246 242 228 / 0.45));
+  }
+
+  .celestial__sun {
+    opacity: 0;
+    background: radial-gradient(
+      circle,
+      #fff7dd 0%,
+      #ffe9ae 32%,
+      rgb(249 172 70 / 0.85) 55%,
+      rgb(242 142 7 / 0.35) 72%,
+      transparent 78%
+    );
+    filter: blur(0.5px);
+    scale: 2.6;
+  }
+
+  /* Empty sky between light and dark chapters: the ink flip happens
+     here, over nothing but gradient */
+  .sky-breath {
+    height: 52svh;
+  }
+
+  /* ---- Himalayan ridge silhouettes ----------------------------------- */
+  .ridge {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    pointer-events: none;
+    line-height: 0;
+  }
+
+  .ridge svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ridge--back {
+    opacity: 0.55;
+  }
+
+  .ridge--front {
+    opacity: 0.9;
+  }
+
+  /* =====================================================================
+     Ink phases. modules/day.js flips body[data-phase] between 'dark'
+     (light text) and 'light' (navy text) in lockstep with the sky.
+     ===================================================================== */
+  body {
+    --ink-day: #172445;
+    --ink-day-soft: rgb(23 36 69 / 0.7);
+    --ink-night: #f7f3e8;
+    --ink-night-soft: rgb(247 243 232 / 0.75);
+  }
+
+  body[data-phase='dark'] {
+    --ink: var(--ink-night);
+    --ink-soft: var(--ink-night-soft);
+    --ink-faint: rgb(247 243 232 / 0.45);
+    --rule: rgb(247 243 232 / 0.22);
+    --rule-soft: rgb(247 243 232 / 0.12);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body,
+    .chapter {
+      transition: color 0.7s var(--ease-in-out);
+    }
+  }
+}

@@ -5,11 +5,18 @@
     <script type="module" src="/src/js/main.js"></script>
   </head>
   <body>
-    <div class="sky" aria-hidden="true">
-      <div class="sky__layer" data-sky="dawn"></div>
-    </div>
     <!-- @include header.html -->
-    <!-- @include stub-hero.html {"eyebrow": "The Book", "title": "The Practice of Immortality.", "body": "A USA Today national bestseller, published by Penguin Random House and Hachette. Reviews, endorsements, awards, and global buy links will live here. The full page is in progress."} -->
+    <main id="main">
+      <section class="stub container" data-module="stub">
+        <p class="stub__eyebrow">The Book</p>
+        <h1 class="stub__title">The Practice of Immortality</h1>
+        <p class="stub__body">A USA Today national bestseller, published by Penguin Random House and Hachette. Reviews, endorsements, awards, and global buy links will live here. The full page is in progress.</p>
+        <div class="stub__links">
+          <a class="btn" href="/">Return home</a>
+          <a class="tlink" href="/connect/">Get in touch</a>
+        </div>
+      </section>
+    </main>
     <!-- @include footer.html -->
   </body>
 </html>

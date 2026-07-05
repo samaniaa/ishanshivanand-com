@@ -5,11 +5,22 @@
     <script type="module" src="/src/js/main.js"></script>
   </head>
   <body>
-    <div class="sky" aria-hidden="true">
-      <div class="sky__layer" data-sky="dawn"></div>
-    </div>
     <!-- @include header.html -->
-    <!-- @include stub-hero.html {"eyebrow": "About", "title": "The biographical record.", "body": "The narrative, the credentials, the faculty positions, formal recognition, and the downloadable media kit for journalists and event organizers. The full page is in progress."} -->
+    <main id="main">
+      <section class="stub container" data-module="stub">
+        <p class="stub__eyebrow">About</p>
+        <h1 class="stub__title">The biographical record</h1>
+        <p class="stub__body">The narrative, the credentials, the faculty positions, formal recognition, and the downloadable media kit for journalists and event organizers. The full page is in progress.</p>
+        <nav class="stub__index" aria-label="On this page">
+          <a href="#recognition">Recognition</a>
+          <a href="#media-kit">Media Kit</a>
+        </nav>
+        <div class="stub__links">
+          <a class="btn" href="/">Return home</a>
+          <a class="tlink" href="/connect/">Get in touch</a>
+        </div>
+      </section>
+    </main>
     <!-- @include footer.html -->
   </body>
 </html>

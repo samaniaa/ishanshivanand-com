@@ -30,7 +30,7 @@ earth-tone unstructured jacket over a navy band-collar shirt.
 Drop the chosen file at `public/assets/img/portrait-hero.jpg`
 (portrait orientation, at least 1200px wide).
 
-## 2. Showreel media (12–16 images or short clips)
+## 2. Chapter photography
 
 Slots are labeled in the sphere and the fallback grid. Vibe brief:
 **golden-hour light, always.** Warm rim light, long soft shadows,

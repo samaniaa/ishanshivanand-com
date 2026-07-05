@@ -1,0 +1,462 @@
+@layer components {
+  /* Chapters sit above the fixed sky */
+  main {
+    position: relative;
+    z-index: 2;
+  }
+
+  .chapter {
+    position: relative;
+    padding-block: var(--space-section);
+  }
+
+  .chapter__head {
+    max-width: 60rem;
+  }
+
+  .chapter h2 {
+    font-size: var(--step-5);
+    font-weight: 450;
+    max-width: 20ch;
+    margin-bottom: 1.4rem;
+  }
+
+  .chapter__lead {
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 58ch;
+  }
+
+  .chapter__cta {
+    margin-top: 2.4rem;
+  }
+
+  /* ================= Pre-dawn: the vision ================= */
+  .predawn {
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+    padding-block: calc(var(--header-h) + 2rem) 22svh;
+  }
+
+  .predawn__vision {
+    font-family: var(--font-display);
+    font-weight: 420;
+    font-size: var(--step-5);
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+    max-width: 26ch;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .predawn__motto {
+    margin-top: 2.6rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--ink-soft);
+  }
+
+  /* ================= Sunrise: the man ================= */
+  .sunrise {
+    min-height: 90svh;
+    display: grid;
+    align-content: center;
+  }
+
+  .sunrise__name {
+    font-size: var(--step-6);
+    font-weight: 460;
+    letter-spacing: -0.022em;
+    line-height: 1.02;
+    margin-bottom: 1rem;
+  }
+
+  .sunrise__tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    color: var(--ink-soft);
+    max-width: 30ch;
+    line-height: 1.4;
+    margin-bottom: 2.4rem;
+  }
+
+  .sunrise__entity {
+    font-size: var(--step-1);
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+
+  /* ================= Morning: the research ================= */
+  .research__meta {
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 56ch;
+    margin-bottom: var(--space-block);
+  }
+
+  .research__stats {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .research__stat {
+    display: grid;
+    gap: 0.6rem 3rem;
+    align-items: baseline;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: clamp(1.2rem, 2.5vw, 2rem);
+  }
+
+  @media (min-width: 860px) {
+    .research__stat {
+      grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    }
+  }
+
+  .research__num {
+    font-family: var(--font-display);
+    font-weight: 640;
+    font-size: clamp(4.5rem, 3rem + 9vw, 11rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    background-size: cover;
+    background-position: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .research__stat:nth-child(1) .research__num {
+    background-image: url('/assets/img/framer/art-flame-1.png');
+  }
+
+  .research__stat:nth-child(2) .research__num {
+    background-image: url('/assets/img/framer/art-flame-2.png');
+  }
+
+  .research__stat:nth-child(3) .research__num {
+    background-image: url('/assets/img/framer/art-flame-3.png');
+  }
+
+  .research__label {
+    font-size: var(--step-0);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 34ch;
+  }
+
+  .research__label strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Pull-quote */
+  .pullquote {
+    margin-top: var(--space-section);
+    max-width: 46rem;
+  }
+
+  .pullquote blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-3);
+    font-weight: 430;
+    line-height: 1.42;
+    letter-spacing: -0.01em;
+  }
+
+  .pullquote figcaption {
+    margin-top: 1.3rem;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+
+  /* ================= Midday: philanthropy drift ================= */
+  .phil__drift {
+    margin-top: var(--space-block);
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    will-change: transform;
+  }
+
+  .phil__moment {
+    flex: 0 0 clamp(17rem, 30vw, 24rem);
+  }
+
+  .phil__photo {
+    aspect-ratio: 4 / 3;
+    border-radius: 1rem;
+    overflow: hidden;
+    background:
+      radial-gradient(80% 80% at 30% 20%, rgb(249 172 70 / 0.25), transparent 70%),
+      rgb(255 252 246 / 0.5);
+    border: 1px solid var(--rule-soft);
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .phil__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .phil__photo figcaption {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-inline: 1rem;
+    text-align: center;
+  }
+
+  .phil__moment h3 {
+    font-size: var(--step-2);
+    font-weight: 470;
+    margin-bottom: 0.4rem;
+  }
+
+  .phil__moment p {
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 30ch;
+  }
+
+  /* ================= Afternoon: the book ================= */
+  .book__grid {
+    display: grid;
+    gap: var(--space-block);
+    align-items: center;
+    margin-top: var(--space-block);
+  }
+
+  @media (min-width: 900px) {
+    .book__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  .book__cover {
+    justify-self: center;
+    width: min(100%, 20rem);
+    border-radius: 0.35rem;
+    rotate: -1.5deg;
+    box-shadow:
+      0 2px 8px rgb(90 40 20 / 0.18),
+      0 30px 70px rgb(90 40 20 / 0.3);
+  }
+
+  .book__body {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+
+  .book__awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.7rem, 1.5vw, 1.2rem);
+  }
+
+  .book__awards img {
+    width: clamp(3.6rem, 6vw, 4.8rem);
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 14px rgb(90 40 20 / 0.22);
+  }
+
+  .book__memoir {
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 48ch;
+  }
+
+  /* ================= Golden hour: the voice ================= */
+  .voice__video {
+    margin-top: var(--space-block);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #0a0d16;
+    box-shadow: 0 20px 60px rgb(90 40 20 / 0.28);
+    position: relative;
+  }
+
+  .voice__video iframe,
+  .voice__video > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+
+  .voice__play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    background: rgb(10 13 22 / 0.2);
+    transition: background var(--dur-quick);
+    border: 0;
+    padding: 0;
+  }
+
+  .voice__play:hover {
+    background: rgb(10 13 22 / 0.06);
+  }
+
+  .voice__play span {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    background: rgb(255 252 246 / 0.95);
+    box-shadow: 0 12px 32px rgb(10 13 22 / 0.35);
+    transition: transform var(--dur-quick) var(--ease-out);
+  }
+
+  .voice__play:hover span {
+    transform: scale(1.06);
+  }
+
+  .voice__play svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--c-coral);
+    translate: 2px 0;
+  }
+
+  .voice__trusted {
+    margin-top: var(--space-section);
+    text-align: center;
+  }
+
+  .voice__statement {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 450;
+    line-height: 1.35;
+    max-width: 28ch;
+    margin-inline: auto;
+    text-wrap: balance;
+  }
+
+  .voice__institutions {
+    margin-top: 2.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: clamp(1.6rem, 3.5vw, 3rem);
+    row-gap: 0.7rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .voice__institutions li {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  /* ================= Dusk: work with Ishan ================= */
+  .work__routes {
+    margin-top: var(--space-block);
+    border-top: 1px solid var(--rule);
+  }
+
+  .work__route {
+    display: grid;
+    gap: 1rem 3rem;
+    align-items: center;
+    padding-block: clamp(1.8rem, 3.5vw, 2.6rem);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  @media (min-width: 900px) {
+    .work__route {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) auto;
+    }
+  }
+
+  .work__route h3 {
+    font-size: var(--step-3);
+    font-weight: 450;
+  }
+
+  .work__route p {
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 40ch;
+  }
+
+  /* ================= Night: the story, the motto ================= */
+  .night {
+    padding-bottom: 0;
+  }
+
+  .night__grid {
+    display: grid;
+    gap: var(--space-block);
+    align-items: start;
+    margin-top: var(--space-block);
+  }
+
+  @media (min-width: 900px) {
+    .night__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  .night__photo {
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 24px 60px rgb(0 0 0 / 0.4);
+  }
+
+  .night__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .night__body {
+    display: grid;
+    gap: 1.2rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+
+  .night__body .btn {
+    justify-self: start;
+    margin-top: 0.8rem;
+  }
+
+  .night__close {
+    min-height: 72svh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .night__motto {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 420;
+    font-size: var(--step-6);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+}

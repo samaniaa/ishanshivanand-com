@@ -1,24 +1,21 @@
 import { ScrollTrigger } from '../core/scroll.js'
 
 /**
- * Header chrome: gains a soft backdrop once content scrolls beneath it,
- * and hides on scroll-down / returns on scroll-up so it never fights
- * the reading line.
+ * Header chrome: hidden at load so the pre-dawn belongs to the vision
+ * line; appears after the first meaningful scroll and stays.
  */
 export function init() {
   const header = document.querySelector('.header')
   if (!header) return
 
   ScrollTrigger.create({
-    start: 60,
+    start: 80,
     end: 'max',
-    onUpdate(self) {
-      header.dataset.scrolled = 'true'
-      header.dataset.hidden = String(self.direction === 1 && self.scroll() > 300)
+    onUpdate() {
+      header.dataset.visible = 'true'
     },
     onLeaveBack() {
-      header.dataset.scrolled = 'false'
-      header.dataset.hidden = 'false'
+      header.dataset.visible = 'false'
     },
   })
 }

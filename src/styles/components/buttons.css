@@ -1,71 +1,65 @@
 @layer components {
+  /* ONE button system.
+     Primary: navy pill. On dark phases the pill flips to warm white.
+     Secondary: sentence-case text link with a gold underline.
+     Labels are plain verbs. No arrows, no dashes, no uppercase. */
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
+    justify-content: center;
     font-family: var(--font-body);
-    font-size: var(--step--1);
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 1em 2em;
-    position: relative;
+    font-size: 0.95rem;
+    font-weight: 550;
+    letter-spacing: 0.01em;
+    padding: 0.8em 1.9em;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #1c2d54, #0a1730);
+    color: #fff;
+    box-shadow:
+      0 1px 2px rgb(7 25 56 / 0.35),
+      0 10px 26px rgb(7 25 56 / 0.22),
+      inset 0 1px 0 rgb(255 255 255 / 0.12);
     transition:
-      color var(--dur-quick),
-      border-color var(--dur-quick),
-      background-color var(--dur-quick);
+      transform var(--dur-quick) var(--ease-out),
+      box-shadow var(--dur-quick);
   }
 
-  .btn--primary {
-    background: var(--c-dark-anchor);
-    color: var(--c-white);
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgb(7 25 56 / 0.35),
+      0 14px 34px rgb(7 25 56 / 0.28),
+      inset 0 1px 0 rgb(255 255 255 / 0.12);
   }
 
-  .btn--primary:hover {
-    background: var(--c-coral);
+  .btn:active {
+    transform: translateY(0) scale(0.99);
   }
 
-  .btn--ghost {
-    border: 1px solid var(--rule);
+  /* On dark sky phases the primary flips to warm white */
+  body[data-phase='dark'] .btn,
+  .btn--light {
+    background: linear-gradient(180deg, #fffdf7, #f3ecdc);
+    color: #14213d;
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.3),
+      0 10px 26px rgb(0 0 0 / 0.25),
+      inset 0 1px 0 rgb(255 255 255 / 0.8);
+  }
+
+  /* Secondary: quiet text link */
+  .tlink {
+    font-weight: 530;
     color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--c-gold-80);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.28em;
+    transition: color var(--dur-quick), text-decoration-color var(--dur-quick);
   }
 
-  .btn--ghost:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* Dash-link: hairline dash grows toward the label on hover */
-  .arrow-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.9rem;
-    font-size: var(--step--1);
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    transition: color var(--dur-quick);
-  }
-
-  .arrow-link::before {
-    content: '';
-    width: 2.4rem;
-    height: 1px;
-    background: var(--c-gold);
-    transition: width 0.45s var(--ease-out);
-  }
-
-  .arrow-link svg {
-    display: none;
-  }
-
-  .arrow-link:hover {
+  .tlink:hover {
     color: var(--c-coral);
-  }
-
-  .arrow-link:hover::before {
-    width: 3.6rem;
-    background: var(--c-coral);
+    text-decoration-color: var(--c-coral);
   }
 }

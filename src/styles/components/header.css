@@ -1,4 +1,6 @@
 @layer components {
+  /* Hidden at load (the pre-dawn belongs to the vision line alone);
+     fades in on first scroll. Colors follow the day phase. */
   .header {
     position: fixed;
     inset-inline: 0;
@@ -7,37 +9,35 @@
     height: var(--header-h);
     display: flex;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
     transition:
+      opacity 0.5s var(--ease-out),
       transform 0.5s var(--ease-out),
-      background-color 0.4s;
+      background-color 0.5s;
   }
 
-  .header::before {
+  .header[data-visible='true'] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .header[data-visible='true']::before {
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0;
-    background: linear-gradient(to bottom, rgb(255 248 240 / 0.85), rgb(255 248 240 / 0.55));
+    z-index: -1;
+    background: rgb(255 252 246 / 0.72);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    transition: opacity 0.4s;
-    pointer-events: none;
+    border-bottom: 1px solid rgb(20 33 61 / 0.06);
   }
 
-  [data-theme='dusk'] .header::before {
-    background: linear-gradient(to bottom, rgb(7 25 56 / 0.82), rgb(7 25 56 / 0.5));
-  }
-
-  .header[data-scrolled='true']::before {
-    opacity: 1;
-  }
-
-  .header[data-hidden='true'] {
-    transform: translateY(-100%);
-  }
-
-  .header__inner {
-    position: relative;
+  body[data-phase='dark'] .header[data-visible='true']::before {
+    background: rgb(7 11 29 / 0.55);
+    border-bottom-color: rgb(247 243 232 / 0.08);
   }
 
   .header__inner {
@@ -52,41 +52,38 @@
   .header__logo {
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.8rem;
     line-height: 1;
   }
 
   .header__logo svg {
-    width: 2.4rem;
+    width: 2.1rem;
     height: auto;
   }
 
   .header__logo-name {
-    font-family: var(--font-body);
-    font-size: 1.02rem;
-    font-weight: 500;
-    letter-spacing: 0.015em;
+    font-size: 0.95rem;
+    font-weight: 550;
+    letter-spacing: 0.01em;
     color: var(--ink);
-    transition: color 0.6s var(--ease-in-out);
+    transition: color 0.5s;
   }
 
   .header__actions {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 3vw, 2.25rem);
+    gap: clamp(1rem, 3vw, 2rem);
   }
 
   .header__contact {
     font-size: var(--step--1);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 520;
     color: var(--ink-soft);
     transition: color var(--dur-quick);
   }
 
   .header__contact:hover {
-    color: var(--accent);
+    color: var(--ink);
   }
 
   @media (max-width: 640px) {
@@ -97,15 +94,14 @@
 
   .header__menu-btn {
     font-size: var(--step--1);
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-weight: 550;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    padding: 0.55em 0;
-    transition: color 0.6s var(--ease-in-out);
+    transition: color 0.5s;
   }
 
   .header__menu-btn::after {
@@ -120,21 +116,27 @@
     width: 2.3rem;
   }
 
-  /* While the overlay menu is open the whole header rides above the panels */
+  /* While the menu is open the header rides above the panels, light */
   body[data-menu-open] .header {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
     z-index: 160;
   }
 
   body[data-menu-open] .header::before {
-    opacity: 0;
+    background: transparent !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent !important;
   }
 
   body[data-menu-open] .header__logo-name,
   body[data-menu-open] .header__menu-btn {
-    color: var(--c-white);
+    color: #f7f3e8;
   }
 
   body[data-menu-open] .header__contact {
-    color: rgb(255 252 246 / 0.6);
+    color: rgb(247 243 232 / 0.6);
   }
 }

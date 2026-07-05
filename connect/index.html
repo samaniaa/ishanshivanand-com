@@ -5,11 +5,18 @@
     <script type="module" src="/src/js/main.js"></script>
   </head>
   <body>
-    <div class="sky" aria-hidden="true">
-      <div class="sky__layer" data-sky="dawn"></div>
-    </div>
     <!-- @include header.html -->
-    <!-- @include stub-hero.html {"eyebrow": "Contact", "title": "Begin a conversation.", "body": "Enquiries for research partnerships, advisory and corporate programs, and speaking are routed by interest. Until the form arrives, write to office@ishanshivanand.com and the office will respond."} -->
+    <main id="main">
+      <section class="stub container" data-module="stub">
+        <p class="stub__eyebrow">Contact</p>
+        <h1 class="stub__title">Begin a conversation</h1>
+        <p class="stub__body">Enquiries for research partnerships, advisory and corporate programs, and speaking are routed by interest. Until the form arrives, write to office@ishanshivanand.com and the office will respond.</p>
+        <div class="stub__links">
+          <a class="btn" href="/">Return home</a>
+          <a class="tlink" href="/connect/">Get in touch</a>
+        </div>
+      </section>
+    </main>
     <!-- @include footer.html -->
   </body>
 </html>

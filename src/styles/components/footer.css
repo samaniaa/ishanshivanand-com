@@ -1,44 +1,23 @@
 @layer components {
+  /* The footer lives at the deepest night: transparent over the night
+     sky, light text. On stub pages (no sky engine) it carries its own
+     night field. */
   .footer {
     position: relative;
-    z-index: 1;
-    padding-block: var(--space-block) 2.5rem;
-    color: var(--c-white);
+    z-index: 2;
+    color: #f7f3e8;
+    padding-block: 3.5rem 2.5rem;
   }
 
-  .footer__motto {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--display-hero);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
-    color: var(--c-white);
-    margin-bottom: 1.2rem;
-  }
-
-  .footer__values {
-    font-size: var(--step--1);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgb(255 252 246 / 0.55);
-    display: flex;
-    gap: 0.6em;
-    flex-wrap: wrap;
-  }
-
-  .footer__values span:not(:last-child)::after {
-    content: '·';
-    margin-left: 0.6em;
-    color: var(--c-gold-80);
+  body:not(:has(.day-sky)) .footer {
+    background: linear-gradient(180deg, #0a1230, #050b20);
   }
 
   .footer__grid {
     display: grid;
     gap: 2.5rem;
-    padding-block: 3.5rem 3rem;
-    border-top: 1px solid rgb(255 252 246 / 0.12);
-    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgb(247 243 232 / 0.14);
   }
 
   @media (min-width: 760px) {
@@ -47,13 +26,26 @@
     }
   }
 
+  .footer__brand svg {
+    width: 2.6rem;
+    height: auto;
+    margin-bottom: 1.1rem;
+  }
+
+  .footer__brand p {
+    font-size: var(--step--1);
+    color: rgb(247 243 232 / 0.65);
+    max-width: 30ch;
+    line-height: 1.6;
+  }
+
   .footer__col h4 {
     font-size: var(--step--1);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: rgb(255 252 246 / 0.45);
-    margin-bottom: 1.1rem;
-    font-weight: 500;
+    color: rgb(247 243 232 / 0.45);
+    margin-bottom: 1rem;
+    font-weight: 520;
   }
 
   .footer__col ul {
@@ -65,24 +57,12 @@
 
   .footer__col a {
     font-size: var(--step--1);
-    color: rgb(255 252 246 / 0.75);
+    color: rgb(247 243 232 / 0.78);
     transition: color var(--dur-quick);
   }
 
   .footer__col a:hover {
     color: var(--c-gold-80);
-  }
-
-  .footer__brand svg {
-    width: 3rem;
-    height: auto;
-    margin-bottom: 1.2rem;
-  }
-
-  .footer__brand p {
-    font-size: var(--step--1);
-    color: rgb(255 252 246 / 0.6);
-    max-width: 30ch;
   }
 
   .footer__legal {
@@ -91,17 +71,9 @@
     justify-content: space-between;
     gap: 1rem;
     padding-top: 2rem;
-    border-top: 1px solid rgb(255 252 246 / 0.12);
+    margin-top: 2.5rem;
+    border-top: 1px solid rgb(247 243 232 / 0.14);
     font-size: 0.78rem;
-    color: rgb(255 252 246 / 0.4);
-  }
-
-  .footer__laurel {
-    position: absolute;
-    right: max(2vw, 1rem);
-    bottom: 6rem;
-    width: clamp(10rem, 18vw, 16rem);
-    opacity: 0.14;
-    pointer-events: none;
+    color: rgb(247 243 232 / 0.45);
   }
 }

@@ -5,11 +5,18 @@
     <script type="module" src="/src/js/main.js"></script>
   </head>
   <body>
-    <div class="sky" aria-hidden="true">
-      <div class="sky__layer" data-sky="dawn"></div>
-    </div>
     <!-- @include header.html -->
-    <!-- @include stub-hero.html {"eyebrow": "Tradition", "title": "The source beneath the work.", "body": "The lineage, the heritage, and the practice: the foundation every other pillar stands on, and the home of meditation on this site. The full page is in progress."} -->
+    <main id="main">
+      <section class="stub container" data-module="stub">
+        <p class="stub__eyebrow">Tradition</p>
+        <h1 class="stub__title">The source beneath the work</h1>
+        <p class="stub__body">The lineage, the heritage, and the practice: the foundation every other pillar stands on, and the home of meditation on this site. The full page is in progress.</p>
+        <div class="stub__links">
+          <a class="btn" href="/">Return home</a>
+          <a class="tlink" href="/connect/">Get in touch</a>
+        </div>
+      </section>
+    </main>
     <!-- @include footer.html -->
   </body>
 </html>

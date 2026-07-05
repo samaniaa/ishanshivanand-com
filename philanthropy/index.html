@@ -5,11 +5,26 @@
     <script type="module" src="/src/js/main.js"></script>
   </head>
   <body>
-    <div class="sky" aria-hidden="true">
-      <div class="sky__layer" data-sky="dawn"></div>
-    </div>
     <!-- @include header.html -->
-    <!-- @include stub-hero.html {"eyebrow": "Philanthropy", "title": "Proven tools, given freely.", "body": "Compassion Unites carries the philanthropic work at the system level: healthcare in rural Rajasthan, validated protocols delivered without charge to veterans and farmers, scholarships at IIT Ropar, champions programs in Mauritius, and the Gaushala. The full page is in progress."} -->
+    <main id="main">
+      <section class="stub container" data-module="stub">
+        <p class="stub__eyebrow">Philanthropy</p>
+        <h1 class="stub__title">Community programs, advancing mental health outcomes globally</h1>
+        <p class="stub__body">Compassion Unites carries the philanthropic work at the system level: rural healthcare in Rajasthan, validated protocols delivered without charge to veterans and farmers, scholarships at IIT Ropar, champions programs in Mauritius. The full page is in progress.</p>
+        <nav class="stub__index" aria-label="On this page">
+          <a href="#compassion-unites">Compassion Unites</a>
+          <a href="#healthcare">Healthcare</a>
+          <a href="#mental-healthcare">Mental Healthcare</a>
+          <a href="#education">Education</a>
+          <a href="#youth">Youth</a>
+          <a href="#animal-welfare">Animal Welfare</a>
+        </nav>
+        <div class="stub__links">
+          <a class="btn" href="/">Return home</a>
+          <a class="tlink" href="/connect/">Get in touch</a>
+        </div>
+      </section>
+    </main>
     <!-- @include footer.html -->
   </body>
 </html>
