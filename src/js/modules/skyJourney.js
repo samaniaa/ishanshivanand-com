@@ -24,11 +24,13 @@ export function init(el) {
         scrub: 0.6,
       },
     })
-    // Dawn holds through the hero, dissolves into day through the
-    // proof/showreel middle, and dusk gathers across the final zone.
-    tl.to(dawn, { opacity: 0, ease: 'none', duration: 0.3 }, 0.12)
-      .to(day, { opacity: 1, ease: 'none', duration: 0.3 }, 0.12)
-      .to(dusk, { opacity: 1, ease: 'none', duration: 0.18 }, 0.64)
+    // Dawn holds through the hero and introduction, dissolves into day
+    // through the flagship grid and Facets I-II, gathers gold through
+    // Facet III, and settles into starlit navy at Facet IV (The Source)
+    // so everything after it lives on the dusk field.
+    tl.to(dawn, { opacity: 0, ease: 'none', duration: 0.24 }, 0.08)
+      .to(day, { opacity: 1, ease: 'none', duration: 0.24 }, 0.08)
+      .to(dusk, { opacity: 1, ease: 'none', duration: 0.15 }, 0.38)
   })
 
   // Theme flip is NOT scrubbed: one eased swap, both directions.

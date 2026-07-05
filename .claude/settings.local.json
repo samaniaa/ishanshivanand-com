@@ -26,7 +26,11 @@
       "Bash(npm run *)",
       "mcp__claude-in-chrome__navigate",
       "mcp__claude-in-chrome__computer",
-      "Bash(git commit -q -m 'Editorial pass: monumental type, edge-bleed portrait, outlined numerals, grain *)"
+      "Bash(git commit -q -m 'Editorial pass: monumental type, edge-bleed portrait, outlined numerals, grain *)",
+      "Bash(cd \"/Users/aarti/IS Website Fable 5/public/assets/img\" && mv portrait-cutout-small.png portrait-cutout.png && ls -la portrait-cutout*)",
+      "Bash(rm src/js/modules/proofStrip.js src/styles/components/proof.css)",
+      "Bash(sed -i '' \"/proof.css/d\" src/styles/main.css)",
+      "Bash(git commit -q -m 'v2 homepage: roles-cycle hero with Vision cutout, flagship grid, facets narrative *)"
     ]
   }
 }

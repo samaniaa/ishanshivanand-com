@@ -1,7 +1,6 @@
 import './main.js'
 import * as skyJourney from './modules/skyJourney.js'
 import * as hero from './modules/hero.js'
-import * as proofStrip from './modules/proofStrip.js'
 import * as showreel from './modules/showreel.js'
 import * as logoWall from './modules/logoWall.js'
 import * as teases from './modules/teases.js'
@@ -9,7 +8,6 @@ import * as teases from './modules/teases.js'
 const registry = {
   sky: skyJourney,
   hero,
-  proof: proofStrip,
   showreel,
   'logo-wall': logoWall,
   tease: teases,

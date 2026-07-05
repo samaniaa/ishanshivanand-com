@@ -1,53 +1,65 @@
-import { gsap, ScrollTrigger } from '../core/scroll.js'
+import { gsap } from '../core/scroll.js'
 import { mm, MQ } from '../core/motion.js'
-import { splitReveal } from '../utils/splitReveal.js'
-import { markReveal } from '../utils/markReveal.js'
+
+const ROLES = ['Academic.', 'Philanthropist.', 'Founder.', 'Author.', 'Speaker.']
 
 /**
- * Hero entrance (~2s, restrained): mark wipe → vision line stagger →
- * portrait clip reveal → attribution + scroll cue.
- * The portrait is the LCP element: it is revealed with clip-path,
- * never opacity-0, so first paint is not suppressed.
+ * Hero v2: name plate rises in masked lines, the cutout rises with it
+ * (no opacity change: it is the LCP element), then the role word begins
+ * its quiet rotation. Reduced motion gets the static roles line.
  */
 export function init(el) {
-  const mark = el.querySelector('[data-hero-mark]')
-  const vision = el.querySelector('[data-hero-vision]')
-  const attrib = el.querySelector('[data-hero-attrib]')
-  const portrait = el.querySelector('[data-hero-portrait]')
-  const cue = el.querySelector('[data-hero-cue]')
+  const nameLines = el.querySelectorAll('.hero__name-line .line-inner')
+  const roleWord = el.querySelector('[data-role-word]')
+  const roleMask = el.querySelector('.hero__role-mask')
+  const cutout = el.querySelector('[data-hero-portrait]')
+  const foot = el.querySelector('[data-hero-attrib]')
 
-  mm.add(MQ.motionOK, () => {
-    gsap.set(attrib, { autoAlpha: 0, y: 22 })
-    gsap.set(cue, { autoAlpha: 0 })
-    gsap.set(portrait, { clipPath: 'inset(0 0 100% 0)' })
-    gsap.set(portrait.querySelector('img'), { scale: 1.07 })
-
-    markReveal(mark, { duration: 1.4 })
-    splitReveal(vision, { delay: 0.3 })
-
-    gsap.timeline({ delay: 0.55 })
-      .to(portrait, {
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 1.3,
-        ease: 'power4.inOut',
-      })
-      .to(
-        portrait.querySelector('img'),
-        { scale: 1, duration: 1.3, ease: 'power4.inOut' },
-        '<'
-      )
-      .to(attrib, { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.45')
-      .to(cue, { autoAlpha: 1, duration: 0.8 }, '-=0.4')
+  mm.add(MQ.reduced, () => {
+    if (roleWord) roleWord.textContent = 'Academic. Philanthropist. Founder.'
   })
 
-  // Portrait parallax: desktop, motion-permitting
-  mm.add(`${MQ.motionOK} and ${MQ.desktop}`, () => {
-    const img = portrait.querySelector('img')
+  mm.add(MQ.motionOK, () => {
+    gsap.set(nameLines, { yPercent: 108 })
+    gsap.set(roleMask, { autoAlpha: 0 })
+    gsap.set(foot, { autoAlpha: 0, y: 24 })
+    gsap.set(cutout, { y: 90 })
+
+    const tl = gsap.timeline()
+    tl.to(nameLines, {
+      yPercent: 0,
+      duration: 1.2,
+      stagger: 0.12,
+      ease: 'power4.out',
+      delay: 0.15,
+    })
+      .to(cutout, { y: 0, duration: 1.5, ease: 'power3.out' }, 0.25)
+      .to(roleMask, { autoAlpha: 1, duration: 0.01 }, 1.0)
+      .from(
+        roleWord,
+        { yPercent: 110, duration: 0.9, ease: 'power4.out' },
+        1.0
+      )
+      .to(foot, { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 1.25)
+
+    // Role rotation: word rises out, next rises in. Starts after entrance.
+    let idx = 0
+    const cycle = gsap.timeline({ repeat: -1, repeatDelay: 2.2, delay: 3 })
+    cycle
+      .to(roleWord, { yPercent: -110, duration: 0.55, ease: 'power3.in' })
+      .add(() => {
+        idx = (idx + 1) % ROLES.length
+        roleWord.textContent = ROLES[idx]
+      })
+      .set(roleWord, { yPercent: 110 })
+      .to(roleWord, { yPercent: 0, duration: 0.65, ease: 'power3.out' })
+
+    // Gentle parallax on the cutout
     gsap.fromTo(
-      img,
-      { yPercent: -6 },
+      cutout,
+      { yPercent: 0 },
       {
-        yPercent: 6,
+        yPercent: 7,
         ease: 'none',
         scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: true },
       }
