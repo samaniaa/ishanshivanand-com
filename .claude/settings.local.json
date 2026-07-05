@@ -15,7 +15,15 @@
       "Bash(sips -Z 1500 -s format jpeg -s formatOptions 78 portrait-original.jpg --out portrait-hero.jpg)",
       "Bash(sips -g pixelWidth -g pixelHeight portrait-hero.jpg)",
       "Bash(git add *)",
-      "Bash(git commit -q -m 'Scaffold Gathering Light site: design system, homepage, motion backbone, menu, sphere gallery *)"
+      "Bash(git commit -q -m 'Scaffold Gathering Light site: design system, homepage, motion backbone, menu, sphere gallery *)",
+      "mcp__14b119d2-544f-4803-ae0b-c24c81e065c6__media_upload",
+      "Bash(curl -s -X PUT -H \"Content-Type: image/jpeg\" --data-binary @\"/Users/aarti/Downloads/Ishan_unedited-56.jpg\" 'https://upload.higgsfield.ai/user_38ITflt5SnBth4nzE3Guc8xuDMe/00b733a2-760a-448a-af18-fc48ecf6d362.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYPNTVMCGYPZMTKFK%2F20260705%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20260705T155216Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=acb9b2b1e6f4aceed90459ee7e0d93574501f9ab005e12915ac1ad1c652cb609' -w '%{http_code}')",
+      "mcp__14b119d2-544f-4803-ae0b-c24c81e065c6__media_confirm",
+      "mcp__14b119d2-544f-4803-ae0b-c24c81e065c6__generate_image",
+      "mcp__14b119d2-544f-4803-ae0b-c24c81e065c6__list_workspaces",
+      "Bash(LC_ALL=en_US.UTF-8 sed -i '' 's/event organisers/event organizers/' about/index.html)",
+      "Bash(python3 -)",
+      "Bash(npm run *)"
     ]
   }
 }

@@ -36,5 +36,13 @@ export function init(el) {
       ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 74%', once: true },
     })
+
+    // On context revert (breakpoint / reduced-motion change) restore the
+    // final values: gsap reverts styles but not textContent.
+    return () => {
+      counters.forEach((node) => {
+        node.textContent = fmt.format(Number(node.dataset.count))
+      })
+    }
   })
 }
