@@ -59,6 +59,46 @@ function buildLightPath(at) {
   ]
 }
 
+/* The range's light palette, keyframed on the same progress axis as the
+   sky. Snow catches the moon before dawn, gold-rose alpenglow as the
+   day breaks, lilac at dusk, and silver again at night. */
+const RANGE_VARS = ['alpenglow', 'snowShade', 'far', 'mid', 'near', 'haze']
+
+function buildRangePalette(at) {
+  const sunriseMid = (at.sunrise ?? 0.08) + FADE * 0.6
+  const morningIn = (at.morning ?? 0.2) + FADE
+  const duskIn = (at.dusk ?? 0.72) + FADE
+  const nightIn = (at.night ?? 0.86) + FADE
+  return [
+    { p: 0, alpenglow: '#cdd8ee', snowShade: '#46527d', far: '#2a3560', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' },
+    { p: sunriseMid, alpenglow: '#ffd489', snowShade: '#6b4a72', far: '#5a3f63', mid: '#382a50', near: '#1b1533', haze: '#a06a88' },
+    { p: morningIn, alpenglow: '#fff3dc', snowShade: '#9db3d8', far: '#c9d4e8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' },
+    { p: duskIn, alpenglow: '#e8b7c9', snowShade: '#4a4a7a', far: '#3c3a6a', mid: '#252a52', near: '#121736', haze: '#5c5490' },
+    { p: nightIn, alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' },
+  ]
+}
+
+function sampleRangePalette(palette, p) {
+  let a = palette[0]
+  let b = palette[palette.length - 1]
+  for (let i = 0; i < palette.length - 1; i++) {
+    if (p >= palette[i].p && p <= palette[i + 1].p) {
+      a = palette[i]
+      b = palette[i + 1]
+      break
+    }
+  }
+  if (p < palette[0].p) b = a
+  if (p > b.p) a = b
+  const span = b.p - a.p || 1
+  const t = gsap.utils.clamp(0, 1, (p - a.p) / span)
+  const out = {}
+  RANGE_VARS.forEach((k) => {
+    out[k] = gsap.utils.interpolate(a[k], b[k], t)
+  })
+  return out
+}
+
 function sampleLightPath(path, p) {
   let a = path[0]
   let b = path[path.length - 1]
@@ -80,10 +120,27 @@ function sampleLightPath(path, p) {
   }
 }
 
+const RANGE_VAR_NAMES = {
+  alpenglow: '--alpenglow',
+  snowShade: '--snow-shade',
+  far: '--range-far',
+  mid: '--range-mid',
+  near: '--range-near',
+  haze: '--haze',
+}
+
 export function init() {
   const sky = document.querySelector('.day-sky')
   const celestial = document.querySelector('.celestial')
+  const range = document.querySelector('.day-range')
   if (!sky) return
+
+  const applyRangePalette = (pal) => {
+    if (!range) return
+    RANGE_VARS.forEach((k) => {
+      range.style.setProperty(RANGE_VAR_NAMES[k], pal[k])
+    })
+  }
 
   const layers = Object.fromEntries(
     [...sky.querySelectorAll('.day-sky__layer')].map((l) => [l.dataset.sky, l])
@@ -97,6 +154,7 @@ export function init() {
     let inkToDay = 0.25
     let inkToDark = 0.75
     let lightPath = buildLightPath({})
+    let rangePalette = buildRangePalette({})
 
     const setPhase = (p) => {
       const dark = p < inkToDay || p >= inkToDark
@@ -112,6 +170,7 @@ export function init() {
       inkToDay = (at.morning ?? 0.2) + FADE / 2
       inkToDark = (at.dusk ?? 0.72) + FADE / 2
       lightPath = buildLightPath(at)
+      rangePalette = buildRangePalette(at)
 
       tl = gsap.timeline({
         defaults: { ease: 'none' },
@@ -122,6 +181,7 @@ export function init() {
           scrub: 0.5,
           onUpdate(self) {
             setPhase(self.progress)
+            applyRangePalette(sampleRangePalette(rangePalette, self.progress))
             if (!celestial) return
             const s = sampleLightPath(lightPath, self.progress)
             gsap.set(celestial, {
@@ -149,11 +209,28 @@ export function init() {
           .to(stars, { opacity: 1, duration: 0.06 }, at.night ?? 0.86)
       }
 
+      // The range holds through pre-dawn and sunrise, dissolves as the
+      // morning arrives, and returns with the dusk. Layers drift apart
+      // slightly for depth while the scene is on stage.
+      if (range) {
+        const morningIn = (at.morning ?? 0.2) + FADE * 0.4
+        const duskIn = Math.max((at.dusk ?? 0.72) - 0.05, morningIn + FADE + 0.05)
+        tl.set(range, { opacity: 1 }, 0)
+          .to(range, { opacity: 0, duration: FADE }, morningIn)
+          .to(range, { opacity: 1, duration: FADE }, duskIn)
+
+        const far = range.querySelector('.day-range__far')
+        const mid = range.querySelector('.day-range__mid')
+        tl.fromTo(far, { y: 0 }, { y: 26, duration: morningIn }, 0)
+          .fromTo(mid, { y: 0 }, { y: 12, duration: morningIn }, 0)
+      }
+
       // Apply state for the current position immediately: without this
       // the celestial sits at the viewport origin until the first
       // scroll event.
       const p = tl.scrollTrigger.progress
       setPhase(p)
+      applyRangePalette(sampleRangePalette(rangePalette, p))
       if (celestial) {
         const s = sampleLightPath(lightPath, p)
         gsap.set(celestial, {
@@ -184,12 +261,22 @@ export function init() {
     }
   })
 
-  // Reduced motion: no scrub, no traveling light. Sky and ink still step
-  // between phases (a color change, not movement) so every chapter stays
-  // readable; a static moon shows in the dark chapters via CSS.
+  // Reduced motion: no scrub, no traveling light. Sky, ink, and the
+  // range palette still step between phases (color changes, not
+  // movement) so every chapter stays readable.
   mm.add(MQ.reduced, () => {
     if (celestial) celestial.style.display = 'none'
     if (stars) stars.style.opacity = '1'
+
+    const REDUCED_RANGE = {
+      predawn: { visible: true, pal: { alpenglow: '#cdd8ee', snowShade: '#46527d', far: '#2a3560', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' } },
+      sunrise: { visible: true, pal: { alpenglow: '#ffd489', snowShade: '#6b4a72', far: '#5a3f63', mid: '#382a50', near: '#1b1533', haze: '#a06a88' } },
+      morning: { visible: false },
+      midday: { visible: false },
+      golden: { visible: false },
+      dusk: { visible: true, pal: { alpenglow: '#e8b7c9', snowShade: '#4a4a7a', far: '#3c3a6a', mid: '#252a52', near: '#121736', haze: '#5c5490' } },
+      night: { visible: true, pal: { alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' } },
+    }
 
     const chapters = document.querySelectorAll('[data-sky-phase]')
     const io = new IntersectionObserver(
@@ -203,6 +290,11 @@ export function init() {
           const dark = entry.target.dataset.ink === 'dark'
           if (dark) document.body.dataset.phase = 'dark'
           else delete document.body.dataset.phase
+          const r = REDUCED_RANGE[key]
+          if (range && r) {
+            range.style.opacity = r.visible ? '1' : '0'
+            if (r.pal) applyRangePalette(r.pal)
+          }
         })
       },
       { rootMargin: '-40% 0px -40% 0px' }

@@ -175,27 +175,34 @@
     height: 52svh;
   }
 
-  /* ---- Himalayan ridge silhouettes ----------------------------------- */
-  .ridge {
-    position: absolute;
+  /* ---- The Himalayan range: fixed scene, lit by the day engine ------- */
+  .day-range {
+    position: fixed;
     inset-inline: 0;
     bottom: 0;
+    z-index: 1; /* after .celestial in the DOM: the light rises BEHIND the peaks */
     pointer-events: none;
-    line-height: 0;
+    will-change: opacity;
+
+    /* No-JS / initial palette: moonlit pre-dawn */
+    --alpenglow: #cdd8ee;
+    --snow-shade: #46527d;
+    --range-far: #2a3560;
+    --range-mid: #1a2348;
+    --range-near: #0d1330;
+    --haze: #4a5285;
   }
 
-  .ridge svg {
+  .day-range svg {
     width: 100%;
-    height: auto;
+    height: clamp(180px, 30vh, 420px);
     display: block;
   }
 
-  .ridge--back {
-    opacity: 0.55;
-  }
-
-  .ridge--front {
-    opacity: 0.9;
+  .day-range__far,
+  .day-range__mid,
+  .day-range__near {
+    will-change: transform;
   }
 
   /* =====================================================================
