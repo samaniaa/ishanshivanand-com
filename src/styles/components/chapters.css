@@ -547,4 +547,17 @@
     margin-left: 0.7em;
     color: var(--c-gold-80);
   }
+
+  .night__cta-lead {
+    margin-top: 3.4rem;
+    max-width: 36ch;
+    margin-inline: auto;
+    font-size: var(--step-0);
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .night__cta {
+    margin-top: 1.4rem;
+  }
 }

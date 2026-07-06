@@ -31,7 +31,8 @@
       "Bash(rm src/js/modules/proofStrip.js src/styles/components/proof.css)",
       "Bash(sed -i '' \"/proof.css/d\" src/styles/main.css)",
       "Bash(git commit -q -m 'v2 homepage: roles-cycle hero with Vision cutout, flagship grid, facets narrative *)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(git commit -m 'Sunset behind the peaks, ink flip on landed night sky, values CTA *)"
     ]
   }
 }

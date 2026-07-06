@@ -50,6 +50,9 @@ function buildLightPaths(at) {
   const duskAt = at.dusk ?? 0.72
   const nightAt = at.night ?? 0.86
   const nightEnd = Math.min(nightAt + FADE, 0.985)
+  // The range is solid again by here (it re-fades in ahead of the dusk
+  // chapter); the sun must not dip below the ridgeline before this.
+  const duskSolid = Math.min(duskAt + FADE, nightAt - 0.03)
 
   return {
     moon: [
@@ -69,10 +72,13 @@ function buildLightPaths(at) {
       { p: crossover, x: 76, y: 68, o: 1 },
       { p: sunriseEnd, x: 66, y: 40, o: 1 },
       { p: dayApex, x: 48, y: 10, o: 1 },
-      { p: duskAt, x: 32, y: 42, o: 1 },
-      { p: nightAt, x: 14, y: 92, o: 1 },
-      { p: Math.min(nightAt + 0.03, 0.99), x: 12, y: 102, o: 0 },
-      { p: 1, x: 12, y: 102, o: 0 },
+      { p: duskAt, x: 34, y: 40, o: 1 },
+      // hold above the ridge until the range is solid...
+      { p: duskSolid, x: 27, y: 54, o: 1 },
+      // ...then dive, so the disc sets BEHIND the mountains
+      { p: nightAt, x: 14, y: 100, o: 1 },
+      { p: Math.min(nightAt + 0.03, 0.99), x: 12, y: 106, o: 0 },
+      { p: 1, x: 12, y: 106, o: 0 },
     ],
   }
 }
@@ -193,8 +199,20 @@ export function init() {
       tl?.kill()
 
       const at = computePhasePositions()
+      // Pull the whole night landing earlier: the sky fade, the moonrise,
+      // and the ink flip must all finish just BEFORE Work with Ishan's
+      // text enters the viewport, so they play out over the long
+      // sky-breath — and the sun has already set behind the solid range
+      // while there is still dusk light.
+      if (at.night != null) {
+        const max = document.documentElement.scrollHeight - window.innerHeight
+        const vhP = window.innerHeight / max
+        at.night = Math.max(at.night - FADE - 0.18 * vhP, (at.dusk ?? 0) + FADE + 0.02)
+      }
       inkToDay = (at.morning ?? 0.2) + FADE / 2
-      inkToDark = (at.night ?? 0.86) + FADE / 2
+      // Flip to light-on-dark only once the night sky has fully landed
+      // (end of the fade, not its midpoint).
+      inkToDark = (at.night ?? 0.86) + FADE
       lightPaths = buildLightPaths(at)
       rangePalette = buildRangePalette(at)
 
@@ -212,6 +230,13 @@ export function init() {
           },
         },
       })
+
+      // Pin the timeline's duration to exactly 1 so tween positions and
+      // ScrollTrigger progress share one axis. Without this the duration
+      // equals the last tween's end (<1) and every positioned tween
+      // fires LATE relative to setPhase/applyLight, which read raw
+      // progress — the range stayed hazy through the sunset.
+      tl.to({}, { duration: 0 }, 1)
 
       // Later layers sit above earlier ones in the DOM, so fading each
       // one IN is a complete cross-fade.
@@ -233,7 +258,10 @@ export function init() {
       // slightly for depth while the scene is on stage.
       if (range) {
         const morningIn = (at.morning ?? 0.2) + FADE * 0.4
-        const duskIn = Math.max((at.night ?? 0.86) - 0.02, morningIn + FADE + 0.05)
+        // Solidify with the dusk fade itself: the range must be opaque
+        // BEFORE the sun dives, so the disc sets behind the peaks
+        // instead of shining through the daytime haze.
+        const duskIn = Math.max(at.dusk ?? 0.72, morningIn + FADE + 0.05)
         tl.set(range, { opacity: 1 }, 0)
           .to(range, { opacity: 0.16, duration: FADE }, morningIn)
           .to(range, { opacity: 1, duration: FADE }, duskIn)
@@ -284,7 +312,7 @@ export function init() {
       morning: { visible: 'haze', pal: { alpenglow: '#fff3dc', snowShade: '#9db3d8', far: '#c9d4e8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' } },
       midday: { visible: 'haze', pal: { alpenglow: '#fff6e8', snowShade: '#a9bcd9', far: '#d4dce9', mid: '#9fb0cc', near: '#6b7da3', haze: '#eef2f8' } },
       golden: { visible: 'haze', pal: { alpenglow: '#ffe9c2', snowShade: '#b09ab8', far: '#c3b2cc', mid: '#a390b0', near: '#71618c', haze: '#f4e4d0' } },
-      dusk: { visible: 'haze', pal: { alpenglow: '#efc4d3', snowShade: '#8f86b0', far: '#8a82b0', mid: '#6b6494', near: '#4a4470', haze: '#b7a8cc' } },
+      dusk: { visible: true, pal: { alpenglow: '#efc4d3', snowShade: '#8f86b0', far: '#8a82b0', mid: '#6b6494', near: '#4a4470', haze: '#b7a8cc' } },
       night: { visible: true, pal: { alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' } },
     }
 

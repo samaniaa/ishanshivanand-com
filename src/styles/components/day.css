@@ -178,6 +178,12 @@
     height: 52svh;
   }
 
+  /* The dusk→night gap needs more than a viewport of empty sky: the
+     night fade, the moonrise, and the ink flip all land inside it. */
+  .sky-breath--long {
+    height: 130svh;
+  }
+
   /* ---- The range: layered silhouette, lit by the day engine ---------- */
   .day-range {
     position: fixed;
