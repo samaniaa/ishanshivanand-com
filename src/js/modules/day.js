@@ -73,7 +73,7 @@ function buildRangePalette(at) {
     { p: 0, alpenglow: '#cdd8ee', snowShade: '#46527d', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' },
     { p: sunriseMid, alpenglow: '#ffd489', snowShade: '#6b4a72', mid: '#382a50', near: '#1b1533', haze: '#a06a88' },
     { p: morningIn, alpenglow: '#fff3dc', snowShade: '#9db3d8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' },
-    { p: duskIn, alpenglow: '#e8b7c9', snowShade: '#4a4a7a', mid: '#252a52', near: '#121736', haze: '#5c5490' },
+    { p: duskIn, alpenglow: '#efc4d3', snowShade: '#8f86b0', mid: '#6b6494', near: '#4a4470', haze: '#b7a8cc' },
     { p: nightIn, alpenglow: '#bfcbe8', snowShade: '#3a4468', mid: '#151d40', near: '#090e26', haze: '#3a4067' },
   ]
 }
@@ -167,7 +167,7 @@ export function init() {
 
       const at = computePhasePositions()
       inkToDay = (at.morning ?? 0.2) + FADE / 2
-      inkToDark = (at.dusk ?? 0.72) + FADE
+      inkToDark = (at.night ?? 0.86) + FADE / 2
       lightPath = buildLightPath(at)
       rangePalette = buildRangePalette(at)
 
@@ -213,7 +213,7 @@ export function init() {
       // slightly for depth while the scene is on stage.
       if (range) {
         const morningIn = (at.morning ?? 0.2) + FADE * 0.4
-        const duskIn = Math.max((at.dusk ?? 0.72) - 0.05, morningIn + FADE + 0.05)
+        const duskIn = Math.max((at.night ?? 0.86) - 0.02, morningIn + FADE + 0.05)
         tl.set(range, { opacity: 1 }, 0)
           .to(range, { opacity: 0.16, duration: FADE }, morningIn)
           .to(range, { opacity: 1, duration: FADE }, duskIn)
@@ -271,7 +271,7 @@ export function init() {
       morning: { visible: 'haze', pal: { alpenglow: '#fff3dc', snowShade: '#9db3d8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' } },
       midday: { visible: 'haze', pal: { alpenglow: '#fff6e8', snowShade: '#a9bcd9', mid: '#9fb0cc', near: '#6b7da3', haze: '#eef2f8' } },
       golden: { visible: 'haze', pal: { alpenglow: '#ffe9c2', snowShade: '#b09ab8', mid: '#a390b0', near: '#71618c', haze: '#f4e4d0' } },
-      dusk: { visible: true, pal: { alpenglow: '#e8b7c9', snowShade: '#4a4a7a', mid: '#252a52', near: '#121736', haze: '#5c5490' } },
+      dusk: { visible: 'haze', pal: { alpenglow: '#efc4d3', snowShade: '#8f86b0', mid: '#6b6494', near: '#4a4470', haze: '#b7a8cc' } },
       night: { visible: true, pal: { alpenglow: '#bfcbe8', snowShade: '#3a4468', mid: '#151d40', near: '#090e26', haze: '#3a4067' } },
     }
 
@@ -284,7 +284,7 @@ export function init() {
           Object.entries(layers).forEach(([k, l]) => {
             l.style.opacity = k === key || k === 'predawn' ? '1' : '0'
           })
-          const dark = entry.target.dataset.ink === 'dark'
+          const dark = entry.target.dataset.ink === 'dark' && key !== 'dusk'
           if (dark) document.body.dataset.phase = 'dark'
           else delete document.body.dataset.phase
           const r = REDUCED_RANGE[key]

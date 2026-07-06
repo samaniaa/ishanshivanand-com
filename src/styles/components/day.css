@@ -62,15 +62,16 @@
   }
 
   /* Dusk: back through the blues and lilacs */
+  /* Dusk: a light lilac evening — dark enough to feel the day ending,
+     light enough that navy ink stays readable until night */
   .day-sky__layer[data-sky='dusk'] {
     background: linear-gradient(
       180deg,
-      #1b2148 0%,
-      #333567 38%,
-      #59486e 62%,
-      #8a5f80 80%,
-      #b06a5e 94%,
-      #d98a4e 100%
+      #8f8cc0 0%,
+      #a393c2 34%,
+      #b898bb 58%,
+      #cfa08f 80%,
+      #e3ab6b 100%
     );
   }
 
