@@ -1,0 +1,50 @@
+<!-- @dsCard group="Type" -->
+<h1>Type · fluid behavior</h1>
+<div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:1.6rem">
+  <label for="vw" style="font-size:0.78rem; color:var(--ink-soft)">Viewport width</label>
+  <input id="vw" type="range" min="360" max="1680" value="1024" style="flex:1; min-width:180px; accent-color:var(--c-gold)" />
+  <output id="vw-out" style="font: 600 0.82rem var(--font-body); color:var(--ink); min-width:5ch">1024px</output>
+</div>
+<div id="rows"></div>
+<p class="ds-note">Each token is a <code>clamp(min, preferred, max)</code> resolved against the simulated viewport — drag the slider to watch the scale breathe. Values are parsed live from <code>tokens.css</code> at build time.</p>
+<script>
+  const SCALE = Object.assign({}, JSON.parse('<!-- @tokens-json scale -->'), JSON.parse('<!-- @tokens-json display -->'))
+  const REM = 16
+  const rows = document.getElementById('rows')
+  const slider = document.getElementById('vw')
+  const out = document.getElementById('vw-out')
+
+  // clamp(A rem, B rem + C vw, D rem) | clamp(A rem, C vw, D rem)
+  function resolve(expr, vw) {
+    const m = expr.match(/clamp\(\s*([\d.]+)rem\s*,\s*(?:([\d.]+)rem\s*\+\s*)?([\d.]+)vw\s*,\s*([\d.]+)rem\s*\)/)
+    if (!m) return null
+    const [, min, base, slope, max] = m
+    const pref = (base ? parseFloat(base) * REM : 0) + (parseFloat(slope) / 100) * vw
+    return Math.min(Math.max(pref, parseFloat(min) * REM), parseFloat(max) * REM)
+  }
+
+  const entries = Object.entries(SCALE)
+  for (const [name, expr] of entries) {
+    const row = document.createElement('div')
+    row.className = 'ds-spec-row'
+    row.innerHTML =
+      '<div class="ds-spec-row__demo" data-t="' + name + '">Aa Rise and lift</div>' +
+      '<div class="ds-spec-row__meta"><code>--' + name + '</code><span data-px="' + name + '"></span></div>'
+    rows.append(row)
+  }
+
+  function update() {
+    const vw = +slider.value
+    out.textContent = vw + 'px'
+    for (const [name, expr] of entries) {
+      const px = resolve(expr, vw)
+      const demo = document.querySelector('[data-t="' + name + '"]')
+      const label = document.querySelector('[data-px="' + name + '"]')
+      if (px == null) { label.textContent = 'unparsed: ' + expr; continue }
+      demo.style.fontSize = Math.min(px, 96) + 'px'
+      label.textContent = px.toFixed(1) + 'px' + (px > 96 ? ' (preview capped at 96px)' : '')
+    }
+  }
+  slider.addEventListener('input', update)
+  update()
+</script>

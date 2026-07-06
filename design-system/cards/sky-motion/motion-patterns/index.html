@@ -1,0 +1,81 @@
+<!-- @dsCard group="Sky & Motion" -->
+<h1>Sky &amp; Motion · motion patterns</h1>
+
+<div style="display:grid; gap:2rem">
+  <div>
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:0.9rem">
+      <p class="ds-pane__label" style="margin:0">data-rise — soft rise on scroll entry</p>
+      <button class="ds-replay" data-replay="rise">Replay</button>
+    </div>
+    <div data-demo="rise">
+      <p class="m-rise" style="font-family:var(--font-display); font-size:var(--step-3); font-weight:450">Rise and Lift Others</p>
+    </div>
+  </div>
+
+  <div>
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:0.9rem">
+      <p class="ds-pane__label" style="margin:0">data-rise-children — 0.12s stagger</p>
+      <button class="ds-replay" data-replay="stagger">Replay</button>
+    </div>
+    <div data-demo="stagger" style="display:flex; gap:1rem; flex-wrap:wrap">
+      <span class="m-rise" style="padding:0.7em 1.4em; border:1px solid var(--rule); border-radius:10px">Compassion</span>
+      <span class="m-rise" style="padding:0.7em 1.4em; border:1px solid var(--rule); border-radius:10px; transition-delay:0.12s">Oneness</span>
+      <span class="m-rise" style="padding:0.7em 1.4em; border:1px solid var(--rule); border-radius:10px; transition-delay:0.24s">Valour</span>
+    </div>
+  </div>
+
+  <div>
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:0.9rem">
+      <p class="ds-pane__label" style="margin:0">data-word-reveal — word-by-word surface (0.06s stagger)</p>
+      <button class="ds-replay" data-replay="words">Replay</button>
+    </div>
+    <p data-demo="words" style="font-size:var(--step-1); line-height:1.6; max-width:44ch"></p>
+  </div>
+
+  <div>
+    <p class="ds-pane__label">Easing &amp; duration tokens</p>
+    <div style="display:flex; gap:2.5rem; flex-wrap:wrap; align-items:flex-start">
+      <figure>
+        <svg width="130" height="130" viewBox="-10 -10 120 120" style="border:1px solid var(--rule-soft); border-radius:8px; background:rgb(7 25 56 / 0.02)">
+          <path d="M0,100 L100,0" stroke="var(--rule)" stroke-dasharray="3 4" fill="none"/>
+          <path d="M0,100 C22,0 36,0 100,0" stroke="var(--c-gold)" stroke-width="2.5" fill="none"/>
+        </svg>
+        <figcaption style="font-size:0.72rem; margin-top:0.4rem"><code>--ease-out</code></figcaption>
+      </figure>
+      <figure>
+        <svg width="130" height="130" viewBox="-10 -10 120 120" style="border:1px solid var(--rule-soft); border-radius:8px; background:rgb(7 25 56 / 0.02)">
+          <path d="M0,100 L100,0" stroke="var(--rule)" stroke-dasharray="3 4" fill="none"/>
+          <path d="M0,100 C65,100 35,0 100,0" stroke="var(--c-coral)" stroke-width="2.5" fill="none"/>
+        </svg>
+        <figcaption style="font-size:0.72rem; margin-top:0.4rem"><code>--ease-in-out</code></figcaption>
+      </figure>
+      <table class="ds-table" style="max-width:24rem">
+        <tbody><!-- @tokens motion --></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p class="ds-note">Demonstrative approximations of the GSAP originals (<code>src/js/modules/chapters.js</code>: rise = 30px fade over 1.1s power3.out; word-reveal scrubs with scroll). On the site every pattern respects <code>prefers-reduced-motion</code>.</p>
+
+<style>
+  .m-rise { display:inline-block; opacity:0; transform: translateY(30px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+  .is-in .m-rise { opacity:1; transform:none; }
+  [data-demo='words'] span { opacity:0.12; transition: opacity 0.5s var(--ease-in-out); }
+  [data-demo='words'].is-in span { opacity:1; }
+</style>
+<script>
+  const SENTENCE = 'Mental health outcomes are shaped by the conditions people live in.'
+  const wordsEl = document.querySelector("[data-demo='words']")
+  wordsEl.innerHTML = SENTENCE.split(' ').map((w, i) => '<span style="transition-delay:' + (i * 0.06).toFixed(2) + 's">' + w + '</span>').join(' ')
+
+  function play(el) {
+    el.classList.remove('is-in')
+    void el.offsetWidth // restart transitions
+    el.classList.add('is-in')
+  }
+  document.querySelectorAll('[data-replay]').forEach((btn) =>
+    btn.addEventListener('click', () => play(document.querySelector("[data-demo='" + btn.dataset.replay + "']")))
+  )
+  document.querySelectorAll('[data-demo]').forEach((el) => setTimeout(() => play(el), 350))
+</script>

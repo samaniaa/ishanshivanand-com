@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{title}} · IS design system</title>
+<style>
+{{css}}
+
+/* ---- ds chrome: card scaffolding only, styled from site tokens ---- */
+@layer utilities {
+  body { background: var(--grad-light); min-height: 100vh; }
+  .ds-card { padding: clamp(1.2rem, 3vw, 2.4rem); font-family: var(--font-body); color: var(--ink); }
+  .ds-card > h1 { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.6rem; }
+  .ds-note { font-size: 0.8rem; color: var(--ink-soft); max-width: 52ch; margin-top: 1.4rem; line-height: 1.6; }
+  .ds-note code, .ds-swatch code, .ds-spec-row code, .ds-bar-row code, .ds-table code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.78rem; color: var(--ink); }
+
+  /* Light/dark pane split */
+  .ds-panes { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; }
+  @media (min-width: 620px) { .ds-panes { grid-template-columns: 1fr 1fr; } }
+  .ds-pane { padding: clamp(1.4rem, 3vw, 2.2rem); background: var(--grad-light); color: var(--ink); }
+  .ds-pane[data-ds-phase='dark'] { background: var(--grad-dark); }
+  .ds-pane__label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.2rem; }
+
+  /* Swatches */
+  .ds-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+  .ds-swatch__chip { height: 64px; border-radius: 8px; border: 1px solid var(--rule-soft); margin-bottom: 0.5rem; }
+  .ds-swatch code { display: block; }
+  .ds-swatch__val { font-size: 0.72rem; color: var(--ink-faint); overflow-wrap: anywhere; }
+  .ds-inline-chip { display: inline-block; width: 0.85em; height: 0.85em; border-radius: 3px; border: 1px solid var(--rule); margin-right: 0.45em; vertical-align: -0.08em; }
+  .ds-chipwell { display: inline-grid; place-items: center; padding: 0.2em 0.2em 0.2em 0.45em; border-radius: 4px; background: var(--grad-dark); margin-right: 0.45em; vertical-align: -0.3em; }
+  .ds-chipwell .ds-inline-chip { margin-right: 0.25em; }
+
+  /* Gradients */
+  .ds-gradient { margin-bottom: 1.4rem; }
+  .ds-gradient__panel { height: 110px; border-radius: 10px; border: 1px solid var(--rule-soft); margin-bottom: 0.5rem; }
+
+  /* Spec rows (type scale) */
+  .ds-spec-row { padding-block: 0.9rem; border-bottom: 1px solid var(--rule-soft); overflow: hidden; }
+  .ds-spec-row__demo { font-family: var(--font-display); line-height: 1.1; white-space: nowrap; }
+  .ds-spec-row__meta { display: flex; gap: 1rem; margin-top: 0.35rem; font-size: 0.72rem; color: var(--ink-faint); flex-wrap: wrap; }
+
+  /* Bars (rhythm) */
+  .ds-bar-row { display: grid; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .ds-bar { height: 14px; border-radius: 4px; background: var(--grad-gold); }
+
+  /* Tables */
+  .ds-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .ds-table th { text-align: left; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  .ds-table th, .ds-table td { padding: 0.6rem 0.9rem 0.6rem 0; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+
+  /* Imagery placeholder */
+  .ds-imagery { background: var(--grad-gold); opacity: 0.35; display: grid; place-items: center; color: var(--c-dark-anchor); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Replay button for motion demos */
+  .ds-replay { font: 600 0.72rem/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); background: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.55em 1.2em; cursor: pointer; }
+  .ds-replay:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+}
+</style>
+</head>
+<body>
+<main class="ds-card">
+{{slot}}
+</main>
+</body>
+</html>
