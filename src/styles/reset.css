@@ -29,6 +29,12 @@
     max-width: 100%;
   }
 
+  /* Keep aspect ratio when CSS resizes an img that carries HTML
+     width/height attributes (their height otherwise wins and distorts) */
+  img {
+    height: auto;
+  }
+
   input,
   button,
   textarea,

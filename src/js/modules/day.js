@@ -62,7 +62,7 @@ function buildLightPath(at) {
 /* The range's light palette, keyframed on the same progress axis as the
    sky. Snow catches the moon before dawn, gold-rose alpenglow as the
    day breaks, lilac at dusk, and silver again at night. */
-const RANGE_VARS = ['alpenglow', 'snowShade', 'far', 'mid', 'near', 'haze']
+const RANGE_VARS = ['alpenglow', 'snowShade', 'mid', 'near', 'haze']
 
 function buildRangePalette(at) {
   const sunriseMid = (at.sunrise ?? 0.08) + FADE * 0.6
@@ -70,11 +70,11 @@ function buildRangePalette(at) {
   const duskIn = (at.dusk ?? 0.72) + FADE
   const nightIn = (at.night ?? 0.86) + FADE
   return [
-    { p: 0, alpenglow: '#cdd8ee', snowShade: '#46527d', far: '#2a3560', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' },
-    { p: sunriseMid, alpenglow: '#ffd489', snowShade: '#6b4a72', far: '#5a3f63', mid: '#382a50', near: '#1b1533', haze: '#a06a88' },
-    { p: morningIn, alpenglow: '#fff3dc', snowShade: '#9db3d8', far: '#c9d4e8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' },
-    { p: duskIn, alpenglow: '#e8b7c9', snowShade: '#4a4a7a', far: '#3c3a6a', mid: '#252a52', near: '#121736', haze: '#5c5490' },
-    { p: nightIn, alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' },
+    { p: 0, alpenglow: '#cdd8ee', snowShade: '#46527d', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' },
+    { p: sunriseMid, alpenglow: '#ffd489', snowShade: '#6b4a72', mid: '#382a50', near: '#1b1533', haze: '#a06a88' },
+    { p: morningIn, alpenglow: '#fff3dc', snowShade: '#9db3d8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' },
+    { p: duskIn, alpenglow: '#e8b7c9', snowShade: '#4a4a7a', mid: '#252a52', near: '#121736', haze: '#5c5490' },
+    { p: nightIn, alpenglow: '#bfcbe8', snowShade: '#3a4468', mid: '#151d40', near: '#090e26', haze: '#3a4067' },
   ]
 }
 
@@ -123,7 +123,6 @@ function sampleLightPath(path, p) {
 const RANGE_VAR_NAMES = {
   alpenglow: '--alpenglow',
   snowShade: '--snow-shade',
-  far: '--range-far',
   mid: '--range-mid',
   near: '--range-near',
   haze: '--haze',
@@ -168,7 +167,7 @@ export function init() {
 
       const at = computePhasePositions()
       inkToDay = (at.morning ?? 0.2) + FADE / 2
-      inkToDark = (at.dusk ?? 0.72) + FADE / 2
+      inkToDark = (at.dusk ?? 0.72) + FADE
       lightPath = buildLightPath(at)
       rangePalette = buildRangePalette(at)
 
@@ -216,13 +215,11 @@ export function init() {
         const morningIn = (at.morning ?? 0.2) + FADE * 0.4
         const duskIn = Math.max((at.dusk ?? 0.72) - 0.05, morningIn + FADE + 0.05)
         tl.set(range, { opacity: 1 }, 0)
-          .to(range, { opacity: 0, duration: FADE }, morningIn)
+          .to(range, { opacity: 0.16, duration: FADE }, morningIn)
           .to(range, { opacity: 1, duration: FADE }, duskIn)
 
-        const far = range.querySelector('.day-range__far')
-        const mid = range.querySelector('.day-range__mid')
-        tl.fromTo(far, { y: 0 }, { y: 26, duration: morningIn }, 0)
-          .fromTo(mid, { y: 0 }, { y: 12, duration: morningIn }, 0)
+        // gentle settle as the day begins
+        tl.fromTo(range, { y: 0 }, { y: 16, duration: morningIn, ease: 'none' }, 0)
       }
 
       // Apply state for the current position immediately: without this
@@ -269,13 +266,13 @@ export function init() {
     if (stars) stars.style.opacity = '1'
 
     const REDUCED_RANGE = {
-      predawn: { visible: true, pal: { alpenglow: '#cdd8ee', snowShade: '#46527d', far: '#2a3560', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' } },
-      sunrise: { visible: true, pal: { alpenglow: '#ffd489', snowShade: '#6b4a72', far: '#5a3f63', mid: '#382a50', near: '#1b1533', haze: '#a06a88' } },
-      morning: { visible: false },
-      midday: { visible: false },
-      golden: { visible: false },
-      dusk: { visible: true, pal: { alpenglow: '#e8b7c9', snowShade: '#4a4a7a', far: '#3c3a6a', mid: '#252a52', near: '#121736', haze: '#5c5490' } },
-      night: { visible: true, pal: { alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' } },
+      predawn: { visible: true, pal: { alpenglow: '#cdd8ee', snowShade: '#46527d', mid: '#1a2348', near: '#0d1330', haze: '#4a5285' } },
+      sunrise: { visible: true, pal: { alpenglow: '#ffd489', snowShade: '#6b4a72', mid: '#382a50', near: '#1b1533', haze: '#a06a88' } },
+      morning: { visible: 'haze', pal: { alpenglow: '#fff3dc', snowShade: '#9db3d8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' } },
+      midday: { visible: 'haze', pal: { alpenglow: '#fff6e8', snowShade: '#a9bcd9', mid: '#9fb0cc', near: '#6b7da3', haze: '#eef2f8' } },
+      golden: { visible: 'haze', pal: { alpenglow: '#ffe9c2', snowShade: '#b09ab8', mid: '#a390b0', near: '#71618c', haze: '#f4e4d0' } },
+      dusk: { visible: true, pal: { alpenglow: '#e8b7c9', snowShade: '#4a4a7a', mid: '#252a52', near: '#121736', haze: '#5c5490' } },
+      night: { visible: true, pal: { alpenglow: '#bfcbe8', snowShade: '#3a4468', mid: '#151d40', near: '#090e26', haze: '#3a4067' } },
     }
 
     const chapters = document.querySelectorAll('[data-sky-phase]')
@@ -292,7 +289,7 @@ export function init() {
           else delete document.body.dataset.phase
           const r = REDUCED_RANGE[key]
           if (range && r) {
-            range.style.opacity = r.visible ? '1' : '0'
+            range.style.opacity = r.visible === 'haze' ? '0.16' : r.visible ? '1' : '0'
             if (r.pal) applyRangePalette(r.pal)
           }
         })

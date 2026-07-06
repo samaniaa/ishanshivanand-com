@@ -73,23 +73,31 @@
 
       <!-- Sunrise · the man -->
       <section class="chapter sunrise container" data-sky-phase="sunrise" data-ink="dark" aria-label="Dr. Ishan Shivanand">
-        <h1 class="sunrise__name" data-rise>Dr. Ishan Shivanand</h1>
-        <p class="sunrise__tagline" data-rise>
-          One of the leading voices shaping the global response to the mental
-          health crisis
-        </p>
-        <p class="sunrise__entity" data-word-reveal>
-          Dr. Ishan Shivanand is an academic, philanthropist, founder of
-          Compassion Unites, and one of the leading voices shaping the global
-          response to the mental health crisis. Peer-reviewed research
-          validates his mental health protocols, now adopted at Google and
-          Fortune 500 companies. Shivanand advises global governments and
-          CEOs. An award-winning author, his first book, The Practice of
-          Immortality, is a USA Today national bestseller.
-        </p>
-        <p class="chapter__cta" data-rise>
-          <a class="btn" href="/about/">Read the story</a>
-        </p>
+        <div class="sunrise__grid">
+          <div>
+            <h1 class="sunrise__name" data-rise>Dr. Ishan Shivanand</h1>
+            <p class="sunrise__tagline" data-rise>
+              One of the leading voices shaping the global response to the
+              mental health crisis
+            </p>
+            <p class="sunrise__entity" data-word-reveal>
+              Dr. Ishan Shivanand is an academic, philanthropist, founder of
+              Compassion Unites, and one of the leading voices shaping the
+              global response to the mental health crisis. Peer-reviewed
+              research validates his mental health protocols, now adopted at
+              Google and Fortune 500 companies. Shivanand advises global
+              governments and CEOs. An award-winning author, his first book,
+              The Practice of Immortality, is a USA Today national
+              bestseller.
+            </p>
+            <p class="chapter__cta" data-rise>
+              <a class="btn" href="/about/">Read the story</a>
+            </p>
+          </div>
+          <figure class="sunrise__portrait" data-rise>
+            <figcaption>Photo: facing the risen sun, arms open</figcaption>
+          </figure>
+        </div>
       </section>
 
       <div class="sky-breath" aria-hidden="true"></div>
@@ -111,6 +119,7 @@
               with severe <strong>insomnia</strong> achieved a complete
               resolution of their clinical symptoms within 8 weeks.
             </span>
+            <span class="research__track"><i style="--pct: 82%"></i></span>
           </div>
           <div class="research__stat" data-rise>
             <span class="research__num">79%</span>
@@ -118,6 +127,7 @@
               with moderate to severe <strong>anxiety</strong> achieved
               significant improvement.
             </span>
+            <span class="research__track"><i style="--pct: 79%"></i></span>
           </div>
           <div class="research__stat" data-rise>
             <span class="research__num">73%</span>
@@ -125,6 +135,7 @@
               with moderately severe <strong>depression</strong> improved
               significantly.
             </span>
+            <span class="research__track"><i style="--pct: 73%"></i></span>
           </div>
         </div>
         <figure class="pullquote">
@@ -174,7 +185,7 @@
       </section>
 
       <!-- Afternoon · the book -->
-      <section id="book" class="chapter container" data-sky-phase="golden" data-ink="light" aria-label="The book">
+      <section id="book" class="chapter container" data-sky-phase="midday" data-ink="light" aria-label="The book">
         <h2>The Practice of Immortality</h2>
         <p class="chapter__lead" data-word-reveal>
           A guide to discovering your unlimited potential. Published by
@@ -249,43 +260,8 @@
 
       <div class="sky-breath" aria-hidden="true"></div>
 
-      <!-- Dusk · work with Ishan -->
-      <section id="work" class="chapter container" data-sky-phase="dusk" data-ink="dark" aria-label="Work with Ishan">
-        <h2>Work with Ishan</h2>
-        <p class="chapter__lead" data-word-reveal>
-          For research collaborations, partnerships, speaking engagements, or
-          media inquiries, send a note to Ishan&rsquo;s team.
-        </p>
-        <div class="work__routes">
-          <div class="work__route" data-rise>
-            <h3>Research and academic partnerships</h3>
-            <p>
-              Collaborate, co-author, and study the protocols at scale, with
-              access to an engaged global community most labs cannot reach.
-            </p>
-            <a class="btn" href="/work-with-ishan/">Propose a study</a>
-          </div>
-          <div class="work__route" data-rise>
-            <h3>Advisory and corporate programs</h3>
-            <p>
-              Workplace mental health for boards, executives, and teams,
-              delivered as measured programs with named outcomes.
-            </p>
-            <a class="btn" href="/work-with-ishan/">Start a conversation</a>
-          </div>
-          <div class="work__route" data-rise>
-            <h3>Speaking and appearances</h3>
-            <p>
-              Keynotes, convenings, and media appearances across healthcare,
-              business, and government.
-            </p>
-            <a class="btn" href="/work-with-ishan/">Invite Ishan</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Night · the story, then the motto -->
-      <section id="about" class="chapter night container" data-sky-phase="night" data-ink="dark" aria-label="About">
+      <!-- Dusk · the story -->
+      <section id="about" class="chapter night container" data-sky-phase="dusk" data-ink="dark" aria-label="About">
         <h2>From the monastery to modern medicine</h2>
         <div class="night__grid">
           <figure class="night__photo" data-rise>
@@ -327,8 +303,47 @@
         </div>
       </section>
 
+      <!-- Night · work with Ishan -->
+      <section id="work" class="chapter container" data-sky-phase="night" data-ink="dark" aria-label="Work with Ishan">
+        <h2>Work with Ishan</h2>
+        <p class="chapter__lead" data-word-reveal>
+          For research collaborations, partnerships, speaking engagements, or
+          media inquiries, send a note to Ishan&rsquo;s team.
+        </p>
+        <div class="work__routes">
+          <div class="work__route" data-rise>
+            <h3>Research and academic partnerships</h3>
+            <p>
+              Collaborate, co-author, and study the protocols at scale, with
+              access to an engaged global community most labs cannot reach.
+            </p>
+            <a class="btn" href="/work-with-ishan/">Propose a study</a>
+          </div>
+          <div class="work__route" data-rise>
+            <h3>Advisory and corporate programs</h3>
+            <p>
+              Workplace mental health for boards, executives, and teams,
+              delivered as measured programs with named outcomes.
+            </p>
+            <a class="btn" href="/work-with-ishan/">Start a conversation</a>
+          </div>
+          <div class="work__route" data-rise>
+            <h3>Speaking and appearances</h3>
+            <p>
+              Keynotes, convenings, and media appearances across healthcare,
+              business, and government.
+            </p>
+            <a class="btn" href="/work-with-ishan/">Invite Ishan</a>
+          </div>
+        </div>
+      </section>
+
       <section class="night__close" data-sky-phase="night" data-ink="dark" aria-label="Rise and Lift Others">
+        <img class="night__seal" src="/assets/brand/is-seal.svg" alt="" width="64" height="64" loading="lazy" data-rise />
         <p class="night__motto" data-word-reveal>Rise and Lift Others</p>
+        <p class="night__values" data-rise>
+          <span>Compassion</span><span>Oneness</span><span>Valour</span>
+        </p>
       </section>
     </main>
 

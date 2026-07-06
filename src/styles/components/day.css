@@ -58,7 +58,7 @@
 
   /* Golden hour: amber gathering */
   .day-sky__layer[data-sky='golden'] {
-    background: linear-gradient(180deg, #fdf3dc 0%, #f8d9a0 45%, #f2b968 78%, #e89050 100%);
+    background: linear-gradient(180deg, #fdfaf1 0%, #fbecc9 42%, #f5cd8d 74%, #eda45f 100%);
   }
 
   /* Dusk: back through the blues and lilacs */
@@ -175,11 +175,12 @@
     height: 52svh;
   }
 
-  /* ---- The Himalayan range: fixed scene, lit by the day engine ------- */
+  /* ---- The range: a photographed Himalaya carried as masks ----------- */
   .day-range {
     position: fixed;
     inset-inline: 0;
     bottom: 0;
+    height: clamp(190px, 34vh, 460px);
     z-index: 1; /* after .celestial in the DOM: the light rises BEHIND the peaks */
     pointer-events: none;
     will-change: opacity;
@@ -187,22 +188,46 @@
     /* No-JS / initial palette: moonlit pre-dawn */
     --alpenglow: #cdd8ee;
     --snow-shade: #46527d;
-    --range-far: #2a3560;
     --range-mid: #1a2348;
     --range-near: #0d1330;
     --haze: #4a5285;
   }
 
-  .day-range svg {
-    width: 100%;
-    height: clamp(180px, 30vh, 420px);
-    display: block;
+  .day-range__rock,
+  .day-range__snow {
+    position: absolute;
+    inset: 0;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: center bottom;
+    mask-position: center bottom;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
   }
 
-  .day-range__far,
-  .day-range__mid,
-  .day-range__near {
-    will-change: transform;
+  /* The photo's cutout: rock, darker toward the base */
+  .day-range__rock {
+    -webkit-mask-image: url('/assets/img/range-alpha.webp');
+    mask-image: url('/assets/img/range-alpha.webp');
+    background: linear-gradient(180deg, var(--range-mid) 0%, var(--range-near) 88%);
+  }
+
+  /* The photo's real snowfields: lit from the celestial side, cooler on
+     the shadow faces */
+  .day-range__snow {
+    -webkit-mask-image: url('/assets/img/range-snow.webp');
+    mask-image: url('/assets/img/range-snow.webp');
+    background: linear-gradient(105deg, var(--snow-shade) 8%, var(--alpenglow) 58%);
+  }
+
+  /* Valley haze along the base */
+  .day-range__haze {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 46%;
+    background: linear-gradient(to top, var(--haze), transparent);
+    opacity: 0.4;
   }
 
   /* =====================================================================

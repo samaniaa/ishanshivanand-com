@@ -15,7 +15,11 @@ imagery. Slots on the homepage:
    - ARK rural healthcare photo
    - IIT education/scholarships photo
    - Six Sigma field/high-altitude medical photo
-2. **Night About portrait** (`.night__photo`): currently the supplied
+2. **Sunrise portrait** (`.sunrise__portrait`): the shot brief is
+   "facing the risen sun, arms open, golden rim light, warm sky behind."
+   Placeholder frame until you supply it (or we generate a version when
+   image credits are added).
+3. **Dusk About portrait** (`.night__photo`): currently the supplied
    wood-background portrait; swap for the chosen final portrait when
    ready.
 
@@ -31,6 +35,14 @@ philanthropy chapter when one is cleared.
 `/connect/` is a stub pointing at office@ishanshivanand.com (address
 unverified). Provide the real enquiry destination or form service, and
 the routing-by-interest fields you want.
+
+## 3b. Trusted-by logos
+Typographic institution names for v1 (safe with parliaments/agencies).
+When logo permissions exist, swap to monochrome marks — layout is ready.
+
+## 3c. Book laurel graphic
+The five award seals are live on the book chapter. If you prefer your
+Framer composite laurel graphic instead, send the image and it swaps in.
 
 ## 4. Social links
 

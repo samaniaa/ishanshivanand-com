@@ -30,7 +30,8 @@
       "Bash(cd \"/Users/aarti/IS Website Fable 5/public/assets/img\" && mv portrait-cutout-small.png portrait-cutout.png && ls -la portrait-cutout*)",
       "Bash(rm src/js/modules/proofStrip.js src/styles/components/proof.css)",
       "Bash(sed -i '' \"/proof.css/d\" src/styles/main.css)",
-      "Bash(git commit -q -m 'v2 homepage: roles-cycle hero with Vision cutout, flagship grid, facets narrative *)"
+      "Bash(git commit -q -m 'v2 homepage: roles-cycle hero with Vision cutout, flagship grid, facets narrative *)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }
