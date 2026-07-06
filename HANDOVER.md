@@ -31,13 +31,17 @@ palette) is driven by ONE timeline so they can never fall out of sync.
   ink. Flips at the MIDPOINT of the relevant sky fade so text only
   changes color over empty sky (`.sky-breath` spacer divs). This is why
   there's never white-on-white.
-- **The mountain range**: a CC0 Annapurna photo (Wikimedia Commons)
-  processed by `tools/make-range.py` into two alpha masks:
-  `public/assets/img/range-alpha.webp` (rock cutout) and
-  `range-snow.webp` (real snowfields). `partials/range.html` renders them
-  as masked divs filled by day-engine palette variables (`--alpenglow`,
-  `--snow-shade`, `--range-mid/near`, `--haze`). To regenerate from a new
-  photo: `python3 tools/make-range.py <photo.jpg>` (needs numpy + PIL).
+- **The mountain range**: a layered SVG silhouette (`partials/range.html`,
+  generated ridgelines + snowfields) filled by day-engine palette
+  variables (`--alpenglow`, `--snow-shade`, `--range-far/mid/near`,
+  `--haze`). Aarti REJECTED a photo-based range (tried and reverted);
+  `tools/make-range.py` remains only in case she supplies a photo she
+  likes. The celestial system is TWO independent travelers
+  (`.celestial--moon`, `.celestial--sun`) on monotonic arcs: moon sets
+  left behind the range as the sun rises right, sun arcs over the day
+  and sets left, moon returns from the right. Sky bookends are brand
+  navys (#071938 / #05152D); sunrise and dusk gradients carry the "blue
+  hour" from her reference photos.
 - **Build-time partials** (`plugins/html-partials.js`): `<!-- @include
   x.html {json} -->` in any page. head/header/menu/footer/range/icon.
 - **Reveals** (`src/js/utils/splitReveal.js`): `wordReveal` (word-by-word
@@ -47,8 +51,8 @@ palette) is driven by ONE timeline so they can never fall out of sync.
 
 ## Homepage chapters (index.html, in order)
 1. Pre-dawn — vision line (italic, balanced) + motto, under moon+range
-2. Sunrise — his name, tagline, the AEO entity paragraph (VERBATIM,
-   crawlable), + portrait slot (facing the sun); "Read the story"
+2. Sunrise — his arms-open cutout photo (left) beside his name, tagline,
+   and the AEO entity paragraph (VERBATIM, crawlable); "Read the story"
 3. Morning — research: flame-textured 82/79/73% numerals + percentage
    tracks + one pull-quote
 4. Midday — philanthropy: her verbatim copy + 3 drift cards (ARK / IIT /

@@ -50,8 +50,10 @@
       <div class="day-sky__layer" data-sky="night"></div>
       <div class="day-sky__stars"></div>
     </div>
-    <div class="celestial" aria-hidden="true">
+    <div class="celestial celestial--moon" aria-hidden="true">
       <div class="celestial__moon"></div>
+    </div>
+    <div class="celestial celestial--sun" aria-hidden="true">
       <div class="celestial__sun"></div>
     </div>
     <!-- @include range.html -->
@@ -74,6 +76,19 @@
       <!-- Sunrise · the man -->
       <section class="chapter sunrise container" data-sky-phase="sunrise" data-ink="dark" aria-label="Dr. Ishan Shivanand">
         <div class="sunrise__grid">
+          <figure class="sunrise__portrait" data-rise>
+            <picture>
+              <source srcset="/assets/img/sunrise-cutout.webp" type="image/webp" />
+              <img
+                src="/assets/img/sunrise-cutout.png"
+                alt="Dr. Ishan Shivanand, arms open to the rising sun"
+                width="936"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </figure>
           <div>
             <h1 class="sunrise__name" data-rise>Dr. Ishan Shivanand</h1>
             <p class="sunrise__tagline" data-rise>
@@ -94,9 +109,6 @@
               <a class="btn" href="/about/">Read the story</a>
             </p>
           </div>
-          <figure class="sunrise__portrait" data-rise>
-            <figcaption>Photo: facing the risen sun, arms open</figcaption>
-          </figure>
         </div>
       </section>
 

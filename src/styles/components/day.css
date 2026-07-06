@@ -24,25 +24,26 @@
     opacity: 1;
     background: linear-gradient(
       180deg,
-      #0a1230 0%,
-      #131b44 34%,
-      #2c2f63 62%,
-      #59486e 82%,
-      #8a5f63 94%,
+      #071938 0%,
+      #0d2354 32%,
+      #2c2f63 58%,
+      #59486e 80%,
+      #8a5f63 93%,
       #b06a4e 100%
     );
   }
 
-  /* Sunrise: ember and rose climbing from the horizon */
+  /* Sunrise: navy through the blue hour, then violet-pink into the
+     warm band (from Aarti's dawn photographs) */
   .day-sky__layer[data-sky='sunrise'] {
     background: linear-gradient(
       180deg,
-      #3a2c55 0%,
-      #7c4053 30%,
-      #bf4f37 58%,
-      #e0813a 78%,
-      #f2b968 92%,
-      #fbe9c0 100%
+      #12234f 0%,
+      #3f5388 24%,
+      #8b9cc8 46%,
+      #c9a8bd 64%,
+      #e8a97e 84%,
+      #f8dca8 100%
     );
   }
 
@@ -61,17 +62,16 @@
     background: linear-gradient(180deg, #fdfaf1 0%, #fbecc9 42%, #f5cd8d 74%, #eda45f 100%);
   }
 
-  /* Dusk: back through the blues and lilacs */
-  /* Dusk: a light lilac evening — dark enough to feel the day ending,
-     light enough that navy ink stays readable until night */
+  /* Dusk: a soft blue evening with the pink band low on the horizon
+     (from Aarti's dusk photographs); navy ink stays readable */
   .day-sky__layer[data-sky='dusk'] {
     background: linear-gradient(
       180deg,
-      #8f8cc0 0%,
-      #a393c2 34%,
-      #b898bb 58%,
-      #cfa08f 80%,
-      #e3ab6b 100%
+      #6f7fb5 0%,
+      #9d9ac8 42%,
+      #c9aac4 66%,
+      #ecc0a8 86%,
+      #e3a05e 100%
     );
   }
 
@@ -79,9 +79,9 @@
   .day-sky__layer[data-sky='night'] {
     background: linear-gradient(
       180deg,
-      #050b20 0%,
-      #0a1230 45%,
-      #1c1f4a 75%,
+      #05152d 0%,
+      #071938 42%,
+      #0d2354 72%,
       #3a3260 92%,
       #4c3a5e 100%
     );
@@ -128,7 +128,7 @@
     }
   }
 
-  /* ---- The traveling light: one element, moon and sun states --------- */
+  /* ---- The traveling lights: moon and sun, each on its own arc ------- */
   .celestial {
     position: fixed;
     z-index: 1;
@@ -145,7 +145,10 @@
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    will-change: opacity;
+  }
+
+  .celestial--sun {
+    opacity: 0;
   }
 
   /* Crescent: a light disc with a shadow disc biting into it */
@@ -157,7 +160,6 @@
   }
 
   .celestial__sun {
-    opacity: 0;
     background: radial-gradient(
       circle,
       #fff7dd 0%,

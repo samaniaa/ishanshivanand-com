@@ -9,7 +9,7 @@
     /* Ink lives on body; the day engine re-scopes it per phase */
     color: var(--ink);
     font-size: var(--step-0);
-    background-color: #0a1230; /* behind the fixed sky; never seen lit */
+    background-color: #071938; /* Dark Anchor, behind the fixed sky */
   }
 
   h1,

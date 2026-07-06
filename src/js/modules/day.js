@@ -37,26 +37,44 @@ function computePhasePositions() {
   return positions
 }
 
-/* The traveling light's path is generated from the same computed phase
-   positions as the sky, so the sun always sets exactly as dusk lands.
-   x in vw, y in vh. */
-function buildLightPath(at) {
+/* Two travelers, one circle. The moon arcs down-LEFT and sets behind
+   the range as the sun rises from behind the range on the RIGHT; the
+   sun arcs over the day and sets LEFT as night lands, and the moon
+   returns from the right. Every segment is monotonic in x and y: no
+   bounce, no hovering. x in vw, y in vh, o = opacity. */
+function buildLightPaths(at) {
   const sunriseAt = at.sunrise ?? 0.08
-  const dayMid = ((at.midday ?? 0.35) + (at.golden ?? 0.58)) / 2
-  const duskAt = (at.dusk ?? 0.72) + FADE
-  const nightAt = at.night ?? 0.88
-  return [
-    { p: 0.0, x: 74, y: 16, moon: 1, sun: 0 },
-    { p: sunriseAt, x: 70, y: 30, moon: 1, sun: 0 },
-    { p: sunriseAt + 0.05, x: 67, y: 48, moon: 0, sun: 0.2 },
-    { p: (at.morning ?? 0.2) + FADE, x: 56, y: 52, moon: 0, sun: 1 },
-    { p: dayMid, x: 62, y: 12, moon: 0, sun: 1 },
-    { p: at.dusk ?? 0.7, x: 40, y: 44, moon: 0, sun: 1 },
-    { p: duskAt, x: 28, y: 78, moon: 0, sun: 0 },
-    { p: nightAt, x: 72, y: 38, moon: 0.2, sun: 0 },
-    { p: Math.min(nightAt + 0.06, 0.98), x: 74, y: 20, moon: 1, sun: 0 },
-    { p: 1.0, x: 75, y: 16, moon: 1, sun: 0 },
-  ]
+  const sunriseEnd = (at.morning ?? 0.2) + FADE
+  const crossover = (sunriseAt + sunriseEnd) / 2
+  const dayApex = ((at.midday ?? 0.35) + (at.golden ?? 0.58)) / 2
+  const duskAt = at.dusk ?? 0.72
+  const nightAt = at.night ?? 0.86
+  const nightEnd = Math.min(nightAt + FADE, 0.985)
+
+  return {
+    moon: [
+      { p: 0, x: 72, y: 16, o: 1 },
+      { p: sunriseAt, x: 58, y: 34, o: 1 },
+      { p: crossover, x: 36, y: 62, o: 1 },
+      { p: sunriseEnd, x: 16, y: 96, o: 1 },
+      { p: Math.min(sunriseEnd + 0.02, nightAt - 0.02), x: 15, y: 102, o: 0 },
+      { p: nightAt, x: 82, y: 92, o: 0 },
+      { p: Math.min(nightAt + 0.02, 0.99), x: 80, y: 84, o: 1 },
+      { p: nightEnd, x: 74, y: 34, o: 1 },
+      { p: 1, x: 72, y: 18, o: 1 },
+    ],
+    sun: [
+      { p: 0, x: 84, y: 102, o: 0 },
+      { p: sunriseAt, x: 84, y: 96, o: 0.9 },
+      { p: crossover, x: 76, y: 68, o: 1 },
+      { p: sunriseEnd, x: 66, y: 40, o: 1 },
+      { p: dayApex, x: 48, y: 10, o: 1 },
+      { p: duskAt, x: 32, y: 42, o: 1 },
+      { p: nightAt, x: 14, y: 92, o: 1 },
+      { p: Math.min(nightAt + 0.03, 0.99), x: 12, y: 102, o: 0 },
+      { p: 1, x: 12, y: 102, o: 0 },
+    ],
+  }
 }
 
 /* The range's light palette, keyframed on the same progress axis as the
@@ -115,8 +133,7 @@ function sampleLightPath(path, p) {
   return {
     x: a.x + (b.x - a.x) * ease,
     y: a.y + (b.y - a.y) * ease,
-    moon: a.moon + (b.moon - a.moon) * ease,
-    sun: a.sun + (b.sun - a.sun) * ease,
+    o: a.o + (b.o - a.o) * ease,
   }
 }
 
@@ -131,9 +148,20 @@ const RANGE_VAR_NAMES = {
 
 export function init() {
   const sky = document.querySelector('.day-sky')
-  const celestial = document.querySelector('.celestial')
+  const moonEl = document.querySelector('.celestial--moon')
+  const sunEl = document.querySelector('.celestial--sun')
   const range = document.querySelector('.day-range')
   if (!sky) return
+
+  const applyLight = (paths, p) => {
+    if (!moonEl || !sunEl) return
+    const w = window.innerWidth
+    const h = window.innerHeight
+    const mp = sampleLightPath(paths.moon, p)
+    const sp = sampleLightPath(paths.sun, p)
+    gsap.set(moonEl, { x: (mp.x / 100) * w, y: (mp.y / 100) * h, opacity: mp.o })
+    gsap.set(sunEl, { x: (sp.x / 100) * w, y: (sp.y / 100) * h, opacity: sp.o })
+  }
 
   const applyRangePalette = (pal) => {
     if (!range) return
@@ -146,14 +174,12 @@ export function init() {
     [...sky.querySelectorAll('.day-sky__layer')].map((l) => [l.dataset.sky, l])
   )
   const stars = sky.querySelector('.day-sky__stars')
-  const moon = celestial?.querySelector('.celestial__moon')
-  const sun = celestial?.querySelector('.celestial__sun')
 
   mm.add(MQ.motionOK, () => {
     let tl = null
     let inkToDay = 0.25
     let inkToDark = 0.75
-    let lightPath = buildLightPath({})
+    let lightPaths = buildLightPaths({})
     let rangePalette = buildRangePalette({})
 
     const setPhase = (p) => {
@@ -169,7 +195,7 @@ export function init() {
       const at = computePhasePositions()
       inkToDay = (at.morning ?? 0.2) + FADE / 2
       inkToDark = (at.night ?? 0.86) + FADE / 2
-      lightPath = buildLightPath(at)
+      lightPaths = buildLightPaths(at)
       rangePalette = buildRangePalette(at)
 
       tl = gsap.timeline({
@@ -182,14 +208,7 @@ export function init() {
           onUpdate(self) {
             setPhase(self.progress)
             applyRangePalette(sampleRangePalette(rangePalette, self.progress))
-            if (!celestial) return
-            const s = sampleLightPath(lightPath, self.progress)
-            gsap.set(celestial, {
-              x: (s.x / 100) * window.innerWidth,
-              y: (s.y / 100) * window.innerHeight,
-            })
-            gsap.set(moon, { opacity: s.moon })
-            gsap.set(sun, { opacity: s.sun })
+            applyLight(lightPaths, self.progress)
           },
         },
       })
@@ -224,20 +243,12 @@ export function init() {
       }
 
       // Apply state for the current position immediately: without this
-      // the celestial sits at the viewport origin until the first
+      // the travelers sit at the viewport origin until the first
       // scroll event.
       const p = tl.scrollTrigger.progress
       setPhase(p)
       applyRangePalette(sampleRangePalette(rangePalette, p))
-      if (celestial) {
-        const s = sampleLightPath(lightPath, p)
-        gsap.set(celestial, {
-          x: (s.x / 100) * window.innerWidth,
-          y: (s.y / 100) * window.innerHeight,
-        })
-        gsap.set(moon, { opacity: s.moon })
-        gsap.set(sun, { opacity: s.sun })
-      }
+      applyLight(lightPaths, p)
     }
 
     // Build after layout settles (fonts can reflow chapter positions),
@@ -263,7 +274,8 @@ export function init() {
   // range palette still step between phases (color changes, not
   // movement) so every chapter stays readable.
   mm.add(MQ.reduced, () => {
-    if (celestial) celestial.style.display = 'none'
+    if (moonEl) moonEl.style.display = 'none'
+    if (sunEl) sunEl.style.display = 'none'
     if (stars) stars.style.opacity = '1'
 
     const REDUCED_RANGE = {

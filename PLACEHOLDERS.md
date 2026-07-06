@@ -15,10 +15,8 @@ imagery. Slots on the homepage:
    - ARK rural healthcare photo
    - IIT education/scholarships photo
    - Six Sigma field/high-altitude medical photo
-2. **Sunrise portrait** (`.sunrise__portrait`): the shot brief is
-   "facing the risen sun, arms open, golden rim light, warm sky behind."
-   Placeholder frame until you supply it (or we generate a version when
-   image credits are added).
+2. **Sunrise portrait**: FILLED (her arms-open cutout,
+   `public/assets/img/sunrise-cutout.webp`).
 3. **Dusk About portrait** (`.night__photo`): currently the supplied
    wood-background portrait; swap for the chosen final portrait when
    ready.
