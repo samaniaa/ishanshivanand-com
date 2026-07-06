@@ -176,59 +176,28 @@
     height: 52svh;
   }
 
-  /* ---- The range: a photographed Himalaya carried as masks ----------- */
+  /* ---- The range: layered silhouette, lit by the day engine ---------- */
   .day-range {
     position: fixed;
     inset-inline: 0;
     bottom: 0;
-    height: clamp(190px, 34vh, 460px);
-    z-index: 1; /* after .celestial in the DOM: the light rises BEHIND the peaks */
+    z-index: 1; /* after the celestial elements in the DOM: the light rises BEHIND the peaks */
     pointer-events: none;
     will-change: opacity;
 
     /* No-JS / initial palette: moonlit pre-dawn */
     --alpenglow: #cdd8ee;
     --snow-shade: #46527d;
+    --range-far: #2a3560;
     --range-mid: #1a2348;
     --range-near: #0d1330;
     --haze: #4a5285;
   }
 
-  .day-range__rock,
-  .day-range__snow {
-    position: absolute;
-    inset: 0;
-    -webkit-mask-size: cover;
-    mask-size: cover;
-    -webkit-mask-position: center bottom;
-    mask-position: center bottom;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-  }
-
-  /* The photo's cutout: rock, darker toward the base */
-  .day-range__rock {
-    -webkit-mask-image: url('/assets/img/range-alpha.webp');
-    mask-image: url('/assets/img/range-alpha.webp');
-    background: linear-gradient(180deg, var(--range-mid) 0%, var(--range-near) 88%);
-  }
-
-  /* The photo's real snowfields: lit from the celestial side, cooler on
-     the shadow faces */
-  .day-range__snow {
-    -webkit-mask-image: url('/assets/img/range-snow.webp');
-    mask-image: url('/assets/img/range-snow.webp');
-    background: linear-gradient(105deg, var(--snow-shade) 8%, var(--alpenglow) 58%);
-  }
-
-  /* Valley haze along the base */
-  .day-range__haze {
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 46%;
-    background: linear-gradient(to top, var(--haze), transparent);
-    opacity: 0.4;
+  .day-range svg {
+    width: 100%;
+    height: clamp(180px, 30vh, 420px);
+    display: block;
   }
 
   /* =====================================================================
