@@ -250,6 +250,17 @@
     opacity: 0.74;
     margin-top: 1.4rem;
   }
+  .bhero__still {
+    margin: clamp(3rem, 9vh, 7rem) auto 0;
+    border-radius: clamp(14px, 1.8vw, 26px);
+    overflow: hidden;
+    box-shadow: 0 48px 110px rgb(7 25 56 / 0.4), 0 10px 30px rgb(7 25 56 / 0.2);
+  }
+  .bhero__still img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
   .bhero__tree {
     justify-self: center;
     width: min(100%, 26rem);
