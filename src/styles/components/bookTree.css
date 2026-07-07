@@ -35,11 +35,11 @@
     object-fit: contain;
     /* Dissolve the clip edges into the (matching) section gradient so
        yuv420 colour rounding can never draw a hairline. */
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent),
-      linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent),
+      linear-gradient(to bottom, transparent, #000 13%, #000 90%, transparent);
     -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent),
-      linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent),
+      linear-gradient(to bottom, transparent, #000 13%, #000 90%, transparent);
     mask-composite: intersect;
   }
 

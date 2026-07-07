@@ -28,7 +28,7 @@ const html = `<!doctype html>
   html, body { margin: 0; height: 100%; }
   body {
     display: grid; place-items: center;
-    background: linear-gradient(180deg, #e7eefa 0%, #f4f2ec 56%, #fdf3ea 100%);
+    background: linear-gradient(180deg, #6ca0df 0%, #a1c6ee 50%, #deeaf7 100%);
     font: 13px system-ui; color: rgb(23 36 69 / 0.55);
   }
   .stage { position: relative; aspect-ratio: 3 / 4; height: min(92svh, 52rem); max-width: 96vw; }
