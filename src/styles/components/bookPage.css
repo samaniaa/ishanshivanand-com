@@ -574,4 +574,24 @@
   .breader .page__content {
     padding: clamp(1.1rem, 3.2vw, 2.1rem);
   }
+  /* No page numbers (Aarti) — they were also the first thing to clip when
+     a page ran long. */
+  .breader .page__folio {
+    display: none;
+  }
+  /* The Samadhi meditation card: tighten it so its border never outgrows
+     the leaf on smaller screens. */
+  .breader .page__content--rest {
+    padding: clamp(1rem, 3vw, 1.8rem);
+  }
+  .breader .page__practice {
+    padding: clamp(0.9rem, 3vw, 1.5rem);
+    max-width: 100%;
+  }
+  .breader .page__practice-sub {
+    margin-bottom: 0.7rem;
+  }
+  .breader .page__practice-body {
+    line-height: 1.5;
+  }
 }
