@@ -556,9 +556,22 @@
     line-height: 1.1;
   }
 
-  /* The embedded reader keeps the site's book-reader styling (bookReader.css,
-     imported per-page in book.js); constrain its width in this context. */
+  /* The embedded reader reuses bookReader.css (imported per-page in book.js)
+     but drops the standalone route's full-height cream stage: on this page
+     it sits as a compact hardcover just below the excerpt, on the page's
+     own sky — no giant white box, no full-viewport min-height. */
   .breader.reader {
-    width: min(100%, 40rem);
+    width: min(100%, 38rem);
+    background: none;
+    min-height: 0;
+    padding-block: 0;
+  }
+  .breader .reader__stage {
+    min-height: 0;
+    padding-inline: 0;
+  }
+  /* A little more text room so the live pages don't clip. */
+  .breader .page__content {
+    padding: clamp(1.1rem, 3.2vw, 2.1rem);
   }
 }
