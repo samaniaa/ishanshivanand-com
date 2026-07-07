@@ -483,7 +483,7 @@
     opacity: 0.75;
   }
   .breader-wrap {
-    margin-top: clamp(3rem, 8vh, 6rem);
+    margin-top: clamp(5rem, 13vh, 9.5rem);
     display: grid;
     justify-items: center;
     text-align: center;
