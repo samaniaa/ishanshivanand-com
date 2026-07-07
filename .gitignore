@@ -2,3 +2,6 @@ node_modules
 dist
 .DS_Store
 dist-ds
+
+dist-portable
+book-page.html
