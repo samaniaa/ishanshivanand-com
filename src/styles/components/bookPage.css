@@ -27,10 +27,12 @@
   .bsky__layer[data-sky='haze'] {
     background: linear-gradient(180deg, #cfe0f0 0%, #ece7d4 38%, #f8e2b4 72%, #f4c488 100%);
   }
-  /* Golden hour, warmed toward rose: as the sun lowers the sky reads pink
-     rather than pure orange (Aarti) — pale peach into coral into dusty rose. */
+  /* Golden hour, read as nature does it: warm gold at the horizon where the
+     sun sits, cooling upward through a soft bluey-pink band into periwinkle
+     lilac at the top (Aarti) — the pink is a passing band, not a flat wash,
+     and the cool top hands off smoothly to the dusk layer's purple. */
   .bsky__layer[data-sky='golden'] {
-    background: linear-gradient(180deg, #fce9d8 0%, #f6cbb0 32%, #eba594 58%, #dd8288 82%, #cc7078 100%);
+    background: linear-gradient(180deg, #9fb0dc 0%, #b6abce 20%, #cfaeba 42%, #ecc79c 72%, #e6a96e 100%);
   }
   .bsky__layer[data-sky='dusk'] {
     background: linear-gradient(180deg, #4f5f9c 0%, #8180b4 42%, #b898b6 66%, #e2b294 86%, #d6924e 100%);
@@ -643,6 +645,63 @@
   }
   .bbulk {
     margin-top: clamp(2rem, 4vh, 2.6rem);
+  }
+
+  /* ---- 08b FAQ accordion (native <details>, crawlable for AEO) ------- */
+  .bfaqs__head {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vh, 3.4rem);
+  }
+  .bfaqs__list {
+    width: 100%;
+    text-align: left;
+    border-top: 1px solid rgb(255 252 246 / 0.16);
+  }
+  .bfaq {
+    border-bottom: 1px solid rgb(255 252 246 / 0.16);
+  }
+  .bfaq__q {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: clamp(1.1rem, 2.5vw, 1.55rem) 0;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.32;
+    color: var(--ink);
+    transition: color var(--dur-quick);
+  }
+  .bfaq__q::-webkit-details-marker {
+    display: none;
+  }
+  .bfaq__q::after {
+    content: '+';
+    margin-left: auto;
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.5em;
+    line-height: 1;
+    color: var(--c-gold-80);
+  }
+  .bfaq[open] .bfaq__q::after {
+    content: '\2212';
+  }
+  .bfaq__q:hover {
+    color: var(--c-gold-80);
+  }
+  .bfaq__a {
+    padding: 0 0 clamp(1.2rem, 3vw, 1.8rem);
+    max-width: 64ch;
+  }
+  .bfaq__a p {
+    font-size: var(--step-0);
+    line-height: 1.7;
+    opacity: 0.82;
+  }
+  .bfaq__a p + p {
+    margin-top: 0.9rem;
   }
 
   /* ---- 09 Close ------------------------------------------------------ */
