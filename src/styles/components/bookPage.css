@@ -27,8 +27,10 @@
   .bsky__layer[data-sky='haze'] {
     background: linear-gradient(180deg, #cfe0f0 0%, #ece7d4 38%, #f8e2b4 72%, #f4c488 100%);
   }
+  /* Golden hour, warmed toward rose: as the sun lowers the sky reads pink
+     rather than pure orange (Aarti) — pale peach into coral into dusty rose. */
   .bsky__layer[data-sky='golden'] {
-    background: linear-gradient(180deg, #fbf0d2 0%, #f8d492 36%, #f2a95c 68%, #e8823c 88%, #dd6f2c 100%);
+    background: linear-gradient(180deg, #fce9d8 0%, #f6cbb0 32%, #eba594 58%, #dd8288 82%, #cc7078 100%);
   }
   .bsky__layer[data-sky='dusk'] {
     background: linear-gradient(180deg, #4f5f9c 0%, #8180b4 42%, #b898b6 66%, #e2b294 86%, #d6924e 100%);
@@ -229,17 +231,17 @@
   }
   @media (min-width: 900px) {
     .bhero__inner {
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.3fr 0.7fr;
     }
   }
   .bhero__quote {
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 420;
-    font-size: clamp(1.7rem, 1.2rem + 2.4vw, 3.1rem);
+    font-size: clamp(1.55rem, 1rem + 2vw, 2.35rem);
     line-height: 1.5;
     letter-spacing: -0.008em;
-    max-width: 32ch;
+    max-width: 40ch;
     text-wrap: balance;
   }
   .bhero__attr {
@@ -590,22 +592,24 @@
     gap: clamp(1.6rem, 4vw, 3.4rem);
     width: 100%;
   }
-  /* Text stand-ins until Aarti's logos arrive; real logos drop in as
-     <img class="bmedia__logo">. Press logos are usually mono, so on the
-     dark dusk sky they render light via the invert filter below. */
+  /* Logos are pre-whitened to a uniform silhouette (assets .../media/); no
+     invert. Wordmarks share a height; the boxier India Today runs a touch
+     taller and the wide New India Abroad a touch shorter, to even the weight. */
   .bmedia__logo {
-    font-family: var(--font-display);
-    font-size: var(--step-0);
-    letter-spacing: 0.01em;
-    opacity: 0.72;
-    color: var(--ink);
-  }
-  img.bmedia__logo {
-    height: clamp(1.5rem, 3vw, 2.3rem);
+    height: clamp(1.5rem, 2.6vw, 2rem);
     width: auto;
     object-fit: contain;
-    opacity: 0.82;
-    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    transition: opacity var(--dur-quick);
+  }
+  .bmedia__logo:hover {
+    opacity: 1;
+  }
+  .bmedia__logo--tall {
+    height: clamp(2.1rem, 3.6vw, 2.9rem);
+  }
+  .bmedia__logo--wide {
+    height: clamp(1.2rem, 2.2vw, 1.7rem);
   }
 
   /* ---- 08 Get the book ----------------------------------------------- */
