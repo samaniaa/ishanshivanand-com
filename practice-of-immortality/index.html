@@ -8,139 +8,42 @@
     <!-- @include header.html -->
     <main id="main">
       <!--
-        Book-quote hero: the growing tree behind the first-person quote.
-        Prototype section for review; drops into the full book page (dark
-        hero band above, descriptor + buy links below) once that is built.
+        The living tree: the actual golden tree from the book cover
+        (isolated and upscaled from the cover art), growing into
+        existence on scroll, then breathing on a seamless loop.
+        Baseline is the still composite: reduced-motion and no-JS
+        visitors see the full tree with no motion. The videos carry
+        their own copy of the section gradient, so they composite
+        invisibly; modules/bookTree.js runs the grow -> breathe handoff.
       -->
-      <section class="book-quote" data-book-quote aria-label="From The Practice of Immortality">
-        <div class="book-quote__inner">
-          <figure class="book-quote__figure">
-            <blockquote class="book-quote__text" data-quote>
-              Immortality is not the promise of living forever. It is a practice, an art of expanding your relationship with time.
-            </blockquote>
-            <figcaption class="book-quote__cite">The Practice of Immortality</figcaption>
-          </figure>
-
-          <div class="book-quote__tree" aria-hidden="true">
-            <svg class="tree" viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="treeGold" x1="0" y1="560" x2="0" y2="120" gradientUnits="userSpaceOnUse">
-                  <stop offset="0" stop-color="#e2513c" />
-                  <stop offset="0.24" stop-color="#f37b1f" />
-                  <stop offset="0.6" stop-color="#f59700" />
-                  <stop offset="1" stop-color="#f9ac46" />
-                </linearGradient>
-                <radialGradient id="treeGlow" cx="0.5" cy="0.5" r="0.5">
-                  <stop offset="0" stop-color="#f9ac46" stop-opacity="0.2" />
-                  <stop offset="0.55" stop-color="#f9ac46" stop-opacity="0.07" />
-                  <stop offset="1" stop-color="#f9ac46" stop-opacity="0" />
-                </radialGradient>
-
-                <!-- One blossom, reused at every canopy tip (centred at 0,0) -->
-                <g id="blossom">
-                  <g stroke="url(#treeGold)" stroke-width="1.5" stroke-linecap="round">
-                    <line x2="0" y2="-13" />
-                    <line x2="7.64" y2="-10.52" />
-                    <line x2="12.36" y2="-4.02" />
-                    <line x2="12.36" y2="4.02" />
-                    <line x2="7.64" y2="10.52" />
-                    <line x2="0" y2="13" />
-                    <line x2="-7.64" y2="10.52" />
-                    <line x2="-12.36" y2="4.02" />
-                    <line x2="-12.36" y2="-4.02" />
-                    <line x2="-7.64" y2="-10.52" />
-                  </g>
-                  <g fill="url(#treeGold)">
-                    <circle cx="0" cy="-13" r="1.7" />
-                    <circle cx="7.64" cy="-10.52" r="1.7" />
-                    <circle cx="12.36" cy="-4.02" r="1.7" />
-                    <circle cx="12.36" cy="4.02" r="1.7" />
-                    <circle cx="7.64" cy="10.52" r="1.7" />
-                    <circle cx="0" cy="13" r="1.7" />
-                    <circle cx="-7.64" cy="10.52" r="1.7" />
-                    <circle cx="-12.36" cy="4.02" r="1.7" />
-                    <circle cx="-12.36" cy="-4.02" r="1.7" />
-                    <circle cx="-7.64" cy="-10.52" r="1.7" />
-                    <circle cx="0" cy="0" r="2.4" />
-                  </g>
-                </g>
-
-                <!-- One dove, reused (centred at 0,0, facing right) -->
-                <g id="dove">
-                  <path class="tree__bird-shape" d="M-14,4 C-8,-1 2,-3 9,-8 C7,-2 12,0 16,-1 C11,4 3,5 -3,4 C-8,7 -12,7 -16,9 C-15,6 -15,5 -14,4 Z" />
-                  <path class="tree__bird-shape" d="M-14,4 L-20,8 L-12,0 Z" />
-                  <circle class="tree__bird-eye" cx="10" cy="-2" r="1" />
-                </g>
-              </defs>
-
-              <ellipse class="tree__glow" cx="240" cy="238" rx="188" ry="164" fill="url(#treeGlow)" />
-
-              <!-- Roots: static ground, outside the sway -->
-              <g class="tree__roots">
-                <path class="tree__branch" stroke-width="3" d="M240,516 C214,524 196,530 168,544" />
-                <path class="tree__branch" stroke-width="3" d="M240,517 C226,528 214,536 202,550" />
-                <path class="tree__branch" stroke-width="3" d="M240,518 C242,532 244,540 240,552" />
-                <path class="tree__branch" stroke-width="3" d="M240,517 C256,528 268,536 280,550" />
-                <path class="tree__branch" stroke-width="3" d="M240,516 C266,524 286,530 312,544" />
-              </g>
-
-              <!-- Canopy: everything that sways -->
-              <g class="tree__sway">
-                <g class="tree__branches">
-                  <path class="tree__branch" stroke-width="7" d="M240,520 C236,474 238,436 240,398" />
-                  <path class="tree__branch" stroke-width="6" d="M240,398 C239,340 240,300 240,168" />
-                  <path class="tree__branch" stroke-width="5" d="M240,398 C214,368 198,350 182,320" />
-                  <path class="tree__branch" stroke-width="5" d="M240,398 C266,368 282,350 298,320" />
-                  <path class="tree__branch" stroke-width="3.4" d="M200,350 C180,330 164,312 156,270" />
-                  <path class="tree__branch" stroke-width="3.4" d="M188,332 C170,306 158,282 152,208" />
-                  <path class="tree__branch" stroke-width="3.4" d="M280,350 C300,330 316,312 324,270" />
-                  <path class="tree__branch" stroke-width="3.4" d="M292,332 C310,306 322,282 328,208" />
-                  <path class="tree__branch" stroke-width="3.4" d="M240,326 C224,300 214,276 210,214" />
-                  <path class="tree__branch" stroke-width="3.4" d="M240,326 C256,300 266,276 270,214" />
-                  <path class="tree__branch" stroke-width="2.6" d="M240,232 C222,214 208,200 196,178" />
-                  <path class="tree__branch" stroke-width="2.6" d="M240,232 C258,214 272,200 284,178" />
-                  <path class="tree__branch" stroke-width="2.4" d="M212,360 C204,352 200,346 194,336" />
-                  <path class="tree__branch" stroke-width="2.4" d="M268,360 C276,352 280,346 286,336" />
-                </g>
-
-                <g class="tree__leaves">
-                  <g transform="translate(156,270)"><use class="tree__leaf" data-s="1.05" href="#blossom" style="transform:scale(1.05)" /></g>
-                  <g transform="translate(152,208)"><use class="tree__leaf" data-s="1" href="#blossom" style="transform:scale(1)" /></g>
-                  <g transform="translate(196,178)"><use class="tree__leaf" data-s="1.1" href="#blossom" style="transform:scale(1.1)" /></g>
-                  <g transform="translate(210,214)"><use class="tree__leaf" data-s="0.95" href="#blossom" style="transform:scale(0.95)" /></g>
-                  <g transform="translate(240,166)"><use class="tree__leaf" data-s="1.2" href="#blossom" style="transform:scale(1.2)" /></g>
-                  <g transform="translate(270,214)"><use class="tree__leaf" data-s="0.95" href="#blossom" style="transform:scale(0.95)" /></g>
-                  <g transform="translate(284,178)"><use class="tree__leaf" data-s="1.1" href="#blossom" style="transform:scale(1.1)" /></g>
-                  <g transform="translate(324,270)"><use class="tree__leaf" data-s="1.05" href="#blossom" style="transform:scale(1.05)" /></g>
-                  <g transform="translate(328,208)"><use class="tree__leaf" data-s="1" href="#blossom" style="transform:scale(1)" /></g>
-                  <g transform="translate(182,240)"><use class="tree__leaf" data-s="0.9" href="#blossom" style="transform:scale(0.9)" /></g>
-                  <g transform="translate(298,240)"><use class="tree__leaf" data-s="0.9" href="#blossom" style="transform:scale(0.9)" /></g>
-                  <g transform="translate(222,192)"><use class="tree__leaf" data-s="0.85" href="#blossom" style="transform:scale(0.85)" /></g>
-                  <g transform="translate(258,192)"><use class="tree__leaf" data-s="0.85" href="#blossom" style="transform:scale(0.85)" /></g>
-                  <g transform="translate(240,206)"><use class="tree__leaf" data-s="0.8" href="#blossom" style="transform:scale(0.8)" /></g>
-                  <g transform="translate(170,300)"><use class="tree__leaf" data-s="0.95" href="#blossom" style="transform:scale(0.95)" /></g>
-                  <g transform="translate(310,300)"><use class="tree__leaf" data-s="0.95" href="#blossom" style="transform:scale(0.95)" /></g>
-                  <g transform="translate(206,258)"><use class="tree__leaf" data-s="0.8" href="#blossom" style="transform:scale(0.8)" /></g>
-                  <g transform="translate(274,258)"><use class="tree__leaf" data-s="0.8" href="#blossom" style="transform:scale(0.8)" /></g>
-                  <g transform="translate(196,334)"><use class="tree__leaf" data-s="0.72" href="#blossom" style="transform:scale(0.72)" /></g>
-                  <g transform="translate(284,334)"><use class="tree__leaf" data-s="0.72" href="#blossom" style="transform:scale(0.72)" /></g>
-                </g>
-
-                <g class="tree__birds">
-                  <g transform="translate(288,150)"><use class="tree__bird" href="#dove" /></g>
-                  <g transform="translate(168,306) scale(-1,1)"><use class="tree__bird" href="#dove" /></g>
-                </g>
-              </g>
-
-              <!-- Meditator at the roots -->
-              <g transform="translate(240,474)">
-                <g class="tree__figure">
-                  <circle class="tree__figure-fill" cx="0" cy="-24" r="7" />
-                  <path class="tree__figure-fill" d="M0,-17 C-7,-17 -12,-11 -14,-2 C-19,1 -24,7 -26,15 C-9,20 9,20 26,15 C24,7 19,1 14,-2 C12,-11 7,-17 0,-17 Z" />
-                </g>
-              </g>
-            </svg>
-          </div>
+      <section class="book-tree" data-book-tree aria-label="The golden tree from The Practice of Immortality">
+        <div class="book-tree__stage">
+          <img
+            class="book-tree__still"
+            src="/assets/img/book/frame-tree.webp"
+            alt="A golden tree in full blossom with two white doves, and a figure meditating beneath it — the artwork from the cover of The Practice of Immortality"
+            width="1200"
+            height="1600"
+          />
+          <video
+            class="book-tree__video book-tree__video--grow"
+            data-tree-grow
+            src="/assets/video/book/grow-in.mp4"
+            muted
+            playsinline
+            preload="none"
+            aria-hidden="true"
+          ></video>
+          <video
+            class="book-tree__video book-tree__video--loop"
+            data-tree-loop
+            src="/assets/video/book/sway-loop.mp4"
+            muted
+            playsinline
+            loop
+            preload="none"
+            aria-hidden="true"
+          ></video>
         </div>
       </section>
     </main>
