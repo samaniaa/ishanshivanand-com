@@ -418,14 +418,44 @@
   }
 
   /* ---- 05 Ancient wisdom + reader ------------------------------------ */
+  /* Two columns break the wall of text: the case on the left, a calm
+     contemplative photo on the right; the excerpt lands full-width below. */
+  .bwisdom__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.8rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .bwisdom__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+  }
   .bwisdom__head {
     font-size: var(--step-3);
-    max-width: 20ch;
+    max-width: 16ch;
     margin-top: 1.2rem;
   }
   .bwisdom__body {
-    max-width: 56ch;
+    max-width: 46ch;
     opacity: 0.94;
+    margin-top: 1.2rem;
+  }
+  .bwisdom__media {
+    margin: 0;
+    justify-self: center;
+    width: min(100%, 26rem);
+  }
+  .bwisdom__media img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 28px 64px rgb(7 25 56 / 0.32);
+  }
+  .bwisdom__pull {
+    margin-inline: auto;
+    margin-top: clamp(2.8rem, 7vh, 4.2rem);
+    max-width: 42ch;
+    text-align: center;
   }
   .bpull {
     font-family: var(--font-display);
@@ -453,8 +483,11 @@
     justify-items: center;
     text-align: center;
   }
-  .breader-wrap .beyebrow {
-    margin-bottom: clamp(1.4rem, 3vh, 2.2rem);
+  .breader__head {
+    margin-bottom: clamp(1.6rem, 3.5vh, 2.6rem);
+  }
+  .breader__cta {
+    margin-top: clamp(1.8rem, 4vh, 2.8rem);
   }
 
   /* ---- 06 Listen ----------------------------------------------------- */
@@ -500,38 +533,79 @@
     opacity: 0.96;
     max-width: 56ch;
   }
+  /* Decorative rating strip: five gold stars over each score. */
   .bratings {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+    gap: clamp(0.8rem, 2vw, 1.4rem);
     width: 100%;
-    max-width: 54rem;
-    border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+    max-width: 58rem;
     margin-top: clamp(2.6rem, 6vh, 3.8rem);
   }
-  .bratings p {
-    padding: 1.7rem 1rem 0;
+  .brating {
     display: grid;
-    gap: 0.5rem;
     justify-items: center;
+    gap: 0.35rem;
+    padding: clamp(1.3rem, 2.6vw, 1.9rem) 0.7rem;
+    border-radius: 16px;
+    background: rgb(255 252 246 / 0.05);
+    border: 1px solid rgb(255 252 246 / 0.13);
   }
-  .bratings strong {
+  .brating__stars {
+    color: var(--c-seal-light);
+    font-size: 1.05rem;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    filter: drop-shadow(0 2px 9px rgb(241 220 131 / 0.4));
+  }
+  .brating__score {
     font-family: var(--font-display);
     font-size: var(--step-4);
     font-weight: 420;
-    color: var(--c-seal-light);
     line-height: 1;
+    color: var(--c-white);
+    margin-top: 0.35rem;
   }
   .brating__src {
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 0.85;
   }
   .brating__n {
     font-size: 0.75rem;
-    opacity: 0.68;
-    margin-top: -0.3rem;
+    opacity: 0.62;
+  }
+
+  /* ---- 07b Featured in (media strip) --------------------------------- */
+  .bfeatured .beyebrow {
+    margin-bottom: clamp(1.6rem, 3.5vh, 2.4rem);
+  }
+  .bmedia {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.6rem, 4vw, 3.4rem);
+    width: 100%;
+  }
+  /* Text stand-ins until Aarti's logos arrive; real logos drop in as
+     <img class="bmedia__logo">. Press logos are usually mono, so on the
+     dark dusk sky they render light via the invert filter below. */
+  .bmedia__logo {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    letter-spacing: 0.01em;
+    opacity: 0.72;
+    color: var(--ink);
+  }
+  img.bmedia__logo {
+    height: clamp(1.5rem, 3vw, 2.3rem);
+    width: auto;
+    object-fit: contain;
+    opacity: 0.82;
+    filter: brightness(0) invert(1);
   }
 
   /* ---- 08 Get the book ----------------------------------------------- */
