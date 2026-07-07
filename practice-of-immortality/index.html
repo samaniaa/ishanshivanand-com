@@ -1,21 +1,441 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- @include head.html {"title": "The Practice of Immortality \u00b7 Dr. Ishan Shivanand", "description": "A USA Today national bestseller, published by Penguin Random House and Hachette."} -->
-    <script type="module" src="/src/js/main.js"></script>
+    <!-- @include head.html {"title": "The Practice of Immortality · Dr. Ishan Shivanand", "description": "A USA Today national bestseller. Part memoir, part practical guide, part spiritual exploration — by Dr. Ishan Shivanand. Published by Penguin Random House and Hachette."} -->
+    <script type="module" src="/src/js/book.js"></script>
   </head>
   <body>
     <!-- @include header.html -->
-    <main id="main">
-      <section class="stub container" data-module="stub">
-        <p class="stub__eyebrow">The Book</p>
-        <h1 class="stub__title">The Practice of Immortality</h1>
-        <p class="stub__body">A USA Today national bestseller, published by Penguin Random House and Hachette. Reviews, endorsements, awards, and global buy links will live here. The full page is in progress.</p>
-        <div class="stub__links">
-          <a class="btn" href="/">Return home</a>
-          <a class="tlink" href="/connect/">Get in touch</a>
+
+    <!-- ===== The book page's own half-day sky: midday -> deep evening ===== -->
+    <div class="bsky" aria-hidden="true">
+      <div class="bsky__layer bsky__layer--base"></div>
+      <div class="bsky__layer" data-sky="haze"></div>
+      <div class="bsky__layer" data-sky="golden"></div>
+      <div class="bsky__layer" data-sky="dusk"></div>
+      <div class="bsky__layer" data-sky="deep"></div>
+      <div class="bsky__stars" data-stars></div>
+    </div>
+    <div class="bsun" data-sun aria-hidden="true">
+      <div class="bsun__disc bsun__disc--day" data-sun-day></div>
+      <div class="bsun__disc bsun__disc--set" data-sun-set></div>
+    </div>
+    <div class="bmoon" data-moon aria-hidden="true"><div class="bmoon__disc"></div></div>
+    <div class="brange" data-range aria-hidden="true">
+      <svg viewBox="0 0 1440 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="dune-lit" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" style="stop-color:var(--lit-hi)"></stop>
+            <stop offset="1" style="stop-color:var(--lit-lo)"></stop>
+          </linearGradient>
+          <linearGradient id="dune-shadow" x1="0" y1="0" x2="0.55" y2="1">
+            <stop offset="0" style="stop-color:var(--shadow-hi)"></stop>
+            <stop offset="1" style="stop-color:var(--shadow-lo)"></stop>
+          </linearGradient>
+          <filter id="dune-grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence>
+            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.55 0.55 0.55 0 0"></feColorMatrix>
+            <feComposite operator="in" in2="SourceGraphic"></feComposite>
+          </filter>
+        </defs>
+        <path style="fill:var(--far)" opacity="0.85" d="M1000,380 C1080,280 1200,208 1320,206 C1370,206 1420,218 1440,226 L1440,380 Z"></path>
+        <path style="fill:url(#dune-lit)" d="M0,380 L0,225 C300,160 560,70 800,54 C900,50 980,70 1060,104 C1200,164 1330,215 1440,236 L1440,380 Z"></path>
+        <path style="fill:url(#dune-shadow)" d="M0,225 C300,160 560,70 800,54 C720,140 600,230 460,290 C320,340 140,365 0,370 Z"></path>
+        <path fill="#000000" filter="url(#dune-grain)" opacity="0.13" d="M0,380 L0,225 C300,160 560,70 800,54 C900,50 980,70 1060,104 C1200,164 1330,215 1440,236 L1440,380 Z"></path>
+      </svg>
+    </div>
+
+    <main id="main" class="bpage">
+
+      <!-- 01 · Hero — midday: the living tree grows, then the quote surfaces -->
+      <section class="bsec bhero">
+        <div class="bwrap bhero__inner">
+          <div class="bhero__text">
+            <p class="bhero__quote">
+              <span class="bhero__line" data-quote-reveal="0">Immortality is not the promise of living forever.</span>
+              <span class="bhero__line" data-quote-reveal="1">It is a practice,</span>
+              <span class="bhero__line" data-quote-reveal="2">an art of expanding your relationship with time. So that each moment becomes richer, more meaningful, and more fully lived.</span>
+            </p>
+            <p class="bhero__attr" data-quote-reveal="3">Ishan Shivanand</p>
+          </div>
+          <div class="bhero__tree" data-book-tree>
+            <div class="book-tree__stage">
+              <img class="book-tree__still" src="/assets/img/book/frame-tree.webp" alt="The golden tree from the cover of The Practice of Immortality, two doves in its branches and a figure meditating beneath it" width="1200" height="1600" />
+              <video class="book-tree__video book-tree__video--grow" data-tree-grow src="/assets/video/book/grow-in.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+              <video class="book-tree__video book-tree__video--loop" data-tree-loop src="/assets/video/book/sway-loop.mp4" muted playsinline loop preload="none" aria-hidden="true"></video>
+            </div>
+          </div>
+        </div>
+        <figure class="bwrap bhero__still" data-rise>
+          <img src="/assets/img/book/award-still.jpg" alt="The Practice of Immortality with its award laurels and reader ratings, in warm sunlight beside a sunflower" width="1800" height="1028" loading="lazy" />
+        </figure>
+      </section>
+
+      <!-- 02 · The book — golden begins -->
+      <section class="bsec" data-anchor="golden">
+        <div class="bwrap bbook" data-rise>
+          <figure class="bbook__cover">
+            <img src="/assets/img/book/book-author.jpg" alt="Ishan Shivanand speaking at the launch of The Practice of Immortality" width="1200" height="1174" loading="lazy" />
+          </figure>
+          <div class="bbook__meta">
+            <h1 class="bdisplay">The Practice of Immortality</h1>
+            <p class="blede">A memoir, a practical guide, a spiritual exploration.</p>
+            <p class="bsub">An award-winning, USA Today national bestseller. Published by Penguin Random House and Hachette.</p>
+            <p class="bactions">
+              <a class="btn" href="https://amzn.to/4kPCun9">Buy the book</a>
+              <a class="tlink" href="https://play.google.com/store/audiobooks/details/Ishan_Shivanand_The_Practice_of_Immortality?id=AQAAAECKtAr0kM&amp;hl=en_GB">Buy the audiobook</a>
+            </p>
+          </div>
         </div>
       </section>
+
+      <!-- 03 · The story behind the book — golden -->
+      <section class="bsec">
+        <div class="bwrap bstory" data-rise>
+          <div class="bstory__text">
+            <h2 class="bhead">The story behind the book</h2>
+            <p class="bbody">For the first 20 years of his life, Ishan Shivanand lived in a monastery, immersed in teachings and austere practices passed from master to disciple across generations.</p>
+            <p class="bbody">The young boy grew up far away from urban life, in an environment which was unlike his peers&rsquo; in every way. Yet he is the most prepared to live fully in the chaos of the modern world.</p>
+            <p class="bbody">The Practice of Immortality is a personal journey through discipline, doubt, and discovery. The meditations at the close of every chapter are drawn from his own lived experience.</p>
+          </div>
+          <div class="bvideo" data-video="JJNpD6PLFoA">
+            <button type="button" aria-label="Play the film: the story behind The Practice of Immortality">
+              <img src="/assets/img/book/thumb-film.jpg" alt="" loading="lazy" />
+              <span class="bvideo__scrim"><span class="bvideo__play"><svg width="20" height="24" viewBox="0 0 20 24" fill="currentColor" aria-hidden="true"><path d="M0 0 L20 12 L0 24 Z"></path></svg></span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 · Praise — golden hour -->
+      <section class="bsec">
+        <div class="bwrap" data-rise>
+          <p class="beyebrow beyebrow--warm bpraise__eyebrow">Praise for The Practice of Immortality</p>
+          <div class="bpraise">
+            <figure class="bquote">
+              <blockquote>Heartfelt, grounded, and intentionally reflective.</blockquote>
+              <figcaption><strong>Literary Titan</strong><br /><span>Gold Book Award Review</span></figcaption>
+            </figure>
+            <figure class="bquote">
+              <blockquote>It provides our youth with lasting knowledge and facilitates their access to traditional practices.</blockquote>
+              <figcaption><strong>Smt. Priti Agarwal</strong><br /><span>IAS Officer, Ministry of Communications, Govt of India</span></figcaption>
+            </figure>
+            <figure class="bquote">
+              <blockquote>The Practice of Immortality is a wonderful, impressive, and inspiring book.</blockquote>
+              <figcaption><strong>Hema Malini</strong><br /><span>Padma Shree Awardee</span></figcaption>
+            </figure>
+            <figure class="bquote">
+              <blockquote>A profound guide to cultivating presence, calm, and meaning.</blockquote>
+              <figcaption><strong>Luis Sanz</strong><br /><span>Stanford Executive Program</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 · Ancient wisdom + read inside the book — golden into dusk -->
+      <section class="bsec">
+        <div class="bwrap bwisdom" data-rise>
+          <div class="bwisdom__grid">
+            <div class="bwisdom__text">
+              <p class="beyebrow beyebrow--warm">Why this book is needed now</p>
+              <h2 class="bhead bwisdom__head">Ancient wisdom for a world in overdrive</h2>
+              <p class="bbody bwisdom__body">We live with machines built to hold our attention. Increasingly capable AI learns exactly what keeps us engaged, and our focus is being harvested. The meditation practices in The Practice of Immortality are a way to reclaim attention, steady the mind, and return to the present.</p>
+            </div>
+            <figure class="bwisdom__media">
+              <img src="/assets/img/book/book-meditation.jpg" alt="Ishan Shivanand seated in meditation in a garden" width="1200" height="1500" loading="lazy" />
+            </figure>
+          </div>
+          <blockquote class="bpull bwisdom__pull">&ldquo;True immortality is not about endless physical life, but about discovering the eternal, changeless awareness that exists beyond time itself&hellip;&rdquo;<span class="bpull__cite">From the book</span></blockquote>
+        </div>
+
+        <div class="bwrap breader-wrap">
+          <h2 class="bhead breader__head">Read some pages of the book</h2>
+          <div class="reader breader">
+            <div class="reader__stage">
+              <div class="book" data-module="book-reader" aria-roledescription="book">
+                <div class="page page--cover" data-density="hard">
+                  <div class="page__content page__content--cover">
+                    <img src="/assets/img/framer/book-cover.jpg" alt="The Practice of Immortality, by Ishan Shivanand" width="683" height="1024" />
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content page__content--half">
+                    <p class="page__halftitle">The Practice<br />of Immortality</p>
+                    <p class="page__halfauthor">Ishan Shivanand</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content">
+                    <p class="page__eyebrow">Chapter Nine</p>
+                    <h2 class="page__title">Becoming Superhuman</h2>
+                    <p class="page__sutra" lang="sa">&#2350;&#2379;&#2361;&#2366;&#2357;&#2352;&#2339;&#2366;&#2340;&#2381;&#2360;&#2367;&#2342;&#2381;&#2343;&#2367;&#2307;</p>
+                    <p class="page__epigraph">Supernatural powers are a veil drawn by delusion.</p>
+                    <p class="page__body page__body--drop">Earlier, I described the way in which we are born. Before birth, we are one with God. Then we are removed from that wondrous place, and we awaken on this Earth, crying in our desolation.</p>
+                    <p class="page__folio">95</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content">
+                    <p class="page__body">A monk in Rajasthan once told me a different version of this story. &ldquo;During the process of birth, the child is violently taken from the tranquility of the mother&rsquo;s womb and plunged into this world &mdash; a place of immense confusion and chaos. The baby instinctively seeks solace in the mother&rsquo;s embrace, finding calmness once again. Thus, the child surrenders to the mother, resting in a state of peace.&rdquo;</p>
+                    <p class="page__folio">96</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content">
+                    <p class="page__body">&ldquo;It is our very nature to surrender. And in surrender we find peace,&rdquo; the monk told me. &ldquo;A spiritual seeker is simply a person who is very cautious and watchful when choosing where to surrender.&rdquo;</p>
+                    <p class="page__body">I have always held these words close. Unconscious surrender may be a way of giving up, whereas conscious surrender embodies the way of the warrior.</p>
+                    <p class="page__folio">97</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content">
+                    <p class="page__body">When my father finally ushered me into the room, he looked at me intently. &ldquo;Son,&rdquo; he said, &ldquo;I want you to begin practicing these bija mantras and sounds.&rdquo;</p>
+                    <p class="page__body">By this point in my life, I had undergone a change. I accepted Babaji&rsquo;s guidance as readily as a flower accepts light and rain from the heavens. In this acceptance, the flower begins to bloom.</p>
+                    <p class="page__folio">98</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content">
+                    <p class="page__body">As the mantras continued to pour from my lips, I felt something like an earthquake from the energies they generated. A vibration passed through my body, like a thousand needles &mdash; but through the whole body.</p>
+                    <p class="page__body">It comes in waves, so at first you think it is just the result of sitting for so long. But then it becomes a pulse, and you realize this is something you have never experienced before.</p>
+                    <p class="page__folio">99</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content">
+                    <p class="page__body">That pulse became a spasm; my spine began to rotate like a conical pendulum. Then my guru touched his thumb to my forehead, and it was like an electrical current flowing into me.</p>
+                    <p class="page__body">Each time my spine rotated, I rotated through the universe and back. In each rotation I saw a thousand worlds, a thousand lifetimes &mdash; not experiencing them, only witnessing.</p>
+                    <p class="page__folio">100</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content page__content--rest">
+                    <p class="page__rule">&middot; &middot; &middot;</p>
+                    <p class="page__continues">The chapter continues.</p>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="page__content page__content--rest">
+                    <div class="page__practice">
+                      <p class="page__practice-title">Samadhi</p>
+                      <p class="page__practice-sub">Meditation Practice</p>
+                      <p class="page__practice-body">Sit comfortably, relax your body, and close your eyes. Focus on your breath, gently inhaling and exhaling. Let your body relax and accept whatever sensations arise. Notice how your breath changes with awareness, and simply observe.</p>
+                    </div>
+                    <p class="page__folio">105</p>
+                  </div>
+                </div>
+                <div class="page" data-density="hard">
+                  <div class="page__content page__content--rest">
+                    <p class="page__eyebrow">The Practice of Immortality</p>
+                    <p class="page__endline">You have been reading from Chapter Nine.</p>
+                    <p class="page__cta"><a class="btn" href="https://amzn.to/4kPCun9">Buy the book</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="reader__controls">
+              <button class="reader__nav" data-dir="prev" aria-label="Previous page">&larr;</button>
+              <output class="reader__count" aria-live="polite">Cover</output>
+              <button class="reader__nav" data-dir="next" aria-label="Next page">&rarr;</button>
+            </div>
+            <p class="reader__hint">Click the cover to open &middot; drag a corner or use &larr; &rarr; to turn the page</p>
+          </div>
+          <p class="bactions bactions--center breader__cta"><a class="btn" href="https://amzn.to/4kPCun9">Get your copy</a></p>
+        </div>
+      </section>
+
+      <!-- 06 · Listen — golden to dusk -->
+      <section class="bsec bsec--center" data-anchor="dusk">
+        <div class="bwrap bwrap--narrow blisten" data-rise>
+          <h2 class="bhead">Listen to the book in Ishan&rsquo;s voice</h2>
+          <div class="bvideo blisten__video" data-video="vjCJ52pzT4k">
+            <button type="button" aria-label="Play the audiobook preview in Ishan&rsquo;s voice">
+              <img src="/assets/img/book/thumb-audiobook.jpg" alt="" loading="lazy" />
+              <span class="bvideo__scrim"><span class="bvideo__play"><svg width="18" height="22" viewBox="0 0 20 24" fill="currentColor" aria-hidden="true"><path d="M0 0 L20 12 L0 24 Z"></path></svg></span></span>
+            </button>
+          </div>
+          <p class="bactions bactions--center">
+            <a class="btn" href="https://play.google.com/store/audiobooks/details/Ishan_Shivanand_The_Practice_of_Immortality?id=AQAAAECKtAr0kM&amp;hl=en_GB">Buy the audiobook</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- 07 · Recognition — deep dusk -->
+      <section class="bsec bsec--center" data-anchor="deep">
+        <div class="bwrap brecog" data-rise>
+          <p class="beyebrow beyebrow--gold">Recognition</p>
+          <h2 class="bhead brecog__head">A USA Today National Bestseller<br />&amp; Amazon Number One Bestseller</h2>
+          <p class="bbody brecog__pub">Published by Penguin Random House and Hachette.</p>
+          <div class="bseals">
+            <img src="/assets/img/framer/award-usatoday.png" alt="USA Today Featured Bestseller" width="84" height="84" loading="lazy" />
+            <img src="/assets/img/framer/award-nautilus.png" alt="Nautilus Book Awards Gold Medal" width="84" height="84" loading="lazy" />
+            <img src="/assets/img/framer/award-literarytitan.png" alt="Literary Titan Book Award" width="84" height="84" loading="lazy" />
+            <img src="/assets/img/framer/award-bookfest.png" alt="The BookFest Award, Gold" width="84" height="84" loading="lazy" />
+            <img src="/assets/img/framer/award-amazon.png" alt="Amazon Number One Bestseller" width="84" height="84" loading="lazy" />
+          </div>
+          <p class="bnautilus">Winner of the 2026 Nautilus Book Awards Gold Medal. An award that has previously honored His Holiness the Dalai Lama, Thich Nhat Hanh, Bren&eacute; Brown, and Eckhart Tolle.</p>
+          <div class="bratings">
+            <div class="brating">
+              <span class="brating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="brating__score">4.95</span>
+              <span class="brating__src">Goodreads</span>
+              <span class="brating__n">650+ ratings</span>
+            </div>
+            <div class="brating">
+              <span class="brating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="brating__score">5.0</span>
+              <span class="brating__src">Amazon US</span>
+              <span class="brating__n">1,500+ ratings</span>
+            </div>
+            <div class="brating">
+              <span class="brating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="brating__score">5.0</span>
+              <span class="brating__src">Amazon UK</span>
+              <span class="brating__n">1,400+ ratings</span>
+            </div>
+            <div class="brating">
+              <span class="brating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="brating__score">5.0</span>
+              <span class="brating__src">Amazon IN</span>
+              <span class="brating__n">1,700+ ratings</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07b · Featured in — media coverage -->
+      <section class="bsec bsec--center bfeatured">
+        <div class="bwrap" data-rise>
+          <p class="beyebrow beyebrow--gold">Featured in</p>
+          <div class="bmedia">
+            <img class="bmedia__logo" src="/assets/img/book/media/times-of-india.png" alt="The Times of India" loading="lazy" />
+            <img class="bmedia__logo bmedia__logo--tall" src="/assets/img/book/media/india-today.svg" alt="India Today" loading="lazy" />
+            <img class="bmedia__logo" src="/assets/img/book/media/gulf-news.png" alt="Gulf News" loading="lazy" />
+            <img class="bmedia__logo bmedia__logo--wide" src="/assets/img/book/media/new-india-abroad.png" alt="New India Abroad" loading="lazy" />
+            <img class="bmedia__logo" src="/assets/img/book/media/dna-india.svg" alt="DNA India" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 · Get the book — deep dusk -->
+      <section class="bsec bsec--center">
+        <div class="bwrap bget" data-rise>
+          <h2 class="bhead">Get your copy today</h2>
+          <p class="bactions bactions--center">
+            <a class="btn" href="https://amzn.to/4kPCun9">Amazon US</a>
+            <a class="btn" href="https://amzn.to/4kWRLCG">Amazon UK</a>
+            <a class="btn" href="https://amzn.to/4lHInD5">Amazon India</a>
+            <a class="btn" href="https://play.google.com/store/audiobooks/details/Ishan_Shivanand_The_Practice_of_Immortality?id=AQAAAECKtAr0kM&amp;hl=en_GB">Audiobook</a>
+          </p>
+          <hr class="brule" />
+          <p class="beyebrow">Translated editions</p>
+          <div class="beditions">
+            <figure><img src="/assets/img/book/editions/italiano.jpg" alt="Italian edition cover" width="460" height="690" loading="lazy" /><a class="tlink" href="https://amzn.eu/d/cACWXIe">Italiano</a></figure>
+            <figure><img src="/assets/img/book/editions/deutsch.jpg" alt="German edition cover" width="460" height="690" loading="lazy" /><a class="tlink" href="https://www.amazon.de/dp/3778783181">Deutsch</a></figure>
+            <figure><img src="/assets/img/book/editions/portugues.jpg" alt="Portuguese edition cover" width="460" height="690" loading="lazy" /><a class="tlink" href="https://penguinlivros.pt/loja/nascente/livro/a-pratica-da-imortalidade/">Portugu&ecirc;s</a></figure>
+            <figure><img src="/assets/img/book/editions/espanol.jpg" alt="Spanish edition cover" width="460" height="690" loading="lazy" /><a class="tlink" href="https://www.amazon.com/pr%C3%A1ctica-inmortalidad-descubrir-positividad-Autoconocimiento-ebook/dp/B0G8G829DT">Espa&ntilde;ol</a></figure>
+            <figure><img src="/assets/img/book/editions/hindi.jpg" alt="Hindi edition cover" width="460" height="690" loading="lazy" /><a class="tlink" href="https://shivyogstore.com/products/the-practice-of-immortality-by-shivyog-master-dr-ishan-shivanand-hindi">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</a></figure>
+            <figure><img src="/assets/img/book/editions/marathi.jpg" alt="Marathi edition cover" width="460" height="690" loading="lazy" /><a class="tlink" href="https://www.amazon.in/Practice-Immortality-%E0%A4%85%E0%A4%AE%E0%A4%B0%E0%A4%A4%E0%A5%8D%E0%A4%B5%E0%A4%BE%E0%A4%9A%E0%A5%80-Amaratva-Shivanand/dp/934996550X">&#2350;&#2352;&#2366;&#2336;&#2368;</a></figure>
+          </div>
+          <p class="bbulk"><a class="tlink" href="/connect/">Bulk and institutional orders</a></p>
+        </div>
+      </section>
+
+      <!-- 08b · Frequently asked questions — deep dusk (AEO) -->
+      <section class="bsec bfaqs">
+        <div class="bwrap bwrap--narrow" data-rise>
+          <h2 class="bhead bfaqs__head">Frequently asked questions</h2>
+          <div class="bfaqs__list">
+            <details class="bfaq">
+              <summary class="bfaq__q">What is The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality is a book by Ishan Shivanand, published by Penguin Random House and Hachette in 2025. Part memoir, part practical guide, and part spiritual exploration, it distils meditation practices from a monastic yogic tradition into tools for health, happiness, focus, and inner calm. Each chapter closes with a guided meditation drawn from the author&rsquo;s own lived experience.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Who wrote The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality was written by Ishan Shivanand, an academic, philanthropist, and founder of Compassion Unites, a cross-sector mental health alliance.</p><p>Shivanand is a shaivite scholar, who spent the first 20 years of his life in a monastery, immersed in teachings and practices that have been passed from master to disciple across generations.</p><p>His breath-work and meditation practices have been studied in peer-reviewed journals including Frontiers in Psychiatry and the Journal of Urology.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">What does &ldquo;the practice of immortality&rdquo; mean?</summary>
+              <div class="bfaq__a"><p>In the book, immortality is not about living forever. Ishan Shivanand defines it as a practice, &ldquo;an art of expanding your relationship with time,&rdquo; so that each moment becomes richer and more fully lived. The title points to discovering an eternal, changeless awareness that exists beyond time itself, rather than extending physical life.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Is The Practice of Immortality a bestseller?</summary>
+              <div class="bfaq__a"><p>Yes. The Practice of Immortality is a USA Today national bestseller and an Amazon #1 bestseller, and was named to USA Today&rsquo;s Top 100 bestselling titles of 2025. It holds a 4.95 rating on Goodreads and 5.0 ratings across Amazon US, UK, and India, from several thousand reader reviews.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">What awards has The Practice of Immortality won?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality won the 2026 Nautilus Book Gold Award, which has previously honored the Dalai Lama, Thich Nhat Hanh, Bren&eacute; Brown, and Eckhart Tolle. It has also won the Literary Titan Book Award and The BookFest Gold Award, alongside its USA Today and Amazon bestseller rankings.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Who published The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality was published by Penguin Random House and Hachette Book Group in 2025. It launched at Yashobhoomi in New Delhi in August 2025 and was featured at the Sharjah International Book Fair the same year.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">How is The Practice of Immortality different from other meditation books?</summary>
+              <div class="bfaq__a"><p>Unlike most meditation books, which are either purely spiritual or purely scientific, The Practice of Immortality bridges both. Ishan Shivanand combines a monastic lineage of 21 generations of yogis with meditation methods validated in peer-reviewed clinical studies, and frames meditation as a way to reclaim attention in an age of AI and constant digital distraction.</p><p>It&rsquo;s a memoir, a spiritual exploration, and a practical guide to living a fulfilled life.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Is The Practice of Immortality a religious book?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality is a spiritual exploration rather than a religious text. It draws on an ancient monastic yogic tradition but is written for readers of any faith or background who want better mental health, focus, and wellbeing, presenting meditation and mindset as a practical, evidence-informed tool for modern life.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Where can I buy The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality is available in print and audiobook formats through major retailers, including Amazon in the US, UK, India, and Canada. Bulk and institutional orders can also be arranged. Purchase links for all formats are provided on this page.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Is there an audiobook of Ishan Shivanand&rsquo;s The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>Yes. The Practice of Immortality is available as an audiobook narrated by the author, Ishan Shivanand, in his own voice. A preview is available through Google Play Books, and the full audiobook can be purchased alongside the print and ebook editions.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">What languages is The Practice of Immortality available in?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality was originally published in English and is available in six additional languages: Italian, German, Portuguese, Spanish, Hindi, and Marathi.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">Who should read The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>The Practice of Immortality is written for anyone seeking greater focus, calm, and meaning in a fast-paced, digitally saturated world. It suits readers interested in biographical reading, meditation, mindfulness, and mental resilience.</p></div>
+            </details>
+            <details class="bfaq">
+              <summary class="bfaq__q">What will I learn from The Practice of Immortality?</summary>
+              <div class="bfaq__a"><p>Readers are transported into a world which very few experience: a remote monastery without clocks, where time and the seasons are felt through the changes in nature.</p><p>Readers learn guided meditation practices for reclaiming attention, steadying the mind, and returning to the present. Drawn from Ishan Shivanand&rsquo;s two decades of monastic training and his clinical research, each chapter ends with a meditation designed to build mental resilience and a richer relationship with everyday moments.</p></div>
+            </details>
+          </div>
+        </div>
+      </section>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality is a book by Ishan Shivanand, published by Penguin Random House and Hachette in 2025. Part memoir, part practical guide, and part spiritual exploration, it distils meditation practices from a monastic yogic tradition into tools for health, happiness, focus, and inner calm. Each chapter closes with a guided meditation drawn from the author's own lived experience." } },
+          { "@type": "Question", "name": "Who wrote The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality was written by Ishan Shivanand, an academic, philanthropist, and founder of Compassion Unites, a cross-sector mental health alliance. Shivanand is a shaivite scholar, who spent the first 20 years of his life in a monastery, immersed in teachings and practices that have been passed from master to disciple across generations. His breath-work and meditation practices have been studied in peer-reviewed journals including Frontiers in Psychiatry and the Journal of Urology." } },
+          { "@type": "Question", "name": "What does \"the practice of immortality\" mean?", "acceptedAnswer": { "@type": "Answer", "text": "In the book, immortality is not about living forever. Ishan Shivanand defines it as a practice, an art of expanding your relationship with time, so that each moment becomes richer and more fully lived. The title points to discovering an eternal, changeless awareness that exists beyond time itself, rather than extending physical life." } },
+          { "@type": "Question", "name": "Is The Practice of Immortality a bestseller?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Practice of Immortality is a USA Today national bestseller and an Amazon #1 bestseller, and was named to USA Today's Top 100 bestselling titles of 2025. It holds a 4.95 rating on Goodreads and 5.0 ratings across Amazon US, UK, and India, from several thousand reader reviews." } },
+          { "@type": "Question", "name": "What awards has The Practice of Immortality won?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality won the 2026 Nautilus Book Gold Award, which has previously honored the Dalai Lama, Thich Nhat Hanh, Brene Brown, and Eckhart Tolle. It has also won the Literary Titan Book Award and The BookFest Gold Award, alongside its USA Today and Amazon bestseller rankings." } },
+          { "@type": "Question", "name": "Who published The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality was published by Penguin Random House and Hachette Book Group in 2025. It launched at Yashobhoomi in New Delhi in August 2025 and was featured at the Sharjah International Book Fair the same year." } },
+          { "@type": "Question", "name": "How is The Practice of Immortality different from other meditation books?", "acceptedAnswer": { "@type": "Answer", "text": "Unlike most meditation books, which are either purely spiritual or purely scientific, The Practice of Immortality bridges both. Ishan Shivanand combines a monastic lineage of 21 generations of yogis with meditation methods validated in peer-reviewed clinical studies, and frames meditation as a way to reclaim attention in an age of AI and constant digital distraction. It's a memoir, a spiritual exploration, and a practical guide to living a fulfilled life." } },
+          { "@type": "Question", "name": "Is The Practice of Immortality a religious book?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality is a spiritual exploration rather than a religious text. It draws on an ancient monastic yogic tradition but is written for readers of any faith or background who want better mental health, focus, and wellbeing, presenting meditation and mindset as a practical, evidence-informed tool for modern life." } },
+          { "@type": "Question", "name": "Where can I buy The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality is available in print and audiobook formats through major retailers, including Amazon in the US, UK, India, and Canada. Bulk and institutional orders can also be arranged. Purchase links for all formats are provided on this page." } },
+          { "@type": "Question", "name": "Is there an audiobook of Ishan Shivanand's The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Practice of Immortality is available as an audiobook narrated by the author, Ishan Shivanand, in his own voice. A preview is available through Google Play Books, and the full audiobook can be purchased alongside the print and ebook editions." } },
+          { "@type": "Question", "name": "What languages is The Practice of Immortality available in?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality was originally published in English and is available in six additional languages: Italian, German, Portuguese, Spanish, Hindi, and Marathi." } },
+          { "@type": "Question", "name": "Who should read The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "The Practice of Immortality is written for anyone seeking greater focus, calm, and meaning in a fast-paced, digitally saturated world. It suits readers interested in biographical reading, meditation, mindfulness, and mental resilience." } },
+          { "@type": "Question", "name": "What will I learn from The Practice of Immortality?", "acceptedAnswer": { "@type": "Answer", "text": "Readers are transported into a world which very few experience: a remote monastery without clocks, where time and the seasons are felt through the changes in nature. Readers learn guided meditation practices for reclaiming attention, steadying the mind, and returning to the present. Drawn from Ishan Shivanand's two decades of monastic training and his clinical research, each chapter ends with a meditation designed to build mental resilience and a richer relationship with everyday moments." } }
+        ]
+      }
+      </script>
+
+      <!-- 09 · Close — deep dusk -->
+      <section class="bsec bsec--center bclose" data-anchor="close">
+        <div class="bwrap bclose__inner">
+          <p class="bclose__text">
+            <span data-close-reveal="0">The Practice of Immortality invites readers into the lived experiences</span>
+            <span data-close-reveal="1">that shaped Ishan Shivanand&rsquo;s understanding of health, happiness, purpose,</span>
+            <span data-close-reveal="2">and the limitless potential of the human spirit.</span>
+          </p>
+          <p class="bactions bactions--center"><a class="btn" href="https://amzn.to/4kPCun9">Find your limitless potential</a></p>
+          <p class="bmotto">Rise and Lift Others</p>
+        </div>
+      </section>
+
     </main>
     <!-- @include footer.html -->
   </body>

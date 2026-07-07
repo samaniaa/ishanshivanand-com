@@ -1,0 +1,200 @@
+@layer components {
+  /* ================================================================
+     "Look inside" hardcover reader
+     ================================================================ */
+  .reader {
+    background: linear-gradient(180deg, #fdf4e3 0%, #fffdf6 34%, #ffffff 100%);
+    min-height: 100svh;
+    padding-block: var(--space-section);
+    text-align: center;
+  }
+  .reader__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+  }
+  .reader__heading {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    line-height: 1.05;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  /* ---- Stage: perspective + centering + contact shadow ------------- */
+  .reader__stage {
+    perspective: 2400px;
+    perspective-origin: 50% 40%;
+    display: grid;
+    place-items: center;
+    min-height: min(80vh, 640px);
+    padding-inline: var(--gutter);
+  }
+
+  /* The book element (StPageFlip mounts here as .stf__parent). */
+  .book {
+    position: relative;
+    width: min(92vw, 840px); /* holds a two-page spread; StPageFlip reads this */
+    margin-inline: auto;
+    transition: transform 0.6s var(--ease-out);
+  }
+  /* Soft contact shadow beneath the whole book. */
+  .book.book--live::after {
+    content: '';
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: -26px;
+    height: 40px;
+    background: radial-gradient(60% 60% at 50% 50%, rgb(7 25 56 / 0.3), transparent 72%);
+    filter: blur(6px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .book--loading { opacity: 0; }
+
+  /* Closed-cover realism: a slight resting tilt + hover lift, a fore-edge
+     page block and a spine shadow drawn onto the cover. */
+  .book[data-at='cover'] { transform: rotateY(-14deg) rotateX(3deg); }
+  .book[data-at='cover']:hover { transform: rotateY(-8deg) rotateX(2deg) translateY(-4px); }
+  .book[data-at='cover'] .page--cover::after {
+    /* stacked page edges on the fore-edge (right) */
+    content: '';
+    position: absolute;
+    top: 2%;
+    bottom: 2%;
+    right: -7px;
+    width: 7px;
+    background: repeating-linear-gradient(
+      90deg,
+      #d8cdb4 0 1px,
+      #fbf6ea 1px 3px
+    );
+    border-radius: 0 2px 2px 0;
+    box-shadow: 4px 0 12px rgb(7 25 56 / 0.28);
+    transform: rotateY(28deg);
+    transform-origin: left center;
+  }
+  .book[data-at='cover'] .page--cover::before {
+    /* spine shadow on the binding (left) */
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 26px;
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.32), rgb(0 0 0 / 0) 88%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* ---- StPageFlip base (inlined from lib so we own the cascade) ----- */
+  .stf__parent { position: relative; display: block; box-sizing: border-box; transform: translateZ(0); touch-action: pan-y; }
+  .stf__wrapper { position: relative; width: 100%; box-sizing: border-box; }
+  .stf__parent canvas { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
+  .stf__block { position: absolute; width: 100%; height: 100%; box-sizing: border-box; perspective: 2000px; }
+  .stf__item { display: none; position: absolute; transform-style: preserve-3d; }
+  .stf__outerShadow, .stf__innerShadow, .stf__hardShadow, .stf__hardInnerShadow { position: absolute; left: 0; top: 0; }
+
+  /* ================================================================
+     Pages
+     ================================================================ */
+  .page { background: transparent; }
+  .page__content {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: clamp(1.6rem, 4.2vw, 2.8rem);
+    display: flex;
+    flex-direction: column;
+    color: var(--c-dark-anchor);
+    font-family: var(--font-body);
+    background:
+      radial-gradient(130% 100% at 12% 0%, #fffdf7, #f7f0e0 72%, #efe4cf);
+  }
+  /* subtle paper grain */
+  .page__content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image:
+      radial-gradient(rgb(120 90 30 / 0.05) 0.5px, transparent 0.6px),
+      radial-gradient(rgb(120 90 30 / 0.04) 0.5px, transparent 0.6px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 1px 2px;
+    mix-blend-mode: multiply;
+  }
+  /* gutter shadow: left pages darken toward their right (inner) edge,
+     right (odd) pages toward their left. StPageFlip flags density; we use
+     nth to approximate the spread's inner darkening. */
+  .page__content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 34px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .page:nth-child(even) .page__content::after { right: 0; background: linear-gradient(90deg, transparent, rgb(90 60 20 / 0.16)); }
+  .page:nth-child(odd) .page__content::after { left: 0; background: linear-gradient(-90deg, transparent, rgb(90 60 20 / 0.16)); }
+
+  /* ---- Cover (hard, image-filled) ---------------------------------- */
+  .page__content--cover { padding: 0; background: #c1391f; }
+  .page__content--cover::before, .page__content--cover::after { display: none; }
+  .page__content--cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ---- Half-title verso -------------------------------------------- */
+  .page__content--half { align-items: center; justify-content: center; text-align: center; }
+  .page__halftitle { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.2; color: rgb(7 25 56 / 0.8); margin-bottom: 1rem; }
+  .page__halfauthor { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(7 25 56 / 0.5); }
+
+  /* ---- Text pages -------------------------------------------------- */
+  .page__eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(7 25 56 / 0.55); margin-bottom: 0.8rem; }
+  .page__title { font-family: var(--font-body); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; font-size: var(--step-2); line-height: 1.05; margin-bottom: 1rem; }
+  .page__sutra { font-size: var(--step-1); color: var(--c-coral); margin-bottom: 0.6rem; }
+  .page__epigraph { font-family: var(--font-display); font-style: italic; font-size: var(--step-0); color: rgb(7 25 56 / 0.7); margin-bottom: 1.4rem; }
+  .page__body { font-family: var(--font-display); font-size: var(--step--1); line-height: 1.62; color: rgb(7 25 56 / 0.9); margin-bottom: 0.8rem; }
+  .page__body--drop::first-letter {
+    font-family: var(--font-body); font-weight: 700; float: left; font-size: 3.1em; line-height: 0.78;
+    padding: 0.04em 0.12em 0 0; color: var(--c-coral);
+  }
+  .page__folio { margin-top: auto; text-align: center; font-size: 0.72rem; color: rgb(7 25 56 / 0.45); padding-top: 1rem; }
+
+  .page__content--rest { align-items: center; justify-content: center; text-align: center; }
+  .page__rule { font-size: var(--step-1); letter-spacing: 0.5em; color: rgb(7 25 56 / 0.4); margin-bottom: 1rem; }
+  .page__continues { font-family: var(--font-display); font-style: italic; font-size: var(--step-1); color: rgb(7 25 56 / 0.7); }
+  .page__practice { border: 1px solid rgb(7 25 56 / 0.35); border-radius: 3px; padding: clamp(1.2rem, 4vw, 2rem); }
+  .page__practice-title { font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-size: var(--step-0); }
+  .page__practice-sub { font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-size: var(--step--1); margin-bottom: 1.1rem; }
+  .page__practice-body { font-family: var(--font-display); font-size: var(--step--1); line-height: 1.65; color: rgb(7 25 56 / 0.85); }
+  .page__endline { font-family: var(--font-display); font-style: italic; font-size: var(--step-1); margin-bottom: 1.4rem; }
+  .page__cta { margin-top: 0.4rem; }
+
+  /* ================================================================
+     Static fallback (no-JS / reduced-motion / pre-enhancement)
+     ================================================================ */
+  .book--static { width: min(24rem, 92vw); aspect-ratio: 400 / 570; margin-inline: auto; box-shadow: 0 24px 60px rgb(7 25 56 / 0.28); border-radius: 3px 6px 6px 3px; overflow: hidden; }
+  .book--static .page { position: absolute; inset: 0; }
+  .book--static .page:not(.is-current) { display: none; }
+  .book--static .page.is-current { display: block; }
+
+  /* ================================================================
+     Controls
+     ================================================================ */
+  .reader__controls { display: flex; align-items: center; justify-content: center; gap: 1.4rem; margin-top: clamp(1.6rem, 4vw, 2.6rem); }
+  .reader__nav {
+    font-size: 1.1rem; line-height: 1; color: var(--ink);
+    background: none; border: 1px solid var(--rule); border-radius: 999px;
+    width: 2.7rem; height: 2.7rem; cursor: pointer;
+    transition: border-color var(--dur-quick), color var(--dur-quick);
+  }
+  .reader__nav:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .reader__nav:disabled { opacity: 0.3; cursor: default; }
+  .reader__count { font-size: 0.78rem; letter-spacing: 0.12em; color: var(--ink-soft); min-width: 9ch; }
+  .reader__hint { margin-top: 1rem; font-size: 0.78rem; color: var(--ink-faint); }
+}

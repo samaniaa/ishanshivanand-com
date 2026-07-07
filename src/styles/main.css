@@ -9,6 +9,8 @@
 @import './components/buttons.css';
 @import './components/day.css';
 @import './components/chapters.css';
+@import './components/bookTree.css';
+@import './components/bookPage.css';
 @import './components/footer.css';
 @import './components/stub.css';
 @import './utilities.css';
