@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "build:ds": "node tools/build-design-system.mjs"
+    "build:ds": "node tools/build-design-system.mjs",
+    "build:tree-preview": "node tools/build-tree-preview.mjs"
   },
   "dependencies": {
     "gsap": "^3.13.0",
