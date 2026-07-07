@@ -96,8 +96,11 @@ export function init(root) {
       const shrink = 1 - 0.24 * setT
       const sink = 14 * tg + 12 * td
       if (els.sun) {
+        // Start further left (78 vs the design's 84) so the hero sun sits
+        // clear of the right-column tree stage; it still travels left and
+        // sets behind the dunes.
         els.sun.style.transform =
-          'translate(' + (84 - 70 * st) * vwU + 'px,' + (100 - 92 * Math.sin(Math.PI * st) + sink) * vhU + 'px) scale(' + shrink + ')'
+          'translate(' + (78 - 70 * st) * vwU + 'px,' + (100 - 92 * Math.sin(Math.PI * st) + sink) * vhU + 'px) scale(' + shrink + ')'
         const horizonFade = c01(1 - (td - 0.6) / 0.4)
         els.sun.style.opacity = String(horizonFade * (1 - 0.4 * tn))
       }

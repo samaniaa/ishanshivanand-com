@@ -64,6 +64,9 @@ export function init(root) {
     const handoff = () => {
       if (handed) return
       handed = true
+      // The canopy is essentially complete here — let the page bring the
+      // quote up as the tree finishes building.
+      root.dispatchEvent(new CustomEvent('tree:grown'))
       loops[0].currentTime = 0
       loops[0]
         .play()
