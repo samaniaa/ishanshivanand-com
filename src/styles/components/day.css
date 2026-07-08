@@ -130,16 +130,10 @@
 
   .celestial--sun {
     opacity: 0;
-    /* Static default size. day.js overrides `scale` inline per phase
-       (small midday → large horizon); the `scale` property composes with
-       the gsap translate on `transform` without conflict. */
-    scale: 2.4;
-  }
-
-  /* Static default size; day.js overrides `scale` inline per phase (full
-     hero at pre-dawn → quiet ~65% companion at the close). */
-  .celestial--moon {
-    scale: 1;
+    /* Size is folded into the transform by day.js (translate … scale(…)),
+       NOT the CSS `scale` property — the standalone `scale` property is
+       applied OUTSIDE `transform` and would multiply the translate
+       distance by the scale factor, throwing the disc off-position. */
   }
 
   /* Two stacked crescents (tokens-moon.css); day.js cross-fades their
@@ -173,6 +167,7 @@
      no data-sun) the warm-gold day sun shows by default. */
   .celestial__sun {
     background: var(--sun-warm-gold);
+    filter: blur(0.5px); /* book-page softness — no hard disc edge */
   }
   .celestial__sun[data-sun='soft-peach'] {
     background: var(--sun-soft-peach);
@@ -203,7 +198,11 @@
     position: fixed;
     inset-inline: 0;
     bottom: 0;
-    z-index: 1; /* after the celestial elements in the DOM: the light rises BEHIND the peaks */
+    /* Above the celestial (z-index:1) so the sun/moon set BEHIND the
+       foreground — regardless of DOM order. This is the generic horizon:
+       any page's foreground element (range, water, dunes, skyline) sits
+       here, in front of the travelling light. */
+    z-index: 2;
     pointer-events: none;
     will-change: opacity;
 

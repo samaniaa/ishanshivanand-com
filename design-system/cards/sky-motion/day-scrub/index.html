@@ -31,14 +31,10 @@
     <output id="phase" style="font: 600 0.72rem/1 var(--font-body); letter-spacing:0.12em; text-transform:uppercase; color:#fffcf6; min-width:9ch">pre-dawn</output>
     <input id="scrub" type="range" min="0" max="1000" value="0" style="flex:1; accent-color:#f9ac46" aria-label="Scrub the day" />
   </div>
-  <p style="font-size:0.7rem; color:rgb(255 252 246 / 0.75); margin-top:0.45rem">One day, thirteen phases — the real sky, sun, and moon, scrubbed by hand. The sun recolours and resizes as it arcs; the moon hands over at dawn and dusk.</p>
+  <p style="font-size:0.7rem; color:rgb(255 252 246 / 0.75); margin-top:0.45rem">One day, thirteen phases — the real sky, sun, and moon, scrubbed by hand. The sun rises and sets behind the horizon; the moon never sets — it drifts, its crescent slowly turning, and the daylight simply washes it out.</p>
 </div>
 
 <script>
-  const PALETTE = JSON.parse('<!-- @palette-json -->')
-  const PALETTE_AT = [0, 0.16, 0.34, 0.78, 0.92]
-  const VARS = { alpenglow: '--alpenglow', snowShade: '--snow-shade', far: '--range-far', mid: '--range-mid', near: '--range-near', haze: '--haze' }
-
   const PHASES = ['predawn', 'blue-hour', 'sunrise', 'daybreak', 'morning-gold', 'morning', 'midday', 'afternoon', 'evening-gold', 'sundown', 'dusk', 'twilight', 'post-dusk']
   const AT = [0, 0.06, 0.13, 0.20, 0.28, 0.35, 0.44, 0.53, 0.61, 0.68, 0.76, 0.84, 0.90]
   const FADE = 0.05
@@ -69,24 +65,52 @@
     return out
   }
 
-  // Sun disc colour + size (absolute scale) along the visible arc.
+  // Sun disc colour + size along the arc. Smaller at the horizon than
+  // before (was dominant); soft-peach is a diffuse bloom, the orange fire
+  // ball keeps its crisp edge.
   const SUN = [
-    { p: 0.13, peach: 1, gold: 0, orange: 0, size: 3.0 },
-    { p: 0.20, peach: 0, gold: 0, orange: 1, size: 3.0 },
-    { p: 0.28, peach: 0, gold: 1, orange: 0, size: 2.4 },
-    { p: 0.44, peach: 0, gold: 1, orange: 0, size: 1.9 },
-    { p: 0.61, peach: 0, gold: 1, orange: 0, size: 2.4 },
-    { p: 0.68, peach: 0, gold: 0, orange: 1, size: 3.0 },
-    { p: 0.76, peach: 1, gold: 0, orange: 0, size: 3.0 },
+    { p: 0.13, peach: 0, gold: 1, orange: 0, size: 2.5 },   // sunrise (soft gold)
+    { p: 0.20, peach: 0, gold: 0, orange: 1, size: 2.9 },   // daybreak (fire ball, orange sky)
+    { p: 0.28, peach: 0, gold: 1, orange: 0, size: 2.7 },   // morning gold
+    { p: 0.44, peach: 0, gold: 1, orange: 0, size: 2.3 },   // midday
+    { p: 0.53, peach: 0, gold: 1, orange: 0, size: 2.5 },   // afternoon
+    { p: 0.61, peach: 0, gold: 1, orange: 0, size: 2.6 },   // evening gold
+    { p: 0.66, peach: 0, gold: 0, orange: 1, size: 2.6 },   // sundown (fire ball, orange sky)
+    { p: 0.73, peach: 0, gold: 0, orange: 1, size: 2.7 },   // orange holds through the orange sky
+    { p: 0.78, peach: 0, gold: 1, orange: 0, size: 2.5 },   // dusk (soft gold)
   ]
-  // Moon face (waning silver ↔ waxing cream) + size.
+  // Moon face (silver waning ↔ cream waxing) + size. The face swaps mid-day
+  // while the moon is washed out and invisible.
   const MOON = [
     { p: 0, waning: 1, waxing: 0, size: 1.0 },
     { p: 0.30, waning: 1, waxing: 0, size: 1.0 },
-    { p: 0.5, waning: 0, waxing: 0, size: 0.83 },
+    { p: 0.5, waning: 0, waxing: 0, size: 0.82 },
     { p: 0.76, waning: 0, waxing: 1, size: 0.66 },
     { p: 1, waning: 0, waxing: 1, size: 0.66 },
   ]
+
+  // The range palette per phase — snow/alpenglow + the three depth bodies +
+  // haze. It CATCHES THE ORANGE at daybreak (0.20) and sundown (0.68).
+  const RANGE = [
+    { p: 0.00, a: '#cdd8ee', s: '#46527d', f: '#2a3560', m: '#1a2348', n: '#0d1330', h: '#4a5285' }, // pre-dawn moonlit
+    { p: 0.13, a: '#ffd08a', s: '#7d6a92', f: '#5a4f80', m: '#382a50', n: '#1b1533', h: '#a06a88' }, // sunrise rose-gold
+    { p: 0.20, a: '#ffb15a', s: '#b5613a', f: '#9c4a2a', m: '#6e341f', n: '#46220f', h: '#d9631a' }, // daybreak ORANGE
+    { p: 0.30, a: '#ffe9c2', s: '#b09ab8', f: '#c3b2cc', m: '#a390b0', n: '#71618c', h: '#f4e4d0' }, // morning-gold
+    { p: 0.44, a: '#fff6e8', s: '#a9bcd9', f: '#d4dce9', m: '#9fb0cc', n: '#6b7da3', h: '#eef2f8' }, // midday pale
+    { p: 0.60, a: '#ffe4b0', s: '#b09ab0', f: '#cbb0c0', m: '#a68ca8', n: '#75608a', h: '#f2ddc4' }, // evening-gold
+    { p: 0.68, a: '#ff9d4a', s: '#a8552f', f: '#8f4325', m: '#642f1c', n: '#3f1f0e', h: '#c85416' }, // sundown ORANGE
+    { p: 0.74, a: '#ff9d4a', s: '#a8552f', f: '#8f4325', m: '#642f1c', n: '#3f1f0e', h: '#c85416' }, // hold orange through the orange sky
+    { p: 0.82, a: '#efc4d3', s: '#8f86b0', f: '#8a82b0', m: '#6b6494', n: '#4a4470', h: '#b7a8cc' }, // dusk lilac
+    { p: 0.90, a: '#b3bcdd', s: '#5a6690', f: '#2f4171', m: '#1c2b54', n: '#0d2354', h: '#46527f' }, // post-dusk navy-silver
+    { p: 1.00, a: '#b3bcdd', s: '#5a6690', f: '#2f4171', m: '#1c2b54', n: '#0d2354', h: '#46527f' },
+  ]
+  const RVARS = { a: '--alpenglow', s: '--snow-shade', f: '--range-far', m: '--range-mid', n: '--range-near', h: '--haze' }
+  function paintRange(p) {
+    let a = RANGE[0], b = RANGE[RANGE.length - 1]
+    for (let i = 0; i < RANGE.length - 1; i++) if (p >= RANGE[i].p && p <= RANGE[i + 1].p) { a = RANGE[i]; b = RANGE[i + 1]; break }
+    const t = clamp01((p - a.p) / ((b.p - a.p) || 1))
+    for (const k in RVARS) range.style.setProperty(RVARS[k], hexLerp(a[k], b[k], t))
+  }
 
   function render(p) {
     // Sky: later layers stack above earlier — fading each IN cross-fades
@@ -99,45 +123,51 @@
     AT.forEach((a, i) => { if (p >= a) cur = i })
     phaseOut.textContent = PHASES[cur].replace('-', ' ')
 
-    // Range palette lerp across keyframes
-    let ai = 0
-    for (let i = 0; i < PALETTE_AT.length - 1; i++) if (p >= PALETTE_AT[i]) ai = i
-    const t = clamp01((p - PALETTE_AT[ai]) / (PALETTE_AT[ai + 1] - PALETTE_AT[ai] || 1))
-    for (const [k, v] of Object.entries(VARS)) range.style.setProperty(v, hexLerp(PALETTE[ai][k], PALETTE[Math.min(ai + 1, 4)][k], t))
-    const dayIn = clamp01((p - 0.3) / FADE), dayOut = clamp01((p - 0.72) / FADE)
-    range.style.opacity = 1 - 0.84 * dayIn * (1 - dayOut)
+    // Range: catches the phase light, and HAZES away through the bright
+    // middle — symmetric, so sunrise fades the peaks just like sunset does;
+    // near-invisible at midday.
+    paintRange(p)
+    // Opaque at the warm ends so the sun sets BEHIND the peaks (never
+    // through them); hazes away only around the bright middle, near-
+    // invisible at midday.
+    const fadeMid = clamp01(1 - Math.abs(p - 0.44) / 0.20)
+    range.style.opacity = 1 - 0.85 * fadeMid
 
     const vw = innerWidth / 100, vh = innerHeight / 100
 
-    // Sun: visible sunrise→dusk, arcing right→over→left, recolouring + resizing
+    // Sun: rises right → over → sets left; recolours + resizes; scale is
+    // INSIDE the transform so translate stays unscaled.
     const sunVis = clamp01((p - 0.11) / 0.03) * clamp01((0.79 - p) / 0.03)
     const st = clamp01((p - 0.13) / (0.76 - 0.13))
-    sun.style.transform = 'translate(' + (84 - 70 * st) * vw + 'px,' + (100 - 92 * Math.sin(Math.PI * st)) * vh + 'px)'
-    sun.style.opacity = sunVis
     const s = sample(SUN, p, ['peach', 'gold', 'orange', 'size'])
+    sun.style.transform = 'translate(' + (84 - 70 * st) * vw + 'px,' + (100 - 92 * Math.sin(Math.PI * st)) * vh + 'px) scale(' + s.size + ')'
+    sun.style.opacity = sunVis
     sunD.peach.style.opacity = s.peach
     sunD.gold.style.opacity = s.gold
     sunD.orange.style.opacity = s.orange
-    sun.style.scale = String(s.size)
 
-    // Moon: morning waning sets down-LEFT as the sun rises; evening waxing
-    // rises on the RIGHT — both briefly on screen at the handovers.
-    let mx, my, mvis
-    if (p < 0.42) {
-      const ms = clamp01(p / 0.16)
-      mx = 72 - 56 * ms; my = 16 + 86 * ms
-      mvis = clamp01((0.17 - p) / 0.05)
-    } else {
-      const ms = clamp01((p - 0.70) / 0.2)
-      mx = 80 - 6 * ms; my = 92 - 62 * ms
-      mvis = clamp01((p - 0.70) / 0.05)
-    }
-    moon.style.transform = 'translate(' + mx * vw + 'px,' + my * vh + 'px)'
-    moon.style.opacity = mvis
+    // Moon: it NEVER sets. It stays high, drifts across the sky and its
+    // crescent slowly turns; the sun's light simply washes it out at dawn
+    // (a brief FLARE, then fade) and it returns at dusk the same way.
+    const morning = p < 0.5
+    const dawnFade = clamp01((p - 0.09) / 0.13)   // 0 dark → 1 washed out
+    const duskFade = clamp01((p - 0.63) / 0.13)   // 0 → 1 as it returns
+    const baseVis = morning ? 1 - dawnFade : duskFade
+    const flareC = morning ? 0.13 : 0.72
+    const flare = Math.exp(-Math.pow((p - flareC) / 0.045, 2)) * 0.3
+    // The moon follows an ARC and always travels LEFT (like the sun, but
+    // shifted right and it fades instead of setting). It RISES from the
+    // lower-right and peaks at the top centre-right (dusk); it SETS by
+    // travelling on toward the left and fading away (dawn). Peak = (56,14).
+    let mx, my, rot
+    if (morning) { const d = clamp01(p / 0.24); mx = 56 - 16 * d; my = 14 + 14 * d; rot = 2 + 12 * d }   // sets: peak → left + fade
+    else { const d = clamp01((p - 0.62) / 0.38); mx = 80 - 24 * d; my = 52 - 38 * d; rot = -10 + 12 * d }  // rises: lower-right → peak
     const m = sample(MOON, p, ['waning', 'waxing', 'size'])
+    moon.style.transform = 'translate(' + mx * vw + 'px,' + my * vh + 'px) rotate(' + rot + 'deg) scale(' + m.size + ')'
+    moon.style.opacity = clamp01(baseVis + flare)
+    moon.style.filter = 'brightness(' + (1 + flare) + ')'
     moonD.waning.style.opacity = m.waning
     moonD.waxing.style.opacity = m.waxing
-    moon.style.scale = String(m.size)
   }
 
   const scrub = document.getElementById('scrub')

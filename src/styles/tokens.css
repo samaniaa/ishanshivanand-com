@@ -60,7 +60,10 @@
     --c-seal-light: #f1dc83;
     --c-seal-bright: #fff5a8;
 
-    /* ---- Locked gradients (135°) ----------------------------------- */
+    /* ---- Locked gradients (135°) -----------------------------------
+       --grad-dark is the dark UI-chrome surface (footer, drawer menu) —
+       solid brand navy. The SKY's dark is never black: it comes from the
+       Sky Scale (--sky-post-dusk), not from here. */
     --grad-light: linear-gradient(135deg, #ffffff, #fffdf9, #fff8f5);
     --grad-dark: linear-gradient(135deg, #0d2354, #071938, #05152d);
     --grad-gold: linear-gradient(135deg, #f9ac46, #f59700, #e2513c);

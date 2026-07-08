@@ -37,11 +37,13 @@ function computePhasePositions() {
   return positions
 }
 
-/* Two travelers, one circle. The moon arcs down-LEFT and sets behind
-   the range as the sun rises from behind the range on the RIGHT; the
-   sun arcs over the day and sets LEFT as night lands, and the moon
-   returns from the right. Every segment is monotonic in x and y: no
-   bounce, no hovering. x in vw, y in vh, o = opacity. */
+/* Two travellers. The SUN rises from behind the range on the RIGHT, arcs
+   over the day, and sets behind the range on the LEFT as night lands. The
+   MOON never sets: it lives on the RIGHT (text goes left) and follows a
+   shallow arc peaking at the top centre-right — the daylight simply washes
+   it out at dawn (drifting left as it fades) and it fades back in at dusk,
+   rising from the lower-right. It never dips to the horizon. x in vw, y in
+   vh, o = opacity. */
 function buildLightPaths(at) {
   const sunriseAt = at.sunrise ?? 0.08
   const sunriseEnd = (at.morning ?? 0.2) + FADE
@@ -56,15 +58,13 @@ function buildLightPaths(at) {
 
   return {
     moon: [
-      { p: 0, x: 72, y: 16, o: 1 },
-      { p: sunriseAt, x: 58, y: 34, o: 1 },
-      { p: crossover, x: 36, y: 62, o: 1 },
-      { p: sunriseEnd, x: 16, y: 96, o: 1 },
-      { p: Math.min(sunriseEnd + 0.02, nightAt - 0.02), x: 15, y: 102, o: 0 },
-      { p: nightAt, x: 82, y: 92, o: 0 },
-      { p: Math.min(nightAt + 0.02, 0.99), x: 80, y: 84, o: 1 },
-      { p: nightEnd, x: 74, y: 34, o: 1 },
-      { p: 1, x: 72, y: 18, o: 1 },
+      { p: 0, x: 56, y: 14, o: 1 },                                 // pre-dawn: peak, top centre-right, bright
+      { p: sunriseAt, x: 50, y: 18, o: 0.85 },                      // washing out, drifting left
+      { p: sunriseEnd, x: 42, y: 26, o: 0 },                        // faded into daylight (stays HIGH — never sets)
+      { p: at.golden ?? 0.58, x: 42, y: 26, o: 0 },                 // gone through the bright middle
+      { p: duskAt, x: 80, y: 50, o: 0 },                            // evening: reappears low on the RIGHT
+      { p: nightAt, x: 62, y: 24, o: 1 },                           // rising toward the peak
+      { p: 1, x: 56, y: 14, o: 1 },                                 // night: at the peak
     ],
     sun: [
       { p: 0, x: 84, y: 102, o: 0 },
@@ -154,23 +154,22 @@ const RANGE_VAR_NAMES = {
   haze: '--haze',
 }
 
-/* The sun's disc colour + size along its arc (tokens-sun.css). Colours
-   cross-fade between three stacked discs; size is a scale on the sun
-   container. On the homepage's 7-phase slice the disc is soft-peach at
-   the horizon bookends (sunrise / dusk) and warm-gold through the day,
-   largest at the horizon and smallest at midday. The orange fire disc is
-   reserved for daybreak / sundown, which the homepage has no section for. */
-const SUN_SIZES = { small: 1.9, medium: 2.4, large: 3.0 }
+/* The sun's disc colour + size along its arc (tokens-sun.css). The
+   homepage's 7-phase slice has no fire phase, so the sun is warm-gold
+   throughout (the book-page day disc: soft halo, no ring); largest at the
+   horizon bookends, smallest at midday. The orange fire disc is reserved
+   for daybreak / sundown, which the homepage has no section for. */
+const SUN_SIZES = { small: 2.3, medium: 2.5, large: 2.7 }
 const SUN_FIELDS = ['peach', 'gold', 'orange', 'scale']
 
 function buildSunLook(at) {
   const S = SUN_SIZES
   return [
-    { p: at.sunrise ?? 0.08, peach: 1, gold: 0, orange: 0, scale: S.large },
+    { p: at.sunrise ?? 0.08, peach: 0, gold: 1, orange: 0, scale: S.large },
     { p: at.morning ?? 0.2, peach: 0, gold: 1, orange: 0, scale: S.medium },
     { p: at.midday ?? 0.35, peach: 0, gold: 1, orange: 0, scale: S.small },
     { p: at.golden ?? 0.58, peach: 0, gold: 1, orange: 0, scale: S.medium },
-    { p: at.dusk ?? 0.72, peach: 1, gold: 0, orange: 0, scale: S.large },
+    { p: at.dusk ?? 0.72, peach: 0, gold: 1, orange: 0, scale: S.large },
   ]
 }
 
@@ -256,7 +255,11 @@ export function init() {
     if (sunDiscs.peach) sunDiscs.peach.style.opacity = s.peach
     if (sunDiscs.gold) sunDiscs.gold.style.opacity = s.gold
     if (sunDiscs.orange) sunDiscs.orange.style.opacity = s.orange
-    sunEl.style.scale = String(s.scale)
+    // Fold size into the transform (gsap merges with the x/y from
+    // applyLight → `translate(x,y) scale(s)`). NOT the CSS `scale`
+    // property, which sits outside `transform` and would scale the
+    // translate distance, flinging the disc off-position.
+    gsap.set(sunEl, { scale: s.scale })
   }
 
   // The moon's face (waning silver ↔ waxing cream cross-fade) and its size.
@@ -265,7 +268,7 @@ export function init() {
     const m = sampleMoonLook(look, p)
     if (moonDiscs.waning) moonDiscs.waning.style.opacity = m.waning
     if (moonDiscs.waxing) moonDiscs.waxing.style.opacity = m.waxing
-    moonEl.style.scale = String(m.scale)
+    gsap.set(moonEl, { scale: m.scale })
   }
 
   const applyRangePalette = (pal) => {
