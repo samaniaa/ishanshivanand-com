@@ -19,72 +19,53 @@
     will-change: opacity;
   }
 
-  /* Pre-dawn: deep indigo through lilac, dark enough for the moon */
+  /* Every layer's gradient comes from the canonical Sky Scale
+     (tokens-sky.css) so the site and the design-system cards read from
+     one source. All 13 phases are defined here; the homepage's DOM uses
+     a 7-phase slice (predawn, sunrise, morning, midday, golden→evening
+     gold, dusk, night→post-dusk) — its legacy 'golden' and 'night' keys
+     are aliased to their canonical tokens. */
   .day-sky__layer[data-sky='predawn'] {
-    opacity: 1;
-    background: linear-gradient(
-      180deg,
-      #071938 0%,
-      #0d2354 32%,
-      #2c2f63 58%,
-      #59486e 80%,
-      #8a5f63 93%,
-      #b06a4e 100%
-    );
+    opacity: 1; /* the base layer, always lit under the cross-fades */
+    background: var(--sky-predawn);
   }
-
-  /* Sunrise: navy through the blue hour, then violet-pink into the
-     warm band (from Aarti's dawn photographs) */
+  .day-sky__layer[data-sky='blue-hour'] {
+    background: var(--sky-blue-hour);
+  }
   .day-sky__layer[data-sky='sunrise'] {
-    background: linear-gradient(
-      180deg,
-      #12234f 0%,
-      #3f5388 24%,
-      #8b9cc8 46%,
-      #c9a8bd 64%,
-      #e8a97e 84%,
-      #f8dca8 100%
-    );
+    background: var(--sky-sunrise);
   }
-
-  /* Morning: pale warmth */
+  .day-sky__layer[data-sky='daybreak'] {
+    background: var(--sky-daybreak);
+  }
+  .day-sky__layer[data-sky='morning-gold'] {
+    background: var(--sky-morning-gold);
+  }
   .day-sky__layer[data-sky='morning'] {
-    background: linear-gradient(180deg, #fdf4e3 0%, #fdf8ec 55%, #fffdf6 100%);
+    background: var(--sky-morning);
   }
-
-  /* Midday: her light gradient, near-white */
   .day-sky__layer[data-sky='midday'] {
-    background: linear-gradient(180deg, #ffffff 0%, #fffdf9 55%, #fff8f5 100%);
+    background: var(--sky-midday);
   }
-
-  /* Golden hour: amber gathering */
+  .day-sky__layer[data-sky='afternoon'] {
+    background: var(--sky-afternoon);
+  }
+  .day-sky__layer[data-sky='evening-gold'],
   .day-sky__layer[data-sky='golden'] {
-    background: linear-gradient(180deg, #fdfaf1 0%, #fbecc9 42%, #f5cd8d 74%, #eda45f 100%);
+    background: var(--sky-evening-gold);
   }
-
-  /* Dusk: a soft blue evening with the pink band low on the horizon
-     (from Aarti's dusk photographs); navy ink stays readable */
+  .day-sky__layer[data-sky='sundown'] {
+    background: var(--sky-sundown);
+  }
   .day-sky__layer[data-sky='dusk'] {
-    background: linear-gradient(
-      180deg,
-      #6f7fb5 0%,
-      #9d9ac8 42%,
-      #c9aac4 66%,
-      #ecc0a8 86%,
-      #e3a05e 100%
-    );
+    background: var(--sky-dusk);
   }
-
-  /* Night: deep navy, faint lilac breath at the horizon */
+  .day-sky__layer[data-sky='twilight'] {
+    background: var(--sky-twilight);
+  }
+  .day-sky__layer[data-sky='post-dusk'],
   .day-sky__layer[data-sky='night'] {
-    background: linear-gradient(
-      180deg,
-      #05152d 0%,
-      #071938 42%,
-      #0d2354 72%,
-      #3a3260 92%,
-      #4c3a5e 100%
-    );
+    background: var(--sky-post-dusk);
   }
 
   /* ---- Stars: bright core + soft halo pairs, only in dark phases ----- */

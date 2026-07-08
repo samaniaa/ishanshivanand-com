@@ -1,12 +1,29 @@
 <!-- @dsCard group="Sky & Motion" -->
-<h1>Sky &amp; Motion · the seven skies</h1>
-<div style="display:grid; gap:0.9rem">
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="predawn" style="opacity:1"></div><div class="day-sky__stars" style="opacity:1"></div></div><code>predawn</code></div>
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="sunrise" style="opacity:1"></div></div><code>sunrise</code></div>
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="morning" style="opacity:1"></div></div><code>morning</code></div>
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="midday" style="opacity:1"></div></div><code>midday</code></div>
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="golden" style="opacity:1"></div></div><code>golden</code></div>
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="dusk" style="opacity:1"></div></div><code>dusk</code></div>
-  <div><div style="position:relative;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="night" style="opacity:1"></div><div class="day-sky__stars" style="opacity:1"></div></div><code>night</code></div>
+<h1>Sky &amp; Motion · the sky scale</h1>
+<p class="ds-note" style="margin-top:0">Thirteen phases, one continuous day, <strong>symmetric around midday</strong>. These strips render the real <code>--sky-*</code> gradient tokens (<code>tokens-sky.css</code>) — the single source of truth for the site and these cards. Stars breathe only in the dark phases; ink flips over empty sky, never over text.</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:0.7rem; margin-top:1rem">
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="predawn" style="opacity:1"></div><div class="day-sky__stars" style="opacity:1"></div></div><code>pre-dawn</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="blue-hour" style="opacity:1"></div><div class="day-sky__stars" style="opacity:0.5"></div></div><code>blue hour</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="sunrise" style="opacity:1"></div></div><code>sunrise</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="daybreak" style="opacity:1"></div></div><code>daybreak</code> <span style="color:var(--ink-faint);font-size:0.7rem">· fire</span></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="morning-gold" style="opacity:1"></div></div><code>morning gold</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="morning" style="opacity:1"></div></div><code>morning</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:2px solid var(--accent)"><div class="day-sky__layer" data-sky="midday" style="opacity:1"></div></div><code>midday</code> <span style="color:var(--ink-faint);font-size:0.7rem">· apex</span></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="afternoon" style="opacity:1"></div></div><code>afternoon</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="evening-gold" style="opacity:1"></div></div><code>evening gold</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="sundown" style="opacity:1"></div></div><code>sundown</code> <span style="color:var(--ink-faint);font-size:0.7rem">· fire</span></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="dusk" style="opacity:1"></div></div><code>dusk</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="twilight" style="opacity:1"></div><div class="day-sky__stars" style="opacity:0.5"></div></div><code>twilight</code></div>
+  <div><div style="position:relative;height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft)"><div class="day-sky__layer" data-sky="post-dusk" style="opacity:1"></div><div class="day-sky__stars" style="opacity:1"></div></div><code>post-dusk</code></div>
 </div>
-<p class="ds-note">One continuous day behind the whole page, scrubbed by scroll. These strips render the REAL <code>.day-sky__layer</code> gradients (predawn → night). Stars breathe only in the dark phases. Ink flips over empty sky, never over text.</p>
+
+<table class="ds-table" style="margin-top:1.5rem">
+<tbody>
+<tr><td><strong>Never black</strong></td><td>The day is bookended by light — warm blush at pre-dawn, silvery afterglow at post-dusk. Always a sign of light.</td></tr>
+<tr><td><strong>Blue &amp; blush</strong></td><td>Blue carries the day; blush edges every transition — the signature of a rising and setting sun.</td></tr>
+<tr><td><strong>Brand navy crown</strong></td><td>The dark phases crown in <code>--c-dark-anchor</code>/<code>--c-dark-lift</code> so the light story stays cohesive with the brand.</td></tr>
+<tr><td><strong>Fire = orange ball</strong></td><td>At <code>daybreak</code> and <code>sundown</code> the sky is ablaze and the sun is an orange disc on the horizon (white overhead at midday).</td></tr>
+<tr><td><strong>Symmetry</strong></td><td>Each morning phase mirrors an evening twin around midday: pre-dawn↔post-dusk, blue hour↔twilight, sunrise↔dusk, daybreak↔sundown, morning gold↔evening gold, morning↔afternoon.</td></tr>
+</tbody>
+</table>

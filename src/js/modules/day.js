@@ -98,7 +98,9 @@ function buildRangePalette(at) {
     { p: sunriseMid, alpenglow: '#ffd489', snowShade: '#7d6a92', far: '#5a4f80', mid: '#382a50', near: '#1b1533', haze: '#a06a88' },
     { p: morningIn, alpenglow: '#fff3dc', snowShade: '#9db3d8', far: '#c9d4e8', mid: '#93a5c8', near: '#5e7099', haze: '#e8eef8' },
     { p: duskIn, alpenglow: '#efc4d3', snowShade: '#8f86b0', far: '#8a82b0', mid: '#6b6494', near: '#4a4470', haze: '#b7a8cc' },
-    { p: nightIn, alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' },
+    // Post-dusk: brand-navy range catching the silver-blue afterglow —
+    // lifted off near-black so the close keeps a sign of light (Sky Law 1).
+    { p: nightIn, alpenglow: '#b3bcdd', snowShade: '#5a6690', far: '#2f4171', mid: '#1c2b54', near: '#0d2354', haze: '#46527f' },
   ]
 }
 
@@ -313,7 +315,7 @@ export function init() {
       midday: { visible: 'haze', pal: { alpenglow: '#fff6e8', snowShade: '#a9bcd9', far: '#d4dce9', mid: '#9fb0cc', near: '#6b7da3', haze: '#eef2f8' } },
       golden: { visible: 'haze', pal: { alpenglow: '#ffe9c2', snowShade: '#b09ab8', far: '#c3b2cc', mid: '#a390b0', near: '#71618c', haze: '#f4e4d0' } },
       dusk: { visible: true, pal: { alpenglow: '#efc4d3', snowShade: '#8f86b0', far: '#8a82b0', mid: '#6b6494', near: '#4a4470', haze: '#b7a8cc' } },
-      night: { visible: true, pal: { alpenglow: '#bfcbe8', snowShade: '#3a4468', far: '#232c55', mid: '#151d40', near: '#090e26', haze: '#3a4067' } },
+      night: { visible: true, pal: { alpenglow: '#b3bcdd', snowShade: '#5a6690', far: '#2f4171', mid: '#1c2b54', near: '#0d2354', haze: '#46527f' } },
     }
 
     const chapters = document.querySelectorAll('[data-sky-phase]')
