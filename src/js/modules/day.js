@@ -154,12 +154,89 @@ const RANGE_VAR_NAMES = {
   haze: '--haze',
 }
 
+/* The sun's disc colour + size along its arc (tokens-sun.css). Colours
+   cross-fade between three stacked discs; size is a scale on the sun
+   container. On the homepage's 7-phase slice the disc is soft-peach at
+   the horizon bookends (sunrise / dusk) and warm-gold through the day,
+   largest at the horizon and smallest at midday. The orange fire disc is
+   reserved for daybreak / sundown, which the homepage has no section for. */
+const SUN_SIZES = { small: 1.9, medium: 2.4, large: 3.0 }
+const SUN_FIELDS = ['peach', 'gold', 'orange', 'scale']
+
+function buildSunLook(at) {
+  const S = SUN_SIZES
+  return [
+    { p: at.sunrise ?? 0.08, peach: 1, gold: 0, orange: 0, scale: S.large },
+    { p: at.morning ?? 0.2, peach: 0, gold: 1, orange: 0, scale: S.medium },
+    { p: at.midday ?? 0.35, peach: 0, gold: 1, orange: 0, scale: S.small },
+    { p: at.golden ?? 0.58, peach: 0, gold: 1, orange: 0, scale: S.medium },
+    { p: at.dusk ?? 0.72, peach: 1, gold: 0, orange: 0, scale: S.large },
+  ]
+}
+
+/* The moon's face + size along its arc (tokens-moon.css). Two crescents
+   cross-fade: the SILVER waning hero at the pre-dawn open, the CREAM
+   waxing companion at the post-dusk close. The swap happens through the
+   day, while the moon is below the horizon (container opacity 0), so it is
+   never seen popping between faces. Full size in the morning, ~65% at the
+   close. */
+const MOON_SIZES = { large: 1.0, small: 0.66 }
+const MOON_FIELDS = ['waning', 'waxing', 'scale']
+
+function buildMoonLook(at) {
+  const { large: L, small: S } = MOON_SIZES
+  return [
+    { p: 0, waning: 1, waxing: 0, scale: L },
+    { p: at.morning ?? 0.2, waning: 1, waxing: 0, scale: L },
+    { p: at.midday ?? 0.35, waning: 0, waxing: 0, scale: (L + S) / 2 },
+    { p: at.dusk ?? 0.72, waning: 0, waxing: 1, scale: S },
+    { p: 1, waning: 0, waxing: 1, scale: S },
+  ]
+}
+
+function sampleLook(look, p, fields) {
+  let a = look[0]
+  let b = look[look.length - 1]
+  for (let i = 0; i < look.length - 1; i++) {
+    if (p >= look[i].p && p <= look[i + 1].p) {
+      a = look[i]
+      b = look[i + 1]
+      break
+    }
+  }
+  if (p < look[0].p) b = a
+  if (p > look[look.length - 1].p) a = b
+  const span = b.p - a.p || 1
+  const t = gsap.utils.clamp(0, 1, (p - a.p) / span)
+  const out = {}
+  fields.forEach((k) => (out[k] = a[k] + (b[k] - a[k]) * t))
+  return out
+}
+
+function sampleSunLook(look, p) {
+  return sampleLook(look, p, SUN_FIELDS)
+}
+
+function sampleMoonLook(look, p) {
+  return sampleLook(look, p, MOON_FIELDS)
+}
+
 export function init() {
   const sky = document.querySelector('.day-sky')
   const moonEl = document.querySelector('.celestial--moon')
   const sunEl = document.querySelector('.celestial--sun')
   const range = document.querySelector('.day-range')
   if (!sky) return
+
+  const sunDiscs = {
+    peach: sunEl?.querySelector("[data-sun='soft-peach']"),
+    gold: sunEl?.querySelector("[data-sun='warm-gold']"),
+    orange: sunEl?.querySelector("[data-sun='orange']"),
+  }
+  const moonDiscs = {
+    waning: moonEl?.querySelector("[data-moon='waning']"),
+    waxing: moonEl?.querySelector("[data-moon='waxing']"),
+  }
 
   const applyLight = (paths, p) => {
     if (!moonEl || !sunEl) return
@@ -169,6 +246,26 @@ export function init() {
     const sp = sampleLightPath(paths.sun, p)
     gsap.set(moonEl, { x: (mp.x / 100) * w, y: (mp.y / 100) * h, opacity: mp.o })
     gsap.set(sunEl, { x: (sp.x / 100) * w, y: (sp.y / 100) * h, opacity: sp.o })
+  }
+
+  // The sun's disc colour (cross-fade of the three stacked discs) and its
+  // size (a scale on the container) as it climbs and sets.
+  const applySun = (look, p) => {
+    if (!sunEl) return
+    const s = sampleSunLook(look, p)
+    if (sunDiscs.peach) sunDiscs.peach.style.opacity = s.peach
+    if (sunDiscs.gold) sunDiscs.gold.style.opacity = s.gold
+    if (sunDiscs.orange) sunDiscs.orange.style.opacity = s.orange
+    sunEl.style.scale = String(s.scale)
+  }
+
+  // The moon's face (waning silver ↔ waxing cream cross-fade) and its size.
+  const applyMoon = (look, p) => {
+    if (!moonEl) return
+    const m = sampleMoonLook(look, p)
+    if (moonDiscs.waning) moonDiscs.waning.style.opacity = m.waning
+    if (moonDiscs.waxing) moonDiscs.waxing.style.opacity = m.waxing
+    moonEl.style.scale = String(m.scale)
   }
 
   const applyRangePalette = (pal) => {
@@ -189,6 +286,8 @@ export function init() {
     let inkToDark = 0.75
     let lightPaths = buildLightPaths({})
     let rangePalette = buildRangePalette({})
+    let sunLook = buildSunLook({})
+    let moonLook = buildMoonLook({})
 
     const setPhase = (p) => {
       const dark = p < inkToDay || p >= inkToDark
@@ -217,6 +316,8 @@ export function init() {
       inkToDark = (at.night ?? 0.86) + FADE
       lightPaths = buildLightPaths(at)
       rangePalette = buildRangePalette(at)
+      sunLook = buildSunLook(at)
+      moonLook = buildMoonLook(at)
 
       tl = gsap.timeline({
         defaults: { ease: 'none' },
@@ -229,6 +330,8 @@ export function init() {
             setPhase(self.progress)
             applyRangePalette(sampleRangePalette(rangePalette, self.progress))
             applyLight(lightPaths, self.progress)
+            applySun(sunLook, self.progress)
+            applyMoon(moonLook, self.progress)
           },
         },
       })
@@ -279,6 +382,8 @@ export function init() {
       setPhase(p)
       applyRangePalette(sampleRangePalette(rangePalette, p))
       applyLight(lightPaths, p)
+      applySun(sunLook, p)
+      applyMoon(moonLook, p)
     }
 
     // Build after layout settles (fonts can reflow chapter positions),

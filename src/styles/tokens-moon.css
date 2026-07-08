@@ -1,0 +1,33 @@
+@layer tokens {
+  /* =====================================================================
+     MOON DISC STATES — the travelling moon's crescent, per the Sky Scale.
+
+     A thin crescent whose glow follows the crescent shape (a drop-shadow
+     on the masked disc — the mask hides only the bite, so the glow bleeds
+     around the lit sliver). Two tints and two mirrored orientations:
+
+       waning  — pre-dawn / blue hour: cool SILVER, lit on the lower-RIGHT
+                 toward the rising sun. The hero moon that opens the day,
+                 full size + full glow.
+       waxing  — twilight / post-dusk: warm CREAM, lit on the lower-LEFT
+                 toward the set sun. The quiet companion that closes the
+                 day, ~65% size + a capped glow.
+
+     The lit side always faces the sun, so the morning and evening moons
+     mirror each other around the day. Size (scale) is set in day.js. The
+     moon cross-fades with the sun at the dawn and dusk transitions — both
+     are briefly on screen together, never a hard appear/disappear.
+     ===================================================================== */
+  :root {
+    --moon-silver: radial-gradient(circle, #fbf9f1 0%, #e4decd 72%, transparent 73%);
+    --moon-cream: radial-gradient(circle, #f6efdc 0%, #e0d3b0 72%, transparent 73%);
+
+    /* Orientation masks: the transparent circle is the bite; the crescent
+       is the lit sliver on the opposite side. */
+    --moon-mask-waning: radial-gradient(circle at 33% 33%, transparent 57%, #000 59%);
+    --moon-mask-waxing: radial-gradient(circle at 67% 33%, transparent 57%, #000 59%);
+
+    --moon-glow-silver: drop-shadow(0 0 20px rgb(238 242 255 / 0.5));
+    --moon-glow-cream: drop-shadow(0 0 13px rgb(246 239 220 / 0.34));
+  }
+}

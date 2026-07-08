@@ -130,27 +130,60 @@
 
   .celestial--sun {
     opacity: 0;
+    /* Static default size. day.js overrides `scale` inline per phase
+       (small midday → large horizon); the `scale` property composes with
+       the gsap translate on `transform` without conflict. */
+    scale: 2.4;
   }
 
-  /* Crescent: a light disc with a shadow disc biting into it */
+  /* Static default size; day.js overrides `scale` inline per phase (full
+     hero at pre-dawn → quiet ~65% companion at the close). */
+  .celestial--moon {
+    scale: 1;
+  }
+
+  /* Two stacked crescents (tokens-moon.css); day.js cross-fades their
+     opacity so the moon shows its waning face in the morning and its
+     waxing face in the evening — lit side always toward the sun. A single
+     .celestial__moon with no data-moon (the design-system card) shows the
+     waning hero moon by default. */
   .celestial__moon {
-    background: radial-gradient(circle, #f6f2e4 0%, #e8e2cd 70%, transparent 71%);
-    -webkit-mask-image: radial-gradient(circle at 68% 38%, transparent 52%, black 54%);
-    mask-image: radial-gradient(circle at 68% 38%, transparent 52%, black 54%);
-    filter: drop-shadow(0 0 22px rgb(246 242 228 / 0.45));
+    background: var(--moon-silver);
+    -webkit-mask-image: var(--moon-mask-waning);
+    mask-image: var(--moon-mask-waning);
+    filter: var(--moon-glow-silver);
+  }
+  .celestial__moon[data-moon='waning'] {
+    background: var(--moon-silver);
+    -webkit-mask-image: var(--moon-mask-waning);
+    mask-image: var(--moon-mask-waning);
+    filter: var(--moon-glow-silver);
+  }
+  .celestial__moon[data-moon='waxing'] {
+    background: var(--moon-cream);
+    -webkit-mask-image: var(--moon-mask-waxing);
+    mask-image: var(--moon-mask-waxing);
+    filter: var(--moon-glow-cream);
+    opacity: 0;
   }
 
+  /* The sun is three stacked disc colours (tokens-sun.css); day.js
+     cross-fades their opacity so the disc recolours as it arcs. In a
+     static context (the design-system card, a single .celestial__sun with
+     no data-sun) the warm-gold day sun shows by default. */
   .celestial__sun {
-    background: radial-gradient(
-      circle,
-      #fff7dd 0%,
-      #ffe9ae 32%,
-      rgb(249 172 70 / 0.85) 55%,
-      rgb(242 142 7 / 0.35) 72%,
-      transparent 78%
-    );
-    filter: blur(0.5px);
-    scale: 2.6;
+    background: var(--sun-warm-gold);
+  }
+  .celestial__sun[data-sun='soft-peach'] {
+    background: var(--sun-soft-peach);
+    opacity: 0;
+  }
+  .celestial__sun[data-sun='warm-gold'] {
+    background: var(--sun-warm-gold);
+  }
+  .celestial__sun[data-sun='orange'] {
+    background: var(--sun-orange);
+    opacity: 0;
   }
 
   /* Empty sky between light and dark chapters: the ink flip happens

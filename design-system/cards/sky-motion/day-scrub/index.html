@@ -1,33 +1,47 @@
 <!-- @dsCard group="Sky & Motion" -->
 <div class="day-sky" aria-hidden="true">
   <div class="day-sky__layer" data-sky="predawn"></div>
+  <div class="day-sky__layer" data-sky="blue-hour"></div>
   <div class="day-sky__layer" data-sky="sunrise"></div>
+  <div class="day-sky__layer" data-sky="daybreak"></div>
+  <div class="day-sky__layer" data-sky="morning-gold"></div>
   <div class="day-sky__layer" data-sky="morning"></div>
   <div class="day-sky__layer" data-sky="midday"></div>
-  <div class="day-sky__layer" data-sky="golden"></div>
+  <div class="day-sky__layer" data-sky="afternoon"></div>
+  <div class="day-sky__layer" data-sky="evening-gold"></div>
+  <div class="day-sky__layer" data-sky="sundown"></div>
   <div class="day-sky__layer" data-sky="dusk"></div>
-  <div class="day-sky__layer" data-sky="night"></div>
+  <div class="day-sky__layer" data-sky="twilight"></div>
+  <div class="day-sky__layer" data-sky="post-dusk"></div>
   <div class="day-sky__stars"></div>
 </div>
-<div class="celestial celestial--moon" aria-hidden="true"><div class="celestial__moon"></div></div>
-<div class="celestial celestial--sun" aria-hidden="true"><div class="celestial__sun"></div></div>
+<div class="celestial celestial--moon" aria-hidden="true">
+  <div class="celestial__moon" data-moon="waning"></div>
+  <div class="celestial__moon" data-moon="waxing"></div>
+</div>
+<div class="celestial celestial--sun" aria-hidden="true">
+  <div class="celestial__sun" data-sun="soft-peach"></div>
+  <div class="celestial__sun" data-sun="warm-gold"></div>
+  <div class="celestial__sun" data-sun="orange"></div>
+</div>
 <!-- @include range.html -->
 
 <div style="position:fixed; inset-inline:0; bottom:0; z-index:10; padding:1.1rem clamp(1rem,4vw,2.5rem); background:rgb(7 25 56 / 0.32); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
   <div style="display:flex; gap:1rem; align-items:center">
-    <output id="phase" style="font: 600 0.72rem/1 var(--font-body); letter-spacing:0.12em; text-transform:uppercase; color:#fffcf6; min-width:7ch">predawn</output>
+    <output id="phase" style="font: 600 0.72rem/1 var(--font-body); letter-spacing:0.12em; text-transform:uppercase; color:#fffcf6; min-width:9ch">pre-dawn</output>
     <input id="scrub" type="range" min="0" max="1000" value="0" style="flex:1; accent-color:#f9ac46" aria-label="Scrub the day" />
   </div>
-  <p style="font-size:0.7rem; color:rgb(255 252 246 / 0.75); margin-top:0.45rem">One day, one life — the real sky layers, celestial arcs, and range palette, scrubbed by hand instead of scroll.</p>
+  <p style="font-size:0.7rem; color:rgb(255 252 246 / 0.75); margin-top:0.45rem">One day, thirteen phases — the real sky, sun, and moon, scrubbed by hand. The sun recolours and resizes as it arcs; the moon hands over at dawn and dusk.</p>
 </div>
 
 <script>
   const PALETTE = JSON.parse('<!-- @palette-json -->')
   const PALETTE_AT = [0, 0.16, 0.34, 0.78, 0.92]
   const VARS = { alpenglow: '--alpenglow', snowShade: '--snow-shade', far: '--range-far', mid: '--range-mid', near: '--range-near', haze: '--haze' }
-  const PHASES = ['predawn', 'sunrise', 'morning', 'midday', 'golden', 'dusk', 'night']
-  const AT = [0, 0.12, 0.26, 0.42, 0.58, 0.72, 0.88]
-  const FADE = 0.07
+
+  const PHASES = ['predawn', 'blue-hour', 'sunrise', 'daybreak', 'morning-gold', 'morning', 'midday', 'afternoon', 'evening-gold', 'sundown', 'dusk', 'twilight', 'post-dusk']
+  const AT = [0, 0.06, 0.13, 0.20, 0.28, 0.35, 0.44, 0.53, 0.61, 0.68, 0.76, 0.84, 0.90]
+  const FADE = 0.05
 
   const layers = {}
   document.querySelectorAll('.day-sky__layer').forEach((l) => (layers[l.dataset.sky] = l))
@@ -35,6 +49,8 @@
   const range = document.querySelector('.day-range')
   const sun = document.querySelector('.celestial--sun')
   const moon = document.querySelector('.celestial--moon')
+  const sunD = { peach: sun.querySelector("[data-sun='soft-peach']"), gold: sun.querySelector("[data-sun='warm-gold']"), orange: sun.querySelector("[data-sun='orange']") }
+  const moonD = { waning: moon.querySelector("[data-moon='waning']"), waxing: moon.querySelector("[data-moon='waxing']") }
   const phaseOut = document.getElementById('phase')
 
   const clamp01 = (v) => Math.min(1, Math.max(0, v))
@@ -43,6 +59,34 @@
     const mix = (i) => Math.round(c(a, i) + (c(b, i) - c(a, i)) * t)
     return '#' + [1, 3, 5].map((i) => mix(i).toString(16).padStart(2, '0')).join('')
   }
+  const sample = (kf, p, keys) => {
+    let a = kf[0], b = kf[kf.length - 1]
+    for (let i = 0; i < kf.length - 1; i++) if (p >= kf[i].p && p <= kf[i + 1].p) { a = kf[i]; b = kf[i + 1]; break }
+    if (p < kf[0].p) b = a
+    if (p > kf[kf.length - 1].p) a = b
+    const span = b.p - a.p || 1, t = clamp01((p - a.p) / span), out = {}
+    keys.forEach((k) => (out[k] = a[k] + (b[k] - a[k]) * t))
+    return out
+  }
+
+  // Sun disc colour + size (absolute scale) along the visible arc.
+  const SUN = [
+    { p: 0.13, peach: 1, gold: 0, orange: 0, size: 3.0 },
+    { p: 0.20, peach: 0, gold: 0, orange: 1, size: 3.0 },
+    { p: 0.28, peach: 0, gold: 1, orange: 0, size: 2.4 },
+    { p: 0.44, peach: 0, gold: 1, orange: 0, size: 1.9 },
+    { p: 0.61, peach: 0, gold: 1, orange: 0, size: 2.4 },
+    { p: 0.68, peach: 0, gold: 0, orange: 1, size: 3.0 },
+    { p: 0.76, peach: 1, gold: 0, orange: 0, size: 3.0 },
+  ]
+  // Moon face (waning silver ↔ waxing cream) + size.
+  const MOON = [
+    { p: 0, waning: 1, waxing: 0, size: 1.0 },
+    { p: 0.30, waning: 1, waxing: 0, size: 1.0 },
+    { p: 0.5, waning: 0, waxing: 0, size: 0.83 },
+    { p: 0.76, waning: 0, waxing: 1, size: 0.66 },
+    { p: 1, waning: 0, waxing: 1, size: 0.66 },
+  ]
 
   function render(p) {
     // Sky: later layers stack above earlier — fading each IN cross-fades
@@ -50,30 +94,50 @@
       if (i === 0) return (layers[k].style.opacity = 1)
       layers[k].style.opacity = clamp01((p - AT[i]) / FADE)
     })
-    stars.style.opacity = p < AT[1] ? 1 : p > AT[6] + FADE ? 1 : clamp01(1 - (p - AT[1]) / 0.04) || clamp01((p - AT[6]) / FADE)
-    // Phase label
+    stars.style.opacity = Math.max(clamp01((AT[2] - p) / 0.05), clamp01((p - AT[11]) / 0.05))
     let cur = 0
     AT.forEach((a, i) => { if (p >= a) cur = i })
-    phaseOut.textContent = PHASES[cur]
+    phaseOut.textContent = PHASES[cur].replace('-', ' ')
+
     // Range palette lerp across keyframes
     let ai = 0
     for (let i = 0; i < PALETTE_AT.length - 1; i++) if (p >= PALETTE_AT[i]) ai = i
     const t = clamp01((p - PALETTE_AT[ai]) / (PALETTE_AT[ai + 1] - PALETTE_AT[ai] || 1))
     for (const [k, v] of Object.entries(VARS)) range.style.setProperty(v, hexLerp(PALETTE[ai][k], PALETTE[Math.min(ai + 1, 4)][k], t))
-    // Range: solid at the day's edges, haze through the bright middle
     const dayIn = clamp01((p - 0.3) / FADE), dayOut = clamp01((p - 0.72) / FADE)
     range.style.opacity = 1 - 0.84 * dayIn * (1 - dayOut)
-    // Celestial arcs (simplified monotonic paths)
+
     const vw = innerWidth / 100, vh = innerHeight / 100
-    const st = clamp01((p - 0.08) / 0.78)
+
+    // Sun: visible sunrise→dusk, arcing right→over→left, recolouring + resizing
+    const sunVis = clamp01((p - 0.11) / 0.03) * clamp01((0.79 - p) / 0.03)
+    const st = clamp01((p - 0.13) / (0.76 - 0.13))
     sun.style.transform = 'translate(' + (84 - 70 * st) * vw + 'px,' + (100 - 92 * Math.sin(Math.PI * st)) * vh + 'px)'
-    sun.style.opacity = p < 0.06 ? 0 : p > 0.9 ? clamp01(1 - (p - 0.9) / 0.04) : 1
-    const early = clamp01(p / 0.24), late = clamp01((p - 0.9) / 0.1)
-    const mt = p < 0.5 ? early : late
-    moon.style.transform = p < 0.5
-      ? 'translate(' + (70 - 55 * early) * vw + 'px,' + (16 + 86 * early) * vh + 'px)'
-      : 'translate(' + (80 - 6 * late) * vw + 'px,' + (92 - 60 * late) * vh + 'px)'
-    moon.style.opacity = p < 0.5 ? clamp01(1 - (early - 0.85) / 0.15) : late > 0 ? 1 : 0
+    sun.style.opacity = sunVis
+    const s = sample(SUN, p, ['peach', 'gold', 'orange', 'size'])
+    sunD.peach.style.opacity = s.peach
+    sunD.gold.style.opacity = s.gold
+    sunD.orange.style.opacity = s.orange
+    sun.style.scale = String(s.size)
+
+    // Moon: morning waning sets down-LEFT as the sun rises; evening waxing
+    // rises on the RIGHT — both briefly on screen at the handovers.
+    let mx, my, mvis
+    if (p < 0.42) {
+      const ms = clamp01(p / 0.16)
+      mx = 72 - 56 * ms; my = 16 + 86 * ms
+      mvis = clamp01((0.17 - p) / 0.05)
+    } else {
+      const ms = clamp01((p - 0.70) / 0.2)
+      mx = 80 - 6 * ms; my = 92 - 62 * ms
+      mvis = clamp01((p - 0.70) / 0.05)
+    }
+    moon.style.transform = 'translate(' + mx * vw + 'px,' + my * vh + 'px)'
+    moon.style.opacity = mvis
+    const m = sample(MOON, p, ['waning', 'waxing', 'size'])
+    moonD.waning.style.opacity = m.waning
+    moonD.waxing.style.opacity = m.waxing
+    moon.style.scale = String(m.size)
   }
 
   const scrub = document.getElementById('scrub')

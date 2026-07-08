@@ -1,0 +1,27 @@
+@layer tokens {
+  /* =====================================================================
+     SUN DISC STATES — the travelling sun's disc, per the Sky Scale.
+
+     Three colours along the warm ramp; the disc RECOLOURS and RESIZES as
+     it arcs (driven by modules/day.js). It is NEVER white — a white disc
+     is lost on the blue midday sky, so midday keeps a warm-white core in
+     an amber body (the book page's day sun).
+
+     Each disc is a CRISP DISC: a bright hot core, a solid body, then a
+     smooth bloom that fades fully to transparent — one glowing orb, no
+     concentric rings, and a clean outer edge that blends into the sky.
+
+       warm-gold   — sunrise → midday → dusk (the day sun)
+       soft-peach  — sunrise / dusk (low, soft, still a defined disc)
+       orange      — daybreak / sundown (the fire ball)
+
+     Sizes (a scale on .celestial--sun, set in day.js): small = midday,
+     medium = gold/morning/afternoon, large = at the horizon. The disc
+     grows as it nears the horizon.
+     ===================================================================== */
+  :root {
+    --sun-warm-gold: radial-gradient(circle closest-side, #fffcf2 0%, #ffeeba 40%, #ffd884 62%, rgb(245 192 106 / 0.9) 69%, rgb(238 174 78 / 0.42) 76%, rgb(232 154 52 / 0.14) 85%, rgb(229 145 40 / 0.03) 94%, transparent 100%);
+    --sun-soft-peach: radial-gradient(circle closest-side, #fff6ea 0%, #ffe3c4 40%, #ffca97 62%, rgb(246 176 114 / 0.9) 69%, rgb(236 136 80 / 0.42) 76%, rgb(226 120 90 / 0.14) 85%, rgb(226 120 90 / 0.03) 94%, transparent 100%);
+    --sun-orange: radial-gradient(circle closest-side, #fff3d2 0%, #ffdb92 38%, #ffbe6a 60%, rgb(245 140 52 / 0.92) 70%, rgb(224 110 28 / 0.5) 80%, rgb(200 72 16 / 0.18) 88%, rgb(200 72 16 / 0.03) 95%, transparent 100%);
+  }
+}
