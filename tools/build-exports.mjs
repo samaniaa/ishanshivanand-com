@@ -76,7 +76,7 @@ const S = { small: 54, medium: 78, large: 106 }
 
 // [skyVar, label, sunColour, size, topFrac] — sun climbs then sets
 const SUN_ARC = [
-  ['sunrise', 'sunrise', 'soft-peach', S.large, 0.64],
+  ['sunrise', 'sunrise', 'warm-gold', S.large, 0.64],
   ['daybreak', 'daybreak', 'orange', S.large, 0.64],
   ['morning-gold', 'morning gold', 'warm-gold', S.medium, 0.46],
   ['morning', 'morning', 'warm-gold', S.medium, 0.32],
@@ -84,13 +84,12 @@ const SUN_ARC = [
   ['afternoon', 'afternoon', 'warm-gold', S.medium, 0.32],
   ['evening-gold', 'evening gold', 'warm-gold', S.medium, 0.46],
   ['sundown', 'sundown', 'orange', S.large, 0.64],
-  ['dusk', 'dusk', 'soft-peach', S.large, 0.64],
+  ['dusk', 'dusk', 'warm-gold', S.large, 0.64],
 ]
 
 // [skyVar, label, sub, sunColour]
 const SUN_DISCS = [
   ['midday', 'warm-gold', 'the day sun — never white', 'warm-gold'],
-  ['sunrise', 'soft-peach', 'sunrise / dusk', 'soft-peach'],
   ['daybreak', 'orange', 'the fire ball — daybreak / sundown', 'orange'],
 ]
 
@@ -122,7 +121,7 @@ function buildPages() {
       card(v, w, h, label, '', sun(col, size, 0.5, top))).join('')
     const W = 40 * 2 + SUN_ARC.length * w + (SUN_ARC.length - 1) * 12
     pages.push({ name: 'sun-arc', W, H: 430,
-      html: page(W, 430, 'The sun across the day', 'The disc recolours and resizes as it arcs — soft-peach and orange at the horizon, warm-gold and small at noon. Never white, so it holds on the blue.', cards) })
+      html: page(W, 430, 'The sun across the day', 'The disc recolours and resizes as it arcs — warm-gold most of the day, the orange fire ball at the horizon, small at noon. Never white, so it holds on the blue.', cards) })
   }
 
   // 3 — Sun disc states
@@ -132,7 +131,7 @@ function buildPages() {
       card(v, w, h, label, sub, sun(col, 196, 0.5, 0.46))).join('')
     const W = 40 * 2 + SUN_DISCS.length * w + (SUN_DISCS.length - 1) * 16
     pages.push({ name: 'sun-disc-states', W, H: 470,
-      html: page(W, 470, 'Sun disc states', 'Crisp discs — a bright hot core, a solid body, and a glow that blends to nothing. Three colours: warm-gold, soft-peach, and the orange fire ball.', cards, 'gap:16px') })
+      html: page(W, 470, 'Sun disc states', 'Crisp discs — a bright hot core, a solid body, and a glow that blends to nothing. Two discs: warm-gold for the day, and the orange fire ball at the horizon.', cards, 'gap:16px') })
   }
 
   // 4 — Moon states
@@ -150,7 +149,7 @@ function buildPages() {
     const w = 470, h = 300
     const dawn = card('sunrise', w, h, 'dawn handover',
       'moon setting (left) as the sun rises (right)',
-      moon('silver', 'waning', 78, 0.24, 0.52, 0.6) + sun('soft-peach', S.large, 0.78, 0.62, 0.9))
+      moon('silver', 'waning', 78, 0.24, 0.52, 0.6) + sun('warm-gold', S.large, 0.78, 0.62, 0.9))
     const dusk = card('dusk', w, h, 'dusk handover',
       'sun setting (left) as the moon rises (right)',
       sun('warm-gold', S.medium, 0.22, 0.6, 0.75) + moon('cream', 'waxing', 74, 0.78, 0.5, 0.8))

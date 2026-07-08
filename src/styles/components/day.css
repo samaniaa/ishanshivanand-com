@@ -169,10 +169,6 @@
     background: var(--sun-warm-gold);
     filter: blur(0.5px); /* book-page softness — no hard disc edge */
   }
-  .celestial__sun[data-sun='soft-peach'] {
-    background: var(--sun-soft-peach);
-    opacity: 0;
-  }
   .celestial__sun[data-sun='warm-gold'] {
     background: var(--sun-warm-gold);
   }

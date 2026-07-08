@@ -2,34 +2,22 @@
   /* =====================================================================
      SUN DISC STATES — the travelling sun's disc, per the Sky Scale.
 
-     Three colours along the warm ramp; the disc RECOLOURS and RESIZES as
-     it arcs (driven by modules/day.js). It is NEVER white — a white disc
-     is lost on the blue midday sky, so midday keeps a warm-white core in
-     an amber body (the book page's day sun).
+     Two discs, both from the book page (proven): each fades to transparent
+     at ~76% so it's a compact orb with a SOFT halo and NO hard ring. The
+     disc recolours + resizes as it arcs (driven by modules/day.js). It is
+     never white — midday keeps a warm-white core in an amber body.
 
-     Each disc is a CRISP DISC: a bright hot core, a solid body, then a
-     smooth bloom that fades fully to transparent — one glowing orb, no
-     concentric rings, and a clean outer edge that blends into the sky.
-
-       warm-gold   — sunrise → midday → dusk (the day sun)
-       soft-peach  — sunrise / dusk (low, soft, still a defined disc)
-       orange      — daybreak / sundown (the fire ball)
+       warm-gold  — the day sun (sunrise → midday → dusk)
+       orange     — the fire ball, reserved for daybreak / sundown, where
+                    the sky itself is orange and the halo blends in
 
      Sizes (a scale on .celestial--sun, set in day.js): small = midday,
-     medium = gold/morning/afternoon, large = at the horizon. The disc
-     grows as it nears the horizon.
+     medium = the gold hours, large = at the horizon.
      ===================================================================== */
   :root {
-    /* The book page's day sun — proven: fades to transparent at 76% so the
-       disc is compact with a soft halo and NO hard ring. */
+    /* The book page's day sun. */
     --sun-warm-gold: radial-gradient(circle, #fff7dd 0%, #ffe9ae 32%, rgb(249 172 70 / 0.85) 55%, rgb(242 142 7 / 0.22) 70%, transparent 76%);
-    /* Soft-peach is DIFFUSE (not a crisp disc): a gentle warm bloom with a
-       smooth opacity falloff and no hard body edge, so at sunrise/dusk it
-       melts into a cool sky instead of reading as a ringed disk. (The
-       orange fire ball keeps its crisp edge for daybreak/sundown.) */
-    --sun-soft-peach: radial-gradient(circle closest-side, #fffaf4 0%, #fff0e4 26%, rgb(255 226 200 / 0.66) 46%, rgb(252 206 172 / 0.36) 63%, rgb(248 190 162 / 0.14) 80%, rgb(245 185 160 / 0.04) 92%, transparent 100%);
-    /* Warm orange disc, but the HALO is toned down — a soft amber glow
-       (not a red-orange ring), fading to transparent at 76%. */
+    /* The book page's set sun, with a toned-down amber halo (not red-orange). */
     --sun-orange: radial-gradient(circle, #ffe8b6 0%, #ffcd8a 34%, rgb(252 184 104 / 0.8) 56%, rgb(248 178 118 / 0.16) 70%, transparent 76%);
   }
 }

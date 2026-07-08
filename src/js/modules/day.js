@@ -160,16 +160,16 @@ const RANGE_VAR_NAMES = {
    horizon bookends, smallest at midday. The orange fire disc is reserved
    for daybreak / sundown, which the homepage has no section for. */
 const SUN_SIZES = { small: 2.3, medium: 2.5, large: 2.7 }
-const SUN_FIELDS = ['peach', 'gold', 'orange', 'scale']
+const SUN_FIELDS = ['gold', 'orange', 'scale']
 
 function buildSunLook(at) {
   const S = SUN_SIZES
   return [
-    { p: at.sunrise ?? 0.08, peach: 0, gold: 1, orange: 0, scale: S.large },
-    { p: at.morning ?? 0.2, peach: 0, gold: 1, orange: 0, scale: S.medium },
-    { p: at.midday ?? 0.35, peach: 0, gold: 1, orange: 0, scale: S.small },
-    { p: at.golden ?? 0.58, peach: 0, gold: 1, orange: 0, scale: S.medium },
-    { p: at.dusk ?? 0.72, peach: 0, gold: 1, orange: 0, scale: S.large },
+    { p: at.sunrise ?? 0.08, gold: 1, orange: 0, scale: S.large },
+    { p: at.morning ?? 0.2, gold: 1, orange: 0, scale: S.medium },
+    { p: at.midday ?? 0.35, gold: 1, orange: 0, scale: S.small },
+    { p: at.golden ?? 0.58, gold: 1, orange: 0, scale: S.medium },
+    { p: at.dusk ?? 0.72, gold: 1, orange: 0, scale: S.large },
   ]
 }
 
@@ -228,7 +228,6 @@ export function init() {
   if (!sky) return
 
   const sunDiscs = {
-    peach: sunEl?.querySelector("[data-sun='soft-peach']"),
     gold: sunEl?.querySelector("[data-sun='warm-gold']"),
     orange: sunEl?.querySelector("[data-sun='orange']"),
   }
@@ -252,7 +251,6 @@ export function init() {
   const applySun = (look, p) => {
     if (!sunEl) return
     const s = sampleSunLook(look, p)
-    if (sunDiscs.peach) sunDiscs.peach.style.opacity = s.peach
     if (sunDiscs.gold) sunDiscs.gold.style.opacity = s.gold
     if (sunDiscs.orange) sunDiscs.orange.style.opacity = s.orange
     // Fold size into the transform (gsap merges with the x/y from

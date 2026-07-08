@@ -20,7 +20,6 @@
   <div class="celestial__moon" data-moon="waxing"></div>
 </div>
 <div class="celestial celestial--sun" aria-hidden="true">
-  <div class="celestial__sun" data-sun="soft-peach"></div>
   <div class="celestial__sun" data-sun="warm-gold"></div>
   <div class="celestial__sun" data-sun="orange"></div>
 </div>
@@ -45,7 +44,7 @@
   const range = document.querySelector('.day-range')
   const sun = document.querySelector('.celestial--sun')
   const moon = document.querySelector('.celestial--moon')
-  const sunD = { peach: sun.querySelector("[data-sun='soft-peach']"), gold: sun.querySelector("[data-sun='warm-gold']"), orange: sun.querySelector("[data-sun='orange']") }
+  const sunD = { gold: sun.querySelector("[data-sun='warm-gold']"), orange: sun.querySelector("[data-sun='orange']") }
   const moonD = { waning: moon.querySelector("[data-moon='waning']"), waxing: moon.querySelector("[data-moon='waxing']") }
   const phaseOut = document.getElementById('phase')
 
@@ -65,19 +64,19 @@
     return out
   }
 
-  // Sun disc colour + size along the arc. Smaller at the horizon than
-  // before (was dominant); soft-peach is a diffuse bloom, the orange fire
-  // ball keeps its crisp edge.
+  // Sun disc colour + size along the arc. Two discs (both from the book
+  // page): warm-gold carries most of the day; the orange fire ball takes
+  // over at daybreak and sundown, crisp against the orange sky.
   const SUN = [
-    { p: 0.13, peach: 0, gold: 1, orange: 0, size: 2.5 },   // sunrise (soft gold)
-    { p: 0.20, peach: 0, gold: 0, orange: 1, size: 2.9 },   // daybreak (fire ball, orange sky)
-    { p: 0.28, peach: 0, gold: 1, orange: 0, size: 2.7 },   // morning gold
-    { p: 0.44, peach: 0, gold: 1, orange: 0, size: 2.3 },   // midday
-    { p: 0.53, peach: 0, gold: 1, orange: 0, size: 2.5 },   // afternoon
-    { p: 0.61, peach: 0, gold: 1, orange: 0, size: 2.6 },   // evening gold
-    { p: 0.66, peach: 0, gold: 0, orange: 1, size: 2.6 },   // sundown (fire ball, orange sky)
-    { p: 0.73, peach: 0, gold: 0, orange: 1, size: 2.7 },   // orange holds through the orange sky
-    { p: 0.78, peach: 0, gold: 1, orange: 0, size: 2.5 },   // dusk (soft gold)
+    { p: 0.13, gold: 1, orange: 0, size: 2.5 },   // sunrise (soft gold)
+    { p: 0.20, gold: 0, orange: 1, size: 2.9 },   // daybreak (fire ball, orange sky)
+    { p: 0.28, gold: 1, orange: 0, size: 2.7 },   // morning gold
+    { p: 0.44, gold: 1, orange: 0, size: 2.3 },   // midday
+    { p: 0.53, gold: 1, orange: 0, size: 2.5 },   // afternoon
+    { p: 0.61, gold: 1, orange: 0, size: 2.6 },   // evening gold
+    { p: 0.66, gold: 0, orange: 1, size: 2.6 },   // sundown (fire ball, orange sky)
+    { p: 0.73, gold: 0, orange: 1, size: 2.7 },   // orange holds through the orange sky
+    { p: 0.78, gold: 1, orange: 0, size: 2.5 },   // dusk (soft gold)
   ]
   // Moon face (silver waning ↔ cream waxing) + size. The face swaps mid-day
   // while the moon is washed out and invisible.
@@ -139,10 +138,9 @@
     // INSIDE the transform so translate stays unscaled.
     const sunVis = clamp01((p - 0.11) / 0.03) * clamp01((0.79 - p) / 0.03)
     const st = clamp01((p - 0.13) / (0.76 - 0.13))
-    const s = sample(SUN, p, ['peach', 'gold', 'orange', 'size'])
+    const s = sample(SUN, p, ['gold', 'orange', 'size'])
     sun.style.transform = 'translate(' + (84 - 70 * st) * vw + 'px,' + (100 - 92 * Math.sin(Math.PI * st)) * vh + 'px) scale(' + s.size + ')'
     sun.style.opacity = sunVis
-    sunD.peach.style.opacity = s.peach
     sunD.gold.style.opacity = s.gold
     sunD.orange.style.opacity = s.orange
 
