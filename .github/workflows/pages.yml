@@ -1,0 +1,58 @@
+name: Publish design system
+
+# Builds the design-system gallery + token package and deploys them to
+# GitHub Pages. Runs when the system changes on `main`, or on demand
+# (Actions → "Publish design system" → Run workflow → pick any branch).
+#
+# One-time setup by the repo owner: Settings → Pages → Source: "GitHub
+# Actions". The repo must be public (or Pages-enabled on a paid plan).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'design-system/**'
+      - 'src/styles/**'
+      - 'partials/**'
+      - 'public/assets/fonts/**'
+      - 'tools/build-design-system.mjs'
+      - 'tools/build-site.mjs'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; let an in-flight run finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build gallery + token package
+        run: npm run build:all
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-ds
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
