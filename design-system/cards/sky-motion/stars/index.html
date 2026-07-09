@@ -2,12 +2,12 @@
 <h1>Sky &amp; Motion · stars</h1>
 <div class="ds-panes">
   <div class="ds-pane" data-theme="dusk" data-ds-phase="dark" style="background:var(--sky-predawn); border-radius:12px; position:relative; overflow:hidden; min-height:280px">
-    <div class="day-sky__stars" style="opacity:1"></div>
+    <div class="day-sky__stars" style="opacity:1"><!-- @include stars.html --></div>
     <p class="ds-pane__label" style="position:absolute; bottom:0.6rem; left:0.9rem; margin:0; color:rgb(247 243 232 / 0.65)">pre-dawn</p>
   </div>
   <div class="ds-pane" data-theme="dusk" data-ds-phase="dark" style="background:var(--sky-post-dusk); border-radius:12px; position:relative; overflow:hidden; min-height:280px">
-    <div class="day-sky__stars" style="opacity:1"></div>
+    <div class="day-sky__stars" style="opacity:1"><!-- @include stars.html --></div>
     <p class="ds-pane__label" style="position:absolute; bottom:0.6rem; left:0.9rem; margin:0; color:rgb(247 243 232 / 0.65)">post-dusk</p>
   </div>
 </div>
-<p class="ds-note"><strong>Few mid-sized stars &mdash; never a field of uniform specks.</strong> Each star is a bright core (&approx;1.5&ndash;2.4px) wrapped in a soft glow halo (&approx;5&ndash;9px), so it reads as a <em>star</em>, not a dot: <strong>6 hero stars plus 3 faint accents</strong> (nine in all), warm-white and cool-white mixed. They stay in the <strong>upper sky</strong> &mdash; masked out below the horizon line so they never litter the page &mdash; and <strong>breathe on a slow ~7s brightness pulse</strong>: the twinkle is a gentle glow, never a blink. Rendered by <code>.day-sky__stars</code>; shown only in the dark phases (pre-dawn, blue hour, twilight, post-dusk).</p>
+<p class="ds-note"><strong>Few mid-sized stars &mdash; never a field of uniform specks.</strong> Each star is a bright core (2&ndash;3px) wrapped in a tight soft halo, so it reads as a <em>star</em>, not a dot: <strong>8 bright stars across the crown plus 6 faint accents</strong> for depth, warm-white (<code>#ffe9c4</code>) and cool-white (<code>#eef2ff</code>) mixed. They keep to the <strong>upper sky</strong>, thinning toward the warm horizon. The key move: <strong>each star twinkles on its own rhythm</strong> &mdash; an independent 2&ndash;4s opacity pulse with a staggered delay, so the field shimmers gently rather than blinking in unison. Rendered by <code>.day-sky__star</code> orbs inside <code>.day-sky__stars</code>; shown only in the dark phases (pre-dawn, blue hour, twilight, post-dusk).</p>

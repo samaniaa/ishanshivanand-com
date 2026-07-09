@@ -68,44 +68,54 @@
     background: var(--sky-post-dusk);
   }
 
-  /* ---- Stars: bright core + soft halo pairs, only in dark phases ----- */
+  /* ---- Stars: few mid-sized orbs, each twinkling on its own rhythm -----
+     Only in the dark phases. Each star is a bright core wrapped in a soft
+     halo (a .day-sky__star span) — warm-white or cool-white — placed in
+     the sky's crown and thinning toward the warm horizon. They twinkle
+     INDEPENDENTLY: every star on its own 2–4s pulse with a staggered
+     delay, never one synchronised blink. The container's opacity is faded
+     per-phase by modules/day.js; the mask keeps the field in the upper
+     sky. The stars themselves are authored once in partials/stars.html
+     (mirrored into index.html) so the card and the site read alike. */
   .day-sky__stars {
     position: absolute;
     inset: 0;
     opacity: 0;
-    background-image:
-      radial-gradient(2px 2px at 12% 14%, rgb(255 250 235 / 0.95), transparent 100%),
-      radial-gradient(7px 7px at 12% 14%, rgb(255 250 235 / 0.22), transparent 100%),
-      radial-gradient(1.6px 1.6px at 31% 27%, rgb(230 235 255 / 0.85), transparent 100%),
-      radial-gradient(6px 6px at 31% 27%, rgb(230 235 255 / 0.18), transparent 100%),
-      radial-gradient(2.4px 2.4px at 47% 9%, rgb(255 250 235 / 1), transparent 100%),
-      radial-gradient(9px 9px at 47% 9%, rgb(255 250 235 / 0.25), transparent 100%),
-      radial-gradient(1.5px 1.5px at 62% 21%, rgb(230 235 255 / 0.8), transparent 100%),
-      radial-gradient(5px 5px at 62% 21%, rgb(230 235 255 / 0.16), transparent 100%),
-      radial-gradient(2px 2px at 76% 12%, rgb(255 250 235 / 0.9), transparent 100%),
-      radial-gradient(8px 8px at 76% 12%, rgb(255 250 235 / 0.2), transparent 100%),
-      radial-gradient(1.6px 1.6px at 89% 25%, rgb(230 235 255 / 0.85), transparent 100%),
-      radial-gradient(6px 6px at 89% 25%, rgb(230 235 255 / 0.18), transparent 100%),
-      radial-gradient(1.4px 1.4px at 22% 38%, rgb(255 250 235 / 0.6), transparent 100%),
-      radial-gradient(1.8px 1.8px at 55% 33%, rgb(230 235 255 / 0.65), transparent 100%),
-      radial-gradient(1.4px 1.4px at 83% 40%, rgb(255 250 235 / 0.55), transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
-    mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 88%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 88%);
+  }
+
+  .day-sky__star {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    /* bright core → tight soft halo → nothing */
+    background: radial-gradient(
+      circle,
+      var(--star) 0%,
+      var(--star) 15%,
+      rgb(var(--halo) / 0.3) 28%,
+      transparent 62%
+    );
+    opacity: var(--tw-max, 1);
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .day-sky__stars {
-      animation: star-breathe 7s ease-in-out infinite alternate;
+    .day-sky__star {
+      animation: twinkle var(--dur, 3s) ease-in-out var(--delay, 0s) infinite;
     }
   }
 
-  @keyframes star-breathe {
-    0% {
-      filter: brightness(0.85);
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: var(--tw-min, 0.35);
     }
 
-    100% {
-      filter: brightness(1.15);
+    50% {
+      opacity: var(--tw-max, 1);
     }
   }
 

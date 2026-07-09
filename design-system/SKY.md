@@ -56,13 +56,18 @@ full 13-phase arc (fire states, blue/gold hours, etc.).
 
 Only in the dark phases (pre-dawn, blue hour, twilight, post-dusk). The
 rule is **few mid-sized stars, never a field of uniform specks**: each star
-is a bright core (~1.5–2.4px) wrapped in a soft glow halo (~5–9px), so it
-reads as a star and not a dot. Nine in all — 6 hero stars plus 3 faint
-accents — warm-white and cool-white mixed. They stay in the **upper sky**
-(masked out below the horizon so they never litter the page) and **breathe
-on a slow ~7s brightness pulse** — the twinkle is a gentle glow, never a
-blink. Rendered by `.day-sky__stars` in `day.css`; see the *Sky & Motion ·
-stars* card.
+is a bright core (2–3px) wrapped in a tight soft halo, so it reads as a
+star and not a dot. Fourteen in all — **8 bright stars across the crown +
+6 faint accents** for depth — warm-white (`#ffe9c4`) and cool-white
+(`#eef2ff`) mixed. They keep to the **upper sky**, thinning toward the warm
+horizon.
+
+The key move is the twinkle: **each star pulses on its own rhythm** — an
+independent 2–4s opacity swing with a staggered delay — so the field
+shimmers gently rather than blinking in unison. Rendered as `.day-sky__star`
+orbs inside `.day-sky__stars` (`day.css`); the field is authored once in
+`partials/stars.html` and mirrored into `index.html`. See the *Sky &
+Motion · stars* card. Adapted from the Contact page's star treatment.
 
 ## Shipped since
 

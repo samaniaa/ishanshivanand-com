@@ -32,7 +32,16 @@
       "Bash(sed -i '' \"/proof.css/d\" src/styles/main.css)",
       "Bash(git commit -q -m 'v2 homepage: roles-cycle hero with Vision cutout, flagship grid, facets narrative *)",
       "Bash(python3 -c ' *)",
-      "Bash(git commit -m 'Sunset behind the peaks, ink flip on landed night sky, values CTA *)"
+      "Bash(git commit -m 'Sunset behind the peaks, ink flip on landed night sky, values CTA *)",
+      "mcp__visualize__show_widget",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(gh api *)",
+      "Bash(grep -iE \"readme|workflow|contribut|branch|\\\\.md$\")",
+      "Bash(grep -iE \"^[^/]*\\\\.md$|CLAUDE|AGENTS|branch|git-workflow|naming\")",
+      "Bash(cd /tmp && echo \"=== ShivYog repo root \\(main\\) ===\" && gh api \"repos/shivyogplay/ishan-shivanand-website/git/trees/main\" --jq '.tree[] | .path' 2>/dev/null && echo \"\" && echo \"=== package.json ===\" && gh api repos/shivyogplay/ishan-shivanand-website/contents/package.json --jq '.content' 2>/dev/null | base64 -d 2>/dev/null | head -40)",
+      "Bash(grep -iE \"globals|\\\\.css$|theme|tokens|design|app/layout|styles/\")",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }
