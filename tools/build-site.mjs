@@ -83,6 +83,35 @@ function buildGallery() {
     })
     .join('\n')
 
+  const HOWTO = `
+    <section class="howto" id="how-to-use">
+      <h2>How to use this system</h2>
+      <div class="howto__grid">
+        <div class="howto__col">
+          <h3>Browse it</h3>
+          <p>Everything below is the <strong>real component</strong>, live. Click <strong>Open&#8599;</strong> on any card to see it full-size and interact with it &mdash; e.g. drag the <em>day-scrub</em> slider to run the whole sky.</p>
+          <p>Share this page&rsquo;s link with anyone &mdash; no account or login needed.</p>
+        </div>
+        <div class="howto__col">
+          <h3>Designers &mdash; use it in an AI tool</h3>
+          <p>The whole system is plain text, so any AI design tool can read it. Give the tool this page&rsquo;s <strong>link</strong>, or attach the downloaded <code>design-system.css</code> + <code>SKY.md</code>, and prompt: <em>&ldquo;Design using this system &mdash; use these tokens and components, don&rsquo;t invent new colours or type.&rdquo;</em></p>
+          <p><strong>In Claude / Claude Design:</strong></p>
+          <ol>
+            <li>Keep this gallery open as your source of truth; paste the <strong>link</strong> into your prompt so generated screens match the tokens.</li>
+            <li>Or attach the token package (<strong>Download tokens</strong>, top right) so Claude designs from the real values.</li>
+            <li>To load it as your <em>own</em> Claude&nbsp;Design project: in Claude&nbsp;Code run <code>/design-login</code>, then ask it to sync these cards into a new design system in your account (the repo is public &mdash; clone it and run <code>npm run build:ds</code>).</li>
+          </ol>
+        </div>
+        <div class="howto__col">
+          <h3>Developers &mdash; build with it</h3>
+          <p>Click <strong>Download tokens</strong> (top right) and unzip, then import the one stylesheet:</p>
+          <pre><code>&lt;link rel="stylesheet"
+  href="./design-system/design-system.css"&gt;</code></pre>
+          <p>Reference tokens as variables &mdash; <code>var(--sky-midday)</code>, <code>var(--ink)</code>, <code>var(--glass)</code>, <code>var(--step-3)</code> &mdash; and use the classes <code>.glass</code>, <code>.testimonial</code>, <code>.logo-strip</code>, <code>.btn</code>. Dark mode: set <code>data-theme="dusk"</code>. Full guide in the package <code>README.md</code>.</p>
+        </div>
+      </div>
+    </section>`
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -154,6 +183,20 @@ function buildGallery() {
   footer { border-top: 1px solid var(--rule); padding: 2rem clamp(1rem, 3vw, 2.4rem) 3rem; color: var(--ink-soft); font-size: 0.85rem; line-height: 1.6; max-width: 70ch; }
   footer code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; background: rgb(7 25 56 / 0.06); padding: 0.1em 0.4em; border-radius: 4px; }
 
+  .howto { background: linear-gradient(160deg, #fffdf8, #fdf3ea); border: 1px solid var(--rule); border-radius: 16px; padding: clamp(1.4rem, 3vw, 2rem); margin: 0.4rem 0 2.6rem; scroll-margin-top: 5.5rem; }
+  .howto > h2 { font-family: var(--serif); font-size: 1.35rem; margin: 0 0 1.2rem; }
+  .howto__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.3rem 2rem; }
+  .howto__col h3 { font-size: 0.92rem; margin: 0 0 0.5rem; color: var(--navy); }
+  .howto__col p { margin: 0 0 0.65rem; font-size: 0.87rem; line-height: 1.55; color: var(--ink-soft); }
+  .howto__col strong { color: var(--ink); font-weight: 600; }
+  .howto__col em { color: var(--ink); font-style: italic; }
+  .howto code { font-family: ui-monospace, Menlo, monospace; font-size: 0.82em; background: rgb(7 25 56 / 0.06); padding: 0.1em 0.4em; border-radius: 4px; }
+  .howto pre { margin: 0 0 0.65rem; background: var(--navy); color: #eef2ff; padding: 0.7rem 0.9rem; border-radius: 8px; overflow-x: auto; }
+  .howto pre code { background: none; color: inherit; font-size: 0.76rem; }
+  .howto ol { margin: 0 0 0.65rem; padding-left: 1.1rem; }
+  .howto li { font-size: 0.87rem; line-height: 1.5; color: var(--ink-soft); margin-bottom: 0.35rem; }
+  nav.side a.nav-top { color: var(--coral); font-weight: 600; }
+
   @media (max-width: 720px) {
     .layout { grid-template-columns: 1fr; }
     nav.side { position: static; max-height: none; flex-flow: row wrap; display: flex; padding: 0.8rem 1rem; border-bottom: 1px solid var(--rule); }
@@ -171,10 +214,12 @@ function buildGallery() {
   </header>
   <div class="layout">
     <nav class="side">
+      <a href="#how-to-use" class="nav-top">How to use</a>
       ${nav}
     </nav>
     <main>
-      <p class="intro">The living reference for the Ishan Shivanand website. Every tile below is the <strong>real component</strong>, rendered from the design tokens — open any one to see it full-size. To build with the system, <strong>download the token package</strong> (top right): one <code>design-system.css</code> with all colours, type, spacing, the sky/sun/moon/stars language, and the glass / testimonial / logo-strip / button components.</p>
+      <p class="intro">The living reference for the Ishan Shivanand website. Every tile below is the <strong>real component</strong>, rendered from the design tokens — open any one to see it full-size.</p>
+${HOWTO}
 ${sections}
     </main>
   </div>
