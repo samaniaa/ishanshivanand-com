@@ -78,6 +78,16 @@
     --rule: rgb(7 25 56 / 0.14);
     --rule-soft: rgb(7 25 56 / 0.08);
 
+    /* ---- Glass (frosted surfaces) ----------------------------------
+       Reusable translucent-over-blur card surface, lifted from the book
+       page's testimonial glass. Theme-switchable like --surface/--ink:
+       a warm-white pane in daylight, a navy pane over the night sky. */
+    --glass: rgb(255 252 246 / 0.52);
+    --glass-border: var(--rule-soft);
+    --glass-shadow: 0 14px 44px rgb(7 25 56 / 0.09);
+    --glass-radius: 16px;
+    --glass-blur: 3px;
+
     /* ---- Type ------------------------------------------------------- */
     --font-display: 'Source Serif 4', 'Source Serif Fallback', Georgia, serif;
     --font-body: 'Inter', 'Inter Fallback', system-ui, sans-serif;
@@ -120,5 +130,8 @@
     --accent: var(--c-gold-80);
     --rule: rgb(255 252 246 / 0.18);
     --rule-soft: rgb(255 252 246 / 0.1);
+    --glass: rgb(13 35 84 / 0.55);
+    --glass-border: rgb(247 243 232 / 0.14);
+    --glass-shadow: 0 20px 60px rgb(4 7 18 / 0.4);
   }
 }

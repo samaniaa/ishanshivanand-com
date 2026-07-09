@@ -1,0 +1,17 @@
+<!-- @dsCard group="Components" -->
+<h1>Components · glass surface</h1>
+<div class="ds-panes">
+  <div class="ds-pane" style="background:var(--sky-midday); border-radius:12px; position:relative; overflow:hidden; min-height:230px; display:grid; place-items:center; padding:2rem">
+    <div style="position:absolute; width:150px; height:150px; border-radius:50%; background:var(--sun-warm-gold); top:-24px; right:-8px; filter:blur(0.5px)"></div>
+    <div class="glass" style="position:relative; padding:1.6rem 1.8rem; max-width:22rem">
+      <p style="margin:0; color:var(--ink); font-size:var(--step-0)">A frosted pane over the day &mdash; translucent, softly blurred, ready to hold any content.</p>
+    </div>
+  </div>
+  <div class="ds-pane" data-theme="dusk" data-ds-phase="dark" style="background:var(--sky-post-dusk); border-radius:12px; position:relative; overflow:hidden; min-height:230px; display:grid; place-items:center; padding:2rem">
+    <div style="position:absolute; width:118px; height:118px; border-radius:50%; background:var(--moon-silver); -webkit-mask-image:var(--moon-mask-waning); mask-image:var(--moon-mask-waning); filter:var(--moon-glow-silver); top:-6px; right:14px"></div>
+    <div class="glass" style="position:relative; padding:1.6rem 1.8rem; max-width:22rem">
+      <p style="margin:0; color:var(--ink); font-size:var(--step-0)">The same pane turns navy over the night sky &mdash; border and ink follow the theme.</p>
+    </div>
+  </div>
+</div>
+<p class="ds-note">One theme-aware frosted surface: <code>--glass</code> over <code>backdrop-filter: blur(--glass-blur)</code>, a hairline <code>--glass-border</code>, a soft <code>--glass-shadow</code> at <code>--glass-radius</code>. Warm-white in daylight, navy-translucent over the post-dusk sky. It backs the testimonial cards and can host any content &mdash; drop <code>class="glass"</code> on any panel.</p>
