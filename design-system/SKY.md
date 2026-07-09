@@ -52,8 +52,21 @@ The current homepage has 7 section-anchored phases and uses this slice:
 and `--sky-post-dusk`. When the homepage is rebuilt it can draw on the
 full 13-phase arc (fire states, blue/gold hours, etc.).
 
-## Coming next
+## Stars
 
-Sun-disc and moon-disc states per phase (white → gold → orange ball;
-crescent → quiet gold), so the travelling light recolours as it arcs —
-the way the book page already tints its setting sun.
+Only in the dark phases (pre-dawn, blue hour, twilight, post-dusk). The
+rule is **few mid-sized stars, never a field of uniform specks**: each star
+is a bright core (~1.5–2.4px) wrapped in a soft glow halo (~5–9px), so it
+reads as a star and not a dot. Nine in all — 6 hero stars plus 3 faint
+accents — warm-white and cool-white mixed. They stay in the **upper sky**
+(masked out below the horizon so they never litter the page) and **breathe
+on a slow ~7s brightness pulse** — the twinkle is a gentle glow, never a
+blink. Rendered by `.day-sky__stars` in `day.css`; see the *Sky & Motion ·
+stars* card.
+
+## Shipped since
+
+Sun-disc and moon-disc states per phase (two book-page discs: warm-gold
+day sun + orange fire ball; silver/cream crescents that never set) — the
+travelling light recolours as it arcs. See `tokens-sun.css` /
+`tokens-moon.css` and the *sun & moon* card.
