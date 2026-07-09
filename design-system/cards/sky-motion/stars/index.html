@@ -10,4 +10,15 @@
     <p class="ds-pane__label" style="position:absolute; bottom:0.6rem; left:0.9rem; margin:0; color:rgb(247 243 232 / 0.65)">post-dusk</p>
   </div>
 </div>
-<p class="ds-note"><strong>Few mid-sized stars &mdash; never a field of uniform specks.</strong> Each star is a bright core (2&ndash;3px) wrapped in a tight soft halo, so it reads as a <em>star</em>, not a dot: <strong>8 bright stars across the crown plus 6 faint accents</strong> for depth, warm-white (<code>#ffe9c4</code>) and cool-white (<code>#eef2ff</code>) mixed. They keep to the <strong>upper sky</strong>, thinning toward the warm horizon. The key move: <strong>each star twinkles on its own rhythm</strong> &mdash; an independent 2&ndash;4s opacity pulse with a staggered delay, so the field shimmers gently rather than blinking in unison. Rendered by <code>.day-sky__star</code> orbs inside <code>.day-sky__stars</code>; shown only in the dark phases (pre-dawn, blue hour, twilight, post-dusk).</p>
+<p class="ds-note"><strong>Few mid-sized stars &mdash; never a field of uniform specks.</strong> Each star is a bright core wrapped in a tight soft halo, so it reads as a <em>star</em>, not a dot; and <strong>each twinkles on its own rhythm</strong> &mdash; a staggered, independent pulse, so the field shimmers gently rather than blinking in unison. Rendered by <code>.day-sky__star</code> orbs inside <code>.day-sky__stars</code>; shown only in the dark phases (pre-dawn, blue hour, twilight, post-dusk).</p>
+
+<table class="ds-table" style="margin-top:1.2rem">
+<tbody>
+<tr><td><strong>Count &amp; tiers</strong></td><td><strong>14 stars</strong>: 8 bright across the crown + 6 faint accents for depth.</td></tr>
+<tr><td><strong>Size</strong></td><td>Each orb <strong>7&ndash;11px</strong> overall; the solid bright core is the inner ~15% (a <strong>2&ndash;3px</strong> point).</td></tr>
+<tr><td><strong>Glow / halo</strong></td><td>Radial: solid core to 15% &rarr; soft halo at <strong>30% opacity</strong> to 28% &rarr; fully transparent by 62%. A tight bloom, no hard edge.</td></tr>
+<tr><td><strong>Tint</strong></td><td>Mixed warm-white <code>#ffe9c4</code> and cool-white <code>#eef2ff</code> (~half and half).</td></tr>
+<tr><td><strong>Placement</strong></td><td>Upper sky only &mdash; tops <strong>2&ndash;25%</strong>; bright ones spread across the crown, faint ones weighted lower-right, thinning toward the warm horizon.</td></tr>
+<tr><td><strong>Twinkle</strong></td><td>Opacity pulse, <code>ease-in-out</code>, each star its own <strong>duration 2.2&ndash;4.0s</strong> and <strong>delay 0.3&ndash;5.1s</strong> (the stagger). Bright stars swing <strong>0.35&harr;1.0</strong>, faint <strong>0.15&harr;0.5</strong>. Never a synchronised blink.</td></tr>
+</tbody>
+</table>

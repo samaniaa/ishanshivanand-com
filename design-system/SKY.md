@@ -56,18 +56,24 @@ full 13-phase arc (fire states, blue/gold hours, etc.).
 
 Only in the dark phases (pre-dawn, blue hour, twilight, post-dusk). The
 rule is **few mid-sized stars, never a field of uniform specks**: each star
-is a bright core (2–3px) wrapped in a tight soft halo, so it reads as a
-star and not a dot. Fourteen in all — **8 bright stars across the crown +
-6 faint accents** for depth — warm-white (`#ffe9c4`) and cool-white
-(`#eef2ff`) mixed. They keep to the **upper sky**, thinning toward the warm
-horizon.
+is a bright core wrapped in a tight soft halo, so it reads as a star and
+not a dot. Fourteen in all — **8 bright across the crown + 6 faint accents**
+for depth — warm-white (`#ffe9c4`) and cool-white (`#eef2ff`) mixed, kept
+to the **upper sky** (tops 2–25%) and thinning toward the warm horizon.
 
-The key move is the twinkle: **each star pulses on its own rhythm** — an
-independent 2–4s opacity swing with a staggered delay — so the field
-shimmers gently rather than blinking in unison. Rendered as `.day-sky__star`
-orbs inside `.day-sky__stars` (`day.css`); the field is authored once in
-`partials/stars.html` and mirrored into `index.html`. See the *Sky &
-Motion · stars* card. Adapted from the Contact page's star treatment.
+The key move is the twinkle: **each star pulses on its own rhythm** — a
+staggered, independent opacity swing — so the field shimmers gently rather
+than blinking in unison. Exact spec:
+
+- **Size** — each orb 7–11px overall; solid bright core to the inner ~15% (a 2–3px point).
+- **Glow** — radial: solid core to 15% → soft halo at 30% opacity to 28% → transparent by 62%.
+- **Twinkle** — opacity pulse, `ease-in-out`; per-star **duration 2.2–4.0s**, **delay 0.3–5.1s** (the stagger). Bright stars swing **0.35↔1.0**, faint **0.15↔0.5**.
+- **Placement** — 8 bright spread across the crown, 6 faint weighted lower-right.
+
+Rendered as `.day-sky__star` orbs inside `.day-sky__stars` (`day.css`); the
+field is authored once in `partials/stars.html` and mirrored into
+`index.html`. See the *Sky & Motion · stars* card. Adapted from the Contact
+page's star treatment.
 
 ## Shipped since
 
