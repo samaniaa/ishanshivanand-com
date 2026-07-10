@@ -10,7 +10,8 @@
     "build:ds": "node tools/build-design-system.mjs",
     "build:site": "node tools/build-site.mjs",
     "build:all": "npm run build:ds && npm run build:site",
-    "build:exports": "node tools/build-exports.mjs"
+    "build:exports": "node tools/build-exports.mjs",
+    "build:contact": "node tools/build-contact.mjs"
   },
   "dependencies": {
     "gsap": "^3.13.0",
