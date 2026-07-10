@@ -14,7 +14,7 @@ on:
       - 'design-system/**'
       - 'src/styles/**'
       - 'partials/**'
-      - 'public/assets/fonts/**'
+      - 'public/assets/**'
       - 'tools/build-design-system.mjs'
       - 'tools/build-site.mjs'
       - '.github/workflows/pages.yml'
