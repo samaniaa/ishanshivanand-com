@@ -3,6 +3,7 @@ import { bindAnchors } from './core/scroll.js'
 import * as menu from './modules/menu.js'
 import * as navState from './modules/navState.js'
 import * as stubPage from './modules/stubPage.js'
+import * as contactPage from './modules/contactPage.js'
 
 /**
  * Shared entry: every page loads this. Page-specific entries (home.js)
@@ -13,6 +14,7 @@ navState.init()
 bindAnchors()
 
 document.querySelectorAll('[data-module="stub"]').forEach((el) => stubPage.init(el))
+document.querySelectorAll('[data-module="contact"]').forEach((el) => contactPage.init(el))
 
 // After everything registers, replay reveals the scroll already passed
 // (hash loads, scroll restoration, font-load re-splits).

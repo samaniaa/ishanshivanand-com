@@ -1,0 +1,172 @@
+@layer components {
+  /* =====================================================================
+     SURFACES — reusable page-agnostic pieces distilled from the book page.
+
+       .glass        a frosted translucent card surface (the --glass-* tokens)
+       .testimonials a responsive grid of quote cards
+       .testimonial  an endorsement on glass (italic serif + attribution)
+       .eyebrow      a small uppercase section label (e.g. "Featured in")
+       .logo-strip   a centred row of press / media / partner logos
+                     (with .eyebrow above = the "trusted by / featured in" unit)
+
+     Everything reads from the semantic tokens (--ink, --accent, --glass-*)
+     so it flips with the day: a warm-white glass pane in daylight, a navy
+     pane over the night sky, ink and accents following. No page owns these
+     — drop them on any page. Star ratings stay book-specific and live with
+     the book page, not here.
+     ===================================================================== */
+
+  /* ---- Glass: the frosted surface primitive -------------------------- */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  /* ---- Testimonials: endorsements on glass --------------------------- */
+  .testimonials {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.2rem, 2.4vw, 1.8rem);
+    align-items: stretch;
+  }
+
+  @media (min-width: 640px) {
+    .testimonials {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* A quote card. Compose with .glass:  <figure class="testimonial glass"> */
+  .testimonial {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: var(--ink);
+    padding: clamp(1.5rem, 3vw, 2.3rem);
+    /* extra headroom for the quotation mark */
+    padding-top: clamp(2.6rem, 4.5vw, 3.4rem);
+  }
+
+  /* Oversized opening quote, in the coral accent */
+  .testimonial::before {
+    content: '\201C';
+    position: absolute;
+    top: clamp(0.5rem, 1.6vw, 1rem);
+    left: clamp(1.1rem, 2.6vw, 1.9rem);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 4.4rem);
+    line-height: 1;
+    color: var(--accent-deep);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .testimonial blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    line-height: 1.45;
+  }
+
+  /* Attribution pinned to the bottom, over a short gold hairline */
+  .testimonial figcaption {
+    margin-top: auto;
+    padding-top: 1.3rem;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .testimonial figcaption::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 2px;
+    margin-bottom: 0.85rem;
+    background: var(--accent);
+    opacity: 0.75;
+  }
+
+  .testimonial figcaption strong {
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* ---- Eyebrow: a small uppercase section label ---------------------- */
+  /* From the book page's .beyebrow — sits above a logo strip ("Featured
+     in") or any section. Colour inherits; --gold / --warm tint it. */
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 clamp(1.6rem, 3.5vh, 2.4rem);
+  }
+
+  .eyebrow--gold {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .eyebrow--warm {
+    color: var(--accent-deep);
+    opacity: 0.92;
+  }
+
+  /* ---- Logo strip: press / media / partner row ----------------------- */
+  /* A plain centred flex row. The logos carry the colour — supply
+     monochrome (ideally white) source images, or add .logo-strip--invert
+     to force any logo to white on a dark surface. */
+  .logo-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.6rem, 4vw, 3.4rem);
+    width: 100%;
+  }
+
+  /* Each logo is a monochrome silhouette used as a mask; its colour comes
+     from the sky modifier (currentColor), so one set of art serves every
+     page's ending sky. Supply the art via --logo (a span) or an inline SVG
+     with fill:currentColor. Sized by height, normalised to one eyeline. */
+  .logo-strip__logo {
+    height: clamp(1.5rem, 2.6vw, 2rem);
+    width: auto;
+    opacity: 0.85;
+    transition: opacity var(--dur-quick);
+    background-color: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+  }
+
+  .logo-strip__logo:hover {
+    opacity: 1;
+  }
+
+  /* Height modifiers — normalise logos of differing aspect to one eyeline */
+  .logo-strip__logo--tall {
+    height: clamp(2.7rem, 4.8vw, 3.8rem);
+  }
+
+  .logo-strip__logo--wide {
+    height: clamp(1.2rem, 2.2vw, 1.7rem);
+  }
+
+  /* Sky-agnostic colour — pick per the sky the strip lands on. */
+  .logo-strip--on-light .logo-strip__logo {
+    color: var(--c-dark-anchor); /* brand navy, for light skies */
+  }
+
+  .logo-strip--on-dark .logo-strip__logo {
+    color: var(--c-white); /* warm white, for dark skies */
+  }
+}

@@ -30,9 +30,23 @@ philanthropy chapter when one is cleared.
 
 ## 3. Contact
 
-`/connect/` is a stub pointing at office@ishanshivanand.com (address
-unverified). Provide the real enquiry destination or form service, and
-the routing-by-interest fields you want.
+`/connect/` is now the full Contact page (ported from your Claude Design
+"Contact.dc.html"): dawn-field atmosphere, invitation, a routed enquiry
+form with progressive disclosure (Speaking adds event fields, Media adds
+outlet), a direct-routes column, and the "Rise and Lift Others" close.
+Still to confirm before launch:
+
+- **Form endpoint.** The form UI is complete but NOT wired to a backend.
+  On submit it validates, opens a prefilled `mailto:` to the office, and
+  shows the success state, so nothing is lost pre-launch. Swap in a real
+  service at launch: set `ENDPOINT` in `src/js/modules/contactPage.js`
+  (top of file) to a Formspree/Web3Forms URL and POST instead of mailto.
+- **Destination email.** The design routes everything to
+  `hello@compassionunites.com` (used in the form mailto, the direct-route
+  card, and the ContactPoint JSON-LD in `connect/index.html`). Confirm
+  this is the right inbox, or give the real one.
+- **Social links.** The LinkedIn and YouTube routes are `#`
+  placeholders (`data-placeholder`), like the footer links.
 
 ## 3b. Trusted-by logos
 Typographic institution names for v1 (safe with parliaments/agencies).
