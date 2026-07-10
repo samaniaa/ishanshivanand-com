@@ -1,0 +1,55 @@
+@layer tokens {
+  /* =====================================================================
+     THE SKY SCALE — canonical source of truth for the day's light.
+
+     One continuous day, thirteen phases, SYMMETRIC around midday. Every
+     morning phase has an evening twin with the sun's arc reversed:
+
+       pre-dawn      ↔  post-dusk     (dark bookend: blush / silver, never black)
+       blue hour     ↔  twilight      (deep blue shoulder)
+       sunrise       ↔  dusk          (soft blue-blush)
+       daybreak      ↔  sundown       (FIRE — sun as an orange ball on the horizon)
+       morning gold  ↔  evening gold  (warm golden hour, low sun)
+       morning       ↔  afternoon     (blue day)
+                    midday                (apex — blue summer sky, white sun)
+
+     THE SKY LAWS (obey these in every page's arc):
+       1. Never black. The day is bookended by light — a warm blush at
+          pre-dawn, a silvery afterglow at post-dusk. There is always a
+          sign of light in the sky.
+       2. Blue carries the day; blush edges every transition. Blue and
+          blush are the signature of a rising and setting sun.
+       3. Brand navy (--c-dark-anchor / --c-dark-lift) crowns the dark
+          phases so the light story stays cohesive with the brand.
+       4. The sun is white overhead at midday and an ORANGE BALL in the
+          fire phases (daybreak / sundown). See tokens-sun / tokens-moon
+          for the sun- and moon-disc states per phase.
+       5. A page may run its own slice of the arc (the homepage closes
+          cool at post-dusk; the book closes warm at sundown over dunes),
+          but every slice obeys laws 1–4.
+
+     Gradients read top-of-sky → horizon (180deg). Do not hardcode these
+     hexes anywhere else — reference the tokens so the site and the
+     design-system cards can never drift.
+     ===================================================================== */
+  :root {
+    /* ---- Rising half --------------------------------------------------- */
+    --sky-predawn: linear-gradient(180deg, #071938 0%, #0d2354 28%, #3a3c72 52%, #6a6193 72%, #b98a9a 88%, #e8b48a 100%);
+    --sky-blue-hour: linear-gradient(180deg, #0e1f45 0%, #2a4570 24%, #5673a0 46%, #93a4c8 64%, #c2a8c0 84%, #e7b58e 100%);
+    --sky-sunrise: linear-gradient(180deg, #12234f 0%, #3f5388 22%, #8ba0cf 44%, #cfa6c2 64%, #ecab80 84%, #f8dca8 100%);
+    --sky-daybreak: linear-gradient(180deg, #c05416 0%, #db691b 26%, #f2903a 52%, #ef7d24 76%, #bd440e 100%);
+    --sky-morning-gold: linear-gradient(180deg, #8fb2df 0%, #c2ccda 28%, #ead6b4 60%, #f4d79c 84%, #eec888 100%);
+    --sky-morning: linear-gradient(180deg, #8fbce6 0%, #bcd8f0 42%, #e4eef6 74%, #f6ecdc 100%);
+
+    /* ---- Apex ---------------------------------------------------------- */
+    --sky-midday: linear-gradient(180deg, #4f88d4 0%, #7fb0e6 30%, #b5d4f2 62%, #e6eff8 86%, #f6f0e3 100%);
+
+    /* ---- Setting half (mirror) ---------------------------------------- */
+    --sky-afternoon: linear-gradient(180deg, #6f9bd6 0%, #a6c2e2 34%, #cfcdcf 60%, #eed7a6 84%, #edc584 100%);
+    --sky-evening-gold: linear-gradient(180deg, #8fa6d4 0%, #b3a8cc 22%, #d0a9bc 44%, #edc79a 72%, #e8a86c 100%);
+    --sky-sundown: linear-gradient(180deg, #b8480f 0%, #d25c16 26%, #ee8630 52%, #e56b1b 76%, #a8380a 100%);
+    --sky-dusk: linear-gradient(180deg, #6f7fb5 0%, #9d9ac8 42%, #c9aac4 66%, #ecc0a8 86%, #e3a05e 100%);
+    --sky-twilight: linear-gradient(180deg, #223255 0%, #3f4d80 30%, #6b6f9e 54%, #9a95b8 76%, #bdb4cc 100%);
+    --sky-post-dusk: linear-gradient(180deg, #071938 0%, #0d2354 28%, #263a6b 52%, #4e5a88 72%, #8794c0 88%, #b3bcdd 100%);
+  }
+}

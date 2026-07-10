@@ -48,13 +48,32 @@
       <div class="day-sky__layer" data-sky="golden"></div>
       <div class="day-sky__layer" data-sky="dusk"></div>
       <div class="day-sky__layer" data-sky="night"></div>
-      <div class="day-sky__stars"></div>
+      <!-- Star field: few mid-sized orbs, each on its own twinkle rhythm.
+           Kept in sync with partials/stars.html (design-system source). -->
+      <div class="day-sky__stars" aria-hidden="true">
+        <span class="day-sky__star" style="left:7%;top:3%;--size:10px;--star:#ffe9c4;--halo:255 233 196;--tw-min:.35;--tw-max:1;--dur:3.1s;--delay:.3s"></span>
+        <span class="day-sky__star" style="left:22%;top:8%;--size:9px;--star:#eef2ff;--halo:238 242 255;--tw-min:.35;--tw-max:1;--dur:2.6s;--delay:1.4s"></span>
+        <span class="day-sky__star" style="left:34%;top:2.5%;--size:11px;--star:#eef2ff;--halo:238 242 255;--tw-min:.35;--tw-max:1;--dur:3.6s;--delay:.8s"></span>
+        <span class="day-sky__star" style="left:48%;top:6%;--size:8px;--star:#ffe9c4;--halo:255 233 196;--tw-min:.35;--tw-max:1;--dur:2.2s;--delay:2.1s"></span>
+        <span class="day-sky__star" style="left:61%;top:3.5%;--size:9.5px;--star:#eef2ff;--halo:238 242 255;--tw-min:.35;--tw-max:1;--dur:3.3s;--delay:.6s"></span>
+        <span class="day-sky__star" style="left:78%;top:7%;--size:10px;--star:#ffe9c4;--halo:255 233 196;--tw-min:.35;--tw-max:1;--dur:2.8s;--delay:1.9s"></span>
+        <span class="day-sky__star" style="left:91%;top:2%;--size:8.5px;--star:#eef2ff;--halo:238 242 255;--tw-min:.35;--tw-max:1;--dur:3.9s;--delay:3.2s"></span>
+        <span class="day-sky__star" style="left:14%;top:12%;--size:9px;--star:#ffe9c4;--halo:255 233 196;--tw-min:.35;--tw-max:1;--dur:2.4s;--delay:4.1s"></span>
+        <span class="day-sky__star" style="left:70%;top:14%;--size:7.5px;--star:#eef2ff;--halo:238 242 255;--tw-min:.15;--tw-max:.5;--dur:3s;--delay:2.7s"></span>
+        <span class="day-sky__star" style="left:88%;top:17%;--size:8px;--star:#ffe9c4;--halo:255 233 196;--tw-min:.15;--tw-max:.5;--dur:3.5s;--delay:.9s"></span>
+        <span class="day-sky__star" style="left:96%;top:11%;--size:7px;--star:#eef2ff;--halo:238 242 255;--tw-min:.15;--tw-max:.5;--dur:2.5s;--delay:4.6s"></span>
+        <span class="day-sky__star" style="left:64%;top:21%;--size:8px;--star:#eef2ff;--halo:238 242 255;--tw-min:.15;--tw-max:.5;--dur:3.2s;--delay:1.2s"></span>
+        <span class="day-sky__star" style="left:83%;top:25%;--size:7.5px;--star:#ffe9c4;--halo:255 233 196;--tw-min:.15;--tw-max:.5;--dur:2.9s;--delay:3.6s"></span>
+        <span class="day-sky__star" style="left:93%;top:20%;--size:7px;--star:#eef2ff;--halo:238 242 255;--tw-min:.15;--tw-max:.5;--dur:4s;--delay:5.1s"></span>
+      </div>
     </div>
     <div class="celestial celestial--moon" aria-hidden="true">
-      <div class="celestial__moon"></div>
+      <div class="celestial__moon" data-moon="waning"></div>
+      <div class="celestial__moon" data-moon="waxing"></div>
     </div>
     <div class="celestial celestial--sun" aria-hidden="true">
-      <div class="celestial__sun"></div>
+      <div class="celestial__sun" data-sun="warm-gold"></div>
+      <div class="celestial__sun" data-sun="orange"></div>
     </div>
     <!-- @include range.html -->
 
@@ -349,7 +368,6 @@
       </section>
 
       <section class="night__close" data-sky-phase="night" data-ink="dark" aria-label="Rise and Lift Others">
-        <img class="night__seal" src="/assets/brand/is-seal.svg" alt="" width="64" height="64" loading="lazy" data-rise />
         <p class="night__motto" data-word-reveal>Rise and Lift Others</p>
         <p class="night__values" data-rise>
           <span>Compassion</span><span>Oneness</span><span>Valour</span>

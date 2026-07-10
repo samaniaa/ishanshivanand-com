@@ -1,0 +1,25 @@
+<!-- @dsCard group="Sky & Motion" -->
+<h1>Sky &amp; Motion · sun &amp; moon</h1>
+<p class="ds-note" style="margin-top:0">The travelling light, from the real <code>--sun-*</code> / <code>--moon-*</code> tokens. The sun is a crisp disc — warm-gold for most of the day, the orange fire ball at the horizon — that resizes as it arcs. <strong>Never white</strong>, so it holds on the blue midday sky. The moon is a thin crescent whose glow follows its shape, with two tints and two mirrored orientations.</p>
+
+<h2 style="font-size:var(--step-0); margin:1.4rem 0 0.6rem">Sun — two disc colours</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.7rem">
+  <div><div style="position:relative;height:150px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--sky-midday)"><div style="position:absolute;top:50%;left:50%;width:88px;height:88px;border-radius:50%;transform:translate(-50%,-50%);background:var(--sun-warm-gold)"></div></div><code>warm-gold</code> <span style="color:var(--ink-faint);font-size:0.7rem">· the day sun</span></div>
+  <div><div style="position:relative;height:150px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--sky-daybreak)"><div style="position:absolute;top:50%;left:50%;width:96px;height:96px;border-radius:50%;transform:translate(-50%,-50%);background:var(--sun-orange)"></div></div><code>orange</code> <span style="color:var(--ink-faint);font-size:0.7rem">· the fire ball, daybreak / sundown</span></div>
+</div>
+
+<h2 style="font-size:var(--step-0); margin:1.6rem 0 0.6rem">Moon — two tints, mirrored orientation</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.7rem">
+  <div><div style="position:relative;height:150px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--sky-predawn)"><div style="position:absolute;top:44%;left:50%;width:86px;height:86px;border-radius:50%;transform:translate(-50%,-50%);background:var(--moon-silver);-webkit-mask-image:var(--moon-mask-waning);mask-image:var(--moon-mask-waning);filter:var(--moon-glow-silver)"></div></div><code>silver · waning</code> <span style="color:var(--ink-faint);font-size:0.7rem">· pre-dawn, lit toward the rising sun</span></div>
+  <div><div style="position:relative;height:150px;border-radius:9px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--sky-post-dusk)"><div style="position:absolute;top:50%;left:50%;width:66px;height:66px;border-radius:50%;transform:translate(-50%,-50%);background:var(--moon-cream);-webkit-mask-image:var(--moon-mask-waxing);mask-image:var(--moon-mask-waxing);filter:var(--moon-glow-cream)"></div></div><code>cream · waxing</code> <span style="color:var(--ink-faint);font-size:0.7rem">· post-dusk, lit toward the set sun</span></div>
+</div>
+
+<table class="ds-table" style="margin-top:1.5rem">
+<tbody>
+<tr><td><strong>Never white</strong></td><td>The sun keeps a warm-white core in an amber body, so it reads on the blue midday sky (white washes out).</td></tr>
+<tr><td><strong>Crisp disc</strong></td><td>Bright hot core → solid body → glow that blends to nothing. No concentric rings, clean edge.</td></tr>
+<tr><td><strong>Crescent glow</strong></td><td>The moon&rsquo;s glow follows the crescent (a drop-shadow on the masked disc), never a round halo.</td></tr>
+<tr><td><strong>Mirrored</strong></td><td>The lit side always faces the sun: <code>waning</code> (lit right) opens the day toward the rising sun; <code>waxing</code> (lit left) closes it toward the set sun.</td></tr>
+<tr><td><strong>Size</strong></td><td>The sun is small at midday, large at the horizon; the moon is full at pre-dawn, a quiet ~65% companion at the close. Driven along the arc in <code>day.js</code>.</td></tr>
+</tbody>
+</table>

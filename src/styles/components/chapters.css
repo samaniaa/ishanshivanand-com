@@ -514,13 +514,6 @@
     position: relative;
   }
 
-  .night__seal {
-    width: clamp(3.2rem, 5vw, 4.2rem);
-    margin-inline: auto;
-    margin-bottom: 2.2rem;
-    filter: drop-shadow(0 6px 20px rgb(0 0 0 / 0.35));
-  }
-
   .night__motto {
     font-family: var(--font-display);
     font-style: italic;

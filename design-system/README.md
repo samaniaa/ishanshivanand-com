@@ -35,9 +35,10 @@ New tokens appear in the token cards automatically on rebuild.
 
 ## Card inventory
 
-24 cards in 7 groups: Colors (3) · Type (4) · Spacing (2) · Buttons (2) ·
-Components (6) · Sky & Motion (3, incl. the scrubbable day) · Brand (4,
-incl. the locked design rules).
+29 cards in 7 groups: Brand (4, incl. the locked design rules) · Colors (3) ·
+Type (4) · Spacing (2) · Buttons (2) · Components (9, incl. glass /
+testimonial / logo-strip) · Sky & Motion (5, incl. stars and the scrubbable
+day).
 
 ## Upload to Claude Design
 
@@ -47,3 +48,31 @@ Claude Code to sync: it lists/creates the design-system project, finalizes
 a plan with the `dist-ds` paths, and uploads via `write_files`. On later
 changes, rebuild and re-upload only the cards whose `manifest.json` hash
 changed.
+
+## Share as a hosted site (no Claude account needed)
+
+For anyone outside the Claude Design deck — teammates on their own
+accounts, external devs — publish the system as a plain static site.
+
+```sh
+npm run build:all       # build:ds + build:site → dist-ds/
+```
+
+`tools/build-site.mjs` adds, into `dist-ds/`:
+
+- `index.html` — a **browsable gallery**: every card grouped and previewed
+  in an iframe (cards are self-contained, so it needs no server).
+- `design-system/` + `design-system-package.zip` — a **portable token
+  package**: one `design-system.css` (all tokens + the glass / testimonial /
+  logo-strip / button components, fonts bundled under `fonts/`), the
+  individual token files, `SKY.md`, and a usage `README.md`. Devs import the
+  one CSS and reference `var(--…)` tokens and the component classes.
+
+**Hosting.** `.github/workflows/pages.yml` builds and deploys `dist-ds/` to
+**GitHub Pages** on every push to `main` (or on demand via Actions → *Run
+workflow*). Share the resulting URL — one link, no logins.
+
+One-time owner setup: repo **Settings → Pages → Source: "GitHub Actions"**,
+and the repo must be **public** (or Pages-enabled on a paid plan). If Pages
+isn't an option, the same `dist-ds/` folder works as a zip you send or drop
+onto Netlify/Vercel — no rework.

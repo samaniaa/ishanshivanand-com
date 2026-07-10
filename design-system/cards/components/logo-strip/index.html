@@ -1,0 +1,38 @@
+<!-- @dsCard group="Components" -->
+<!-- @nofonts -->
+<style>
+  /* Real press logos, inlined once and reused by both sky versions. */
+  #ls {
+    --l-toi: url('<!-- @asset img/press/the-times-of-india.png -->');
+    --l-it: url('<!-- @asset img/press/india-today.svg -->');
+    --l-gn: url('<!-- @asset img/press/gulf-news.png -->');
+    --l-nia: url('<!-- @asset img/press/new-india-abroad.png -->');
+    --l-dna: url('<!-- @asset img/press/dna-india.svg -->');
+  }
+</style>
+<h1>Components · logo strip &middot; trusted by</h1>
+<div id="ls">
+  <div class="ds-pane" data-theme="dusk" data-ds-phase="dark" style="background:var(--sky-post-dusk); border-radius:12px; padding:clamp(1.8rem,5vw,3rem) clamp(1.2rem,4vw,2.4rem); text-align:center">
+    <p class="eyebrow eyebrow--gold">Featured in</p>
+    <div class="logo-strip logo-strip--on-dark">
+      <span class="logo-strip__logo" style="--logo:var(--l-toi); aspect-ratio:359/110" role="img" aria-label="The Times of India"></span>
+      <span class="logo-strip__logo logo-strip__logo--tall" style="--logo:var(--l-it); aspect-ratio:1029/1108" role="img" aria-label="India Today"></span>
+      <span class="logo-strip__logo" style="--logo:var(--l-gn); aspect-ratio:448/71" role="img" aria-label="Gulf News"></span>
+      <span class="logo-strip__logo logo-strip__logo--wide" style="--logo:var(--l-nia); aspect-ratio:500/75" role="img" aria-label="New India Abroad"></span>
+      <span class="logo-strip__logo" style="--logo:var(--l-dna); aspect-ratio:463/211" role="img" aria-label="DNA India"></span>
+    </div>
+    <p class="ds-pane__label" style="margin:1.4rem 0 0; color:rgb(247 243 232 / 0.6)">on a dark sky &mdash; <code>logo-strip--on-dark</code></p>
+  </div>
+  <div class="ds-pane" style="background:var(--sky-morning); border-radius:12px; padding:clamp(1.8rem,5vw,3rem) clamp(1.2rem,4vw,2.4rem); margin-top:1rem; text-align:center">
+    <p class="eyebrow eyebrow--gold">Featured in</p>
+    <div class="logo-strip logo-strip--on-light">
+      <span class="logo-strip__logo" style="--logo:var(--l-toi); aspect-ratio:359/110" role="img" aria-label="The Times of India"></span>
+      <span class="logo-strip__logo logo-strip__logo--tall" style="--logo:var(--l-it); aspect-ratio:1029/1108" role="img" aria-label="India Today"></span>
+      <span class="logo-strip__logo" style="--logo:var(--l-gn); aspect-ratio:448/71" role="img" aria-label="Gulf News"></span>
+      <span class="logo-strip__logo logo-strip__logo--wide" style="--logo:var(--l-nia); aspect-ratio:500/75" role="img" aria-label="New India Abroad"></span>
+      <span class="logo-strip__logo" style="--logo:var(--l-dna); aspect-ratio:463/211" role="img" aria-label="DNA India"></span>
+    </div>
+    <p class="ds-pane__label" style="margin:1.4rem 0 0; color:rgb(7 25 56 / 0.55)">on a light sky &mdash; <code>logo-strip--on-light</code></p>
+  </div>
+</div>
+<p class="ds-note">The <strong>&ldquo;featured in / trusted by&rdquo;</strong> treatment, built to sit on <strong>any page&rsquo;s ending sky</strong> &mdash; a gold <code>.eyebrow</code> above a centred <code>.logo-strip</code> of real press logos. Because every page closes on a different sky, the strip has a <strong>light and a dark version</strong>: <code>--on-dark</code> colours the logos warm-white for dark skies, <code>--on-light</code> brand navy (<code>--c-dark-anchor</code>) for light skies &mdash; one logo set, either sky. Each logo is a monochrome silhouette used as a mask, tinted by <code>currentColor</code>, so the colour is exact (not a filtered approximation). Normalised to one eyeline by height (<code>--tall</code> / <code>--wide</code> tune odd aspects), resting at <code>opacity:.85</code>. On a real page, supply the art via a <code>--logo</code> mask or an inline SVG with <code>fill:currentColor</code>.</p>

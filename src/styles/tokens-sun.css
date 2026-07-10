@@ -1,0 +1,23 @@
+@layer tokens {
+  /* =====================================================================
+     SUN DISC STATES — the travelling sun's disc, per the Sky Scale.
+
+     Two discs, both from the book page (proven): each fades to transparent
+     at ~76% so it's a compact orb with a SOFT halo and NO hard ring. The
+     disc recolours + resizes as it arcs (driven by modules/day.js). It is
+     never white — midday keeps a warm-white core in an amber body.
+
+       warm-gold  — the day sun (sunrise → midday → dusk)
+       orange     — the fire ball, reserved for daybreak / sundown, where
+                    the sky itself is orange and the halo blends in
+
+     Sizes (a scale on .celestial--sun, set in day.js): small = midday,
+     medium = the gold hours, large = at the horizon.
+     ===================================================================== */
+  :root {
+    /* The book page's day sun. */
+    --sun-warm-gold: radial-gradient(circle, #fff7dd 0%, #ffe9ae 32%, rgb(249 172 70 / 0.85) 55%, rgb(242 142 7 / 0.22) 70%, transparent 76%);
+    /* The book page's set sun, with a toned-down amber halo (not red-orange). */
+    --sun-orange: radial-gradient(circle, #ffe8b6 0%, #ffcd8a 34%, rgb(252 184 104 / 0.8) 56%, rgb(248 178 118 / 0.16) 70%, transparent 76%);
+  }
+}
