@@ -329,7 +329,8 @@ Everything is a CSS custom property — reference with \`var(--…)\`:
 
 Plain classes (in \`@layer components\`):
 
-- \`.glass\` — a frosted surface. \`.testimonial\` (on \`.glass\`) + \`.testimonials\` grid — endorsement cards. \`.logo-strip\` + \`.logo-strip__logo\` (\`--tall\`/\`--wide\`, \`--invert\`) — a press/partner row.
+- \`.glass\` — a frosted surface. \`.testimonial\` (on \`.glass\`) + \`.testimonials\` grid — endorsement cards.
+- \`.eyebrow\` (\`--gold\`/\`--warm\`) above a \`.logo-strip\` + \`.logo-strip__logo\` (\`--tall\`/\`--wide\`, \`--invert\`) — the "trusted by / featured in" press row.
 - \`.btn\` / \`.btn--light\` and \`.tlink\` — the locked link pair.
 
 Theme flip: components read the semantic tokens, so setting

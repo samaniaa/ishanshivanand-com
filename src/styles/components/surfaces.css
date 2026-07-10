@@ -5,7 +5,9 @@
        .glass        a frosted translucent card surface (the --glass-* tokens)
        .testimonials a responsive grid of quote cards
        .testimonial  an endorsement on glass (italic serif + attribution)
+       .eyebrow      a small uppercase section label (e.g. "Featured in")
        .logo-strip   a centred row of press / media / partner logos
+                     (with .eyebrow above = the "trusted by / featured in" unit)
 
      Everything reads from the semantic tokens (--ink, --accent, --glass-*)
      so it flips with the day: a warm-white glass pane in daylight, a navy
@@ -95,6 +97,28 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
+  }
+
+  /* ---- Eyebrow: a small uppercase section label ---------------------- */
+  /* From the book page's .beyebrow — sits above a logo strip ("Featured
+     in") or any section. Colour inherits; --gold / --warm tint it. */
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 clamp(1.6rem, 3.5vh, 2.4rem);
+  }
+
+  .eyebrow--gold {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .eyebrow--warm {
+    color: var(--accent-deep);
+    opacity: 0.92;
   }
 
   /* ---- Logo strip: press / media / partner row ----------------------- */
