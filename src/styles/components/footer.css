@@ -1,79 +1,184 @@
 @layer components {
-  /* The footer lives at the deepest night: transparent over the night
-     sky, light text. On stub pages (no sky engine) it carries its own
-     night field. */
+  /* =====================================================================
+     Site footer — universal glass band (Gathering Light).
+     Full-bleed frosted panel over a deep-navy "blue-glow" field. Always
+     dark, independent of the page day/dusk theme. Reads on light or dark
+     pages. The frosted PANEL is the reusable object; the homepage may
+     place the same panel over the live post-dusk sky instead of the field.
+     ===================================================================== */
   .footer {
+    --f-ink: #f7f3e8;
+    --f-ink-soft: rgb(247 243 232 / 0.9);
+    --f-ink-mid: rgb(247 243 232 / 0.72);
+    --f-ink-faint: rgb(247 243 232 / 0.45);
+    --f-rule: rgb(247 243 232 / 0.14);
+
     position: relative;
-    z-index: 2;
-    color: #f7f3e8;
-    padding-block: 3.5rem 2.5rem;
+    overflow: hidden;
+    color: var(--f-ink);
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgb(40 63 128 / 0.5), transparent 58%),
+      linear-gradient(180deg, #0b1a3e, #070f28 60%, #04091c);
   }
 
-  body:not(:has(.day-sky)) .footer {
-    background: linear-gradient(180deg, #0a1230, #050b20);
+  .footer .glass {
+    position: relative;
+    background: linear-gradient(155deg, rgb(30 44 92 / 0.3), rgb(10 18 44 / 0.46));
+    backdrop-filter: blur(22px) saturate(1.2);
+    -webkit-backdrop-filter: blur(22px) saturate(1.2);
+    border-top: 1px solid var(--f-rule);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+    padding: clamp(3.5rem, 6vw, 5.5rem) 0 clamp(1.8rem, 3vw, 2.6rem);
   }
+
+  /* .footer .container inherits the site --container width */
 
   .footer__grid {
     display: grid;
-    gap: 2.5rem;
-    padding-top: 3rem;
-    border-top: 1px solid rgb(247 243 232 / 0.14);
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: start;
   }
 
-  @media (min-width: 760px) {
+  /* ---- brand ---- */
+  .footer__lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .footer__mark {
+    width: 40px;
+    height: auto;
+    display: block;
+  }
+  .footer__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--c-white);
+  }
+  .footer__social {
+    list-style: none;
+    display: flex;
+    gap: 0.6rem;
+    padding: 0;
+    margin: 1.7rem 0 0;
+  }
+  .footer__social a {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--f-ink-soft);
+    background: rgb(247 243 232 / 0.06);
+    border: 1px solid rgb(247 243 232 / 0.16);
+    transition:
+      color var(--dur-quick) var(--ease-out),
+      background var(--dur-quick) var(--ease-out),
+      border-color var(--dur-quick),
+      transform var(--dur-quick) var(--ease-out);
+  }
+  .footer__social svg {
+    width: 21px;
+    height: 21px;
+    display: block;
+  }
+  .footer__social a:hover {
+    color: var(--c-dark-anchor);
+    background: var(--grad-gold);
+    border-color: transparent;
+    transform: translateY(-2px);
+  }
+
+  /* ---- nav columns ---- */
+  .footer__col h4 {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--f-ink-mid);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .footer__col ul:not(.footer__social) {
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+    padding: 0;
+    margin: 0;
+  }
+  /* word-fill hover: cream at rest, gold→coral sweeps across the word.
+     Scoped to nav-list links only — the social buttons (.footer__social)
+     and the CTA (.btn, not in a <ul>) keep their own treatments. */
+  .footer__col ul:not(.footer__social) a {
+    position: relative;
+    font-size: 0.92rem;
+    width: fit-content;
+    background-image: linear-gradient(90deg, var(--c-gold-80) 0%, var(--c-coral) 45%, #eae6da 45%, #eae6da 100%);
+    background-size: 220% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: background-position 0.5s var(--ease-out);
+  }
+  .footer__col ul:not(.footer__social) a:hover {
+    background-position: 0 0;
+  }
+
+  .footer__col--connect .btn {
+    margin-top: 0.4rem;
+  }
+
+  /* ---- legal ---- */
+  .footer__legal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: clamp(1.8rem, 3vw, 2.4rem);
+    padding-top: clamp(1.2rem, 2vw, 1.6rem);
+    border-top: 1px solid var(--f-rule);
+    font-size: 0.76rem;
+    color: var(--f-ink-faint);
+  }
+  .footer__legal-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .footer__legal-links a {
+    position: relative;
+    background-image: linear-gradient(90deg, var(--c-gold-80) 0%, var(--c-coral) 45%, currentColor 45%, currentColor 100%);
+    background-size: 220% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.5s var(--ease-out);
+  }
+  .footer__legal-links a:hover {
+    background-position: 0 0;
+  }
+
+  @media (max-width: 840px) {
     .footer__grid {
-      grid-template-columns: 2fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer__brand,
+    .footer__col--connect {
+      grid-column: 1 / -1;
     }
   }
 
-  .footer__brand svg {
-    width: 2.6rem;
-    height: auto;
-    margin-bottom: 1.1rem;
-  }
-
-  .footer__brand p {
-    font-size: var(--step--1);
-    color: rgb(247 243 232 / 0.65);
-    max-width: 30ch;
-    line-height: 1.6;
-  }
-
-  .footer__col h4 {
-    font-size: var(--step--1);
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: rgb(247 243 232 / 0.45);
-    margin-bottom: 1rem;
-    font-weight: 520;
-  }
-
-  .footer__col ul {
-    display: grid;
-    gap: 0.55rem;
-    list-style: none;
-    padding: 0;
-  }
-
-  .footer__col a {
-    font-size: var(--step--1);
-    color: rgb(247 243 232 / 0.78);
-    transition: color var(--dur-quick);
-  }
-
-  .footer__col a:hover {
-    color: var(--c-gold-80);
-  }
-
-  .footer__legal {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-top: 2rem;
-    margin-top: 2.5rem;
-    border-top: 1px solid rgb(247 243 232 / 0.14);
-    font-size: 0.78rem;
-    color: rgb(247 243 232 / 0.45);
+  @media (prefers-reduced-motion: reduce) {
+    .footer__col ul:not(.footer__social) a,
+    .footer__legal-links a,
+    .footer__social a {
+      transition: none;
+    }
   }
 }
