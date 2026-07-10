@@ -134,10 +134,15 @@
     width: 100%;
   }
 
+  /* Works whether the logo is an <img src> or an element with a
+     background-image (both size by height, normalised to one eyeline). */
   .logo-strip__logo {
     height: clamp(1.5rem, 2.6vw, 2rem);
     width: auto;
     object-fit: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     opacity: 0.85;
     transition: opacity var(--dur-quick);
   }
@@ -155,8 +160,14 @@
     height: clamp(1.2rem, 2.2vw, 1.7rem);
   }
 
-  /* Force colour logos to flat white (for dark surfaces) */
-  .logo-strip--invert .logo-strip__logo {
-    filter: brightness(0) invert(1);
+  /* Sky-agnostic recolour — pick per the sky the strip lands on. The filter
+     flattens any source art (white or colour) to one ink, so a single set
+     of logos serves every page's ending sky. */
+  .logo-strip--on-light .logo-strip__logo {
+    filter: brightness(0); /* ink logos, for light skies */
+  }
+
+  .logo-strip--on-dark .logo-strip__logo {
+    filter: brightness(0) invert(1); /* white logos, for dark skies */
   }
 }

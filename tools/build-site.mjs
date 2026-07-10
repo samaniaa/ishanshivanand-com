@@ -330,7 +330,7 @@ Everything is a CSS custom property — reference with \`var(--…)\`:
 Plain classes (in \`@layer components\`):
 
 - \`.glass\` — a frosted surface. \`.testimonial\` (on \`.glass\`) + \`.testimonials\` grid — endorsement cards.
-- \`.eyebrow\` (\`--gold\`/\`--warm\`) above a \`.logo-strip\` + \`.logo-strip__logo\` (\`--tall\`/\`--wide\`, \`--invert\`) — the "trusted by / featured in" press row.
+- \`.eyebrow\` (\`--gold\`/\`--warm\`) above a \`.logo-strip\` + \`.logo-strip__logo\` (\`--tall\`/\`--wide\`) — the "trusted by / featured in" press row. Recolour per sky: \`.logo-strip--on-dark\` (white logos) / \`.logo-strip--on-light\` (ink logos).
 - \`.btn\` / \`.btn--light\` and \`.tlink\` — the locked link pair.
 
 Theme flip: components read the semantic tokens, so setting
